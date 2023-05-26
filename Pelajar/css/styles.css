@@ -1,0 +1,49 @@
+body {
+  background-image: url(../images/background.jpg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+}
+
+#header-logo {
+  width: 30px;
+  height: 30px;
+}
+
+#content {
+  min-height: calc(100vh - 56px - 56px);
+}
+
+/* Repeating table header hack */
+thead {
+  display: table-header-group;
+}
+
+tfoot {
+  display: table-footer-group;
+}
+
+/* Parsley styling */
+.parsley-errors-list {
+  padding-left: 0.75em;
+}
+
+.parsley-custom-error-message {
+  font-size: 0.85em;
+  color: #dc3545;
+  list-style: none;
+}
+
+.parsley-error {
+  border: 1px solid #dc3545;
+  background-color: #ea868f;
+  color: #fff;
+}
+
+.parsley-error::-moz-placeholder {
+  color: #fff;
+}
+
+.parsley-error::placeholder {
+  color: #fff;
+}/*# sourceMappingURL=styles.css.map */
