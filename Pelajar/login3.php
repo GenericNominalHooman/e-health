@@ -1,3 +1,8 @@
+<?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
 <?php 
 include 'config.php';
 session_start();
@@ -46,7 +51,10 @@ if(isset($_POST['submit'])){
       <div class="col-12 col-lg-9 col-xl-7">
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
           <div class="card-body p-4 p-md-5">
-            <img src="images/pelajar2.jpeg" class="rounded mx-auto d-block" witdh="200" height="150">
+            <?php
+            // Iz,caninacanteen@gmail.com: Fetching pelajar2remove.png to dynamic
+            echo('<img src="'.IMG_URL.'/pelajar2remove.png'.'" class="rounded mx-auto d-block" witdh="200" height="150">');
+            ?>
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">LOG MASUK PELAJAR</h3>
             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
@@ -152,5 +160,5 @@ if (x.type === "password") {
 
 </body>
 </html>
-<?php include "footer.php"; ?>
+<?php include(COMPONENTS_DIR."/footer.php"); ?>
 <?php mysqli_close($conn); ?>

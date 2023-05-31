@@ -1,3 +1,7 @@
+<?php
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -86,4 +90,4 @@ if (x.type === "password") {
 
 </body>
 </html>
-<?php include "footer2.php"; ?>
+<?php include(COMPONENTS_DIR."/footer.php"); ?>

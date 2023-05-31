@@ -1,3 +1,8 @@
+<?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
 <?php 
 include 'config.php';
 session_start();
@@ -5,7 +10,7 @@ session_start();
 if(isset($_POST['submit'])){
 
    $username= mysqli_real_escape_string($conn, $_POST['username']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+   $pass = md5(mysqli_real_escape_string($conn, $_POST['password']));
 
    $select = mysqli_query($conn, "SELECT * FROM `loginadmin` WHERE  username = '$username' AND password = '$pass'") or die('query failed');
 
@@ -116,5 +121,5 @@ if (x.type === "password") {
 
 </body>
 </html>
-<?php include "footer.php"; ?>
+<?php include(COMPONENTS_DIR."/footer.php"); ?>
 <?php mysqli_close($conn); ?>

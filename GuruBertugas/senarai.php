@@ -1,4 +1,9 @@
 <?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+?>
+<?php
 require_once("config.php");
 
 /*if(!isset($_SESSION["gurubertugas"])){
@@ -227,7 +232,7 @@ require_once("config.php");
 </body>
 
 </html>
-<?php include "footer2.php";?>
+<?php include(COMPONENTS_DIR . "/footer.php");?>
 <?php
 
 
