@@ -1,6 +1,28 @@
 <?php
+// Importing site configuration
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
+<?php
+class Database{
+  private $conn;
 
+  public function __construct(){
+    $this->createConnection();
+  }
+  
+  private function createConnection(){
+    try {
+      $conn = new PDO("mysql:host=".HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
+      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    } catch(PDOException $e) {
+      echo "Connection failed: " . $e->getMessage();
+    }
 
-$conn = mysqli_connect('localhost','root','Kafin-12','hospital2');
+    $this->conn = $conn;
+  }
 
+  public function getConnection(){
+    return $this->conn;
+  }
+}
 ?>

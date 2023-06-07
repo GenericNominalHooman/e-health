@@ -1,4 +1,5 @@
 <?php
+// Importing site configuration
 require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 ?>
 

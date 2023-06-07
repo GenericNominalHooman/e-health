@@ -1,4 +1,11 @@
+<?php
+// Import site config
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
 <?php 
+// Import redirtect component
+require_once(COMPONENTS_DIR."/redirect.php");
+
 session_start(); 
 include "config.php";
 
@@ -38,6 +45,9 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 		        exit();
 
 			}
+		}else{
+			$redirectObj = new Redirect();
+			$redirectObj->redirectToWithError("index2.php", "Kata laluan atau nama pengguna salah");
 		}
 	}
 	
