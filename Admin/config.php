@@ -1,6 +1,6 @@
 <?php
 
 
-$conn = mysqli_connect('localhost','root','Kafin-12','hospital2');
+$conn = mysqli_connect('localhost','root','','hospital2');
 
 ?>
