@@ -8,22 +8,23 @@ class Verify{
     private $notEmpty;
     private $minLength;
     private $maxLength;
+    private $aString;
     private $isPassVerification = true;
     private $sanitizedInput;
 
-    public function __construct($notEmpty, $minLength, $maxLength){
+    public function __construct($notEmpty, $minLength, $maxLength, $aString){
         $this->notEmpty = $notEmpty;
         $this->minLength = $minLength;
         $this->maxLength = $maxLength;
+        $this->aString = $aString;
     }
     
     public function verify($inputToVerify){
         // Sanitize user input
-        // $this->sanitizedInput = $this->sanitize($inputToVerify);
-        $this->sanitizedInput = $inputToVerify;
+        $this->sanitizedInput = $this->sanitize($inputToVerify);
 
         // Run through all of the available filters
-        $this->isNotEmpty()->isMinLength()->isMaxLength();
+        $this->isNotEmpty()->isMinLength()->isMaxLength()->isAString();
 
         // Return whether user input pass all verification parameters
         return $this->isPassVerification;
@@ -31,9 +32,9 @@ class Verify{
 
     private function isNotEmpty(){
         // Check whether check for empty is active
-        if($this->notEmpty != null){
+        if($this->notEmpty == true){
             // Check whether user input is empty
-            if(empty($inputToVerify)||$this->sanitizedInput == null){
+            if(empty($this->sanitizedInput)||$this->sanitizedInput == null){
                 $this->isPassVerification = false;
             }
         }
@@ -44,9 +45,11 @@ class Verify{
 
     private function isMinLength(){
         // Check whether check for empty is active
-        if($this->minLength != null){
+        if($this->minLength == true){
             // Check whether user input is empty - Iz,caninacanteen@gmail.com: PS: THIS CHECK IS REDUNDANT, FIND A WAY TO ALLOW METHOD CHAINING WHILE STILL ALLOWING NON CONFORMING USER INPUT TO EXIT PROPERLY
             if(empty($this->sanitizedInput)||$this->sanitizedInput == null){
+                $this->isPassVerification = false;
+            }else{
                 // Check whether user input is over the minimum length
                 if(strlen($this->sanitizedInput)<$this->minLength){
                     $this->isPassVerification = false;
@@ -60,11 +63,13 @@ class Verify{
 
     private function isMaxLength(){
         // Check whether check for empty is active
-        if($this->maxLength != null){
+        if($this->maxLength == true){
             // Check whether user input is empty - Iz,caninacanteen@gmail.com: PS: THIS CHECK IS REDUNDANT, FIND A WAY TO ALLOW METHOD CHAINING WHILE STILL ALLOWING NON CONFORMING USER INPUT TO EXIT PROPERLY
             if(empty($this->sanitizedInput)||$this->sanitizedInput == null){
-                // Check whether user input is under the maximum length
-                if(strlen($this->sanitizedInput)>$this->minLength){
+                $this->isPassVerification = false;
+            }else{
+                // Check whether user input is over the minimum length
+                if(strlen($this->sanitizedInput)>=$this->maxLength){
                     $this->isPassVerification = false;
                 }
             }
@@ -74,11 +79,32 @@ class Verify{
         return $this;
     }
 
+    private function isAString(){
+        // Check whether check for empty is active
+        if($this->maxLength == true){
+            // Check whether user input is empty - Iz,caninacanteen@gmail.com: PS: THIS CHECK IS REDUNDANT, FIND A WAY TO ALLOW METHOD CHAINING WHILE STILL ALLOWING NON CONFORMING USER INPUT TO EXIT PROPERLY
+            if(empty($this->sanitizedInput)||$this->sanitizedInput == null){
+                $this->isPassVerification = false;
+            }else{
+                // Check whether user input is over the minimum length
+                if(!ctype_alpha($this->sanitizedInput)){
+                    $this->isPassVerification = false;
+                }
+            }
+        }
+        d($this->isPassVerification);
+        
+        return $this;        
+    }
 
     private function sanitize($inputToVerify){
-        // String sanitization here
-
-        $this->sanitizedInput = $inputToVerify;
+        // Remove any HTML tags from the input
+        $filtered = strip_tags($inputToVerify);
+        // Convert any special characters to HTML entities
+        $filtered = htmlspecialchars($filtered, ENT_QUOTES | ENT_HTML5, 'UTF-8');
+        // Return the sanitized input
+        d($filtered);
+        return $filtered;
     }
 }
 
@@ -86,6 +112,7 @@ class VerificationRulesBuilder{
     private $notEmpty;
     private $minLength;
     private $maxLength;
+    private $aString;
 
     // Public constructor
     public function __construct($notEmpty, $minLength, $maxLength){
@@ -119,12 +146,17 @@ class VerificationRulesBuilder{
         return $this;
     }
 
+    public function isAString(){
+        $this->aString = true;
+        return $this;
+    }
+
     public function build(){
-        return new Verify($this->notEmpty, $this->minLength, $this->maxLength);
+        return new Verify($this->notEmpty, $this->minLength, $this->maxLength, $this->aString);
     }
 
     public function clone(){
-        return VerificationRulesBuilder::createClone($this->notEmpty, $this->minLength, $this->maxLength);
+        return VerificationRulesBuilder::createClone($this->notEmpty, $this->minLength, $this->maxLength, $this->aString);
     }
 }
 ?>

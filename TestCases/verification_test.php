@@ -8,6 +8,7 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
     $verificationBuilderObj->setIsNotEmpty();
     $verificationBuilderObj->setMinLength(2);
     $verificationBuilderObj->setMaxLength(3);
+    $verificationBuilderObj->isAString();
     $verificationObj = $verificationBuilderObj->build();
-    d($verificationObj->verify(null));
+    d($verificationObj->verify(12));
 ?>

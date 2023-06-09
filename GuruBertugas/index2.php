@@ -34,9 +34,11 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 		  <h2 class="text-center mb-3">LOG MASUK GURU BERTUGAS</h2>
      <form autocomplte="off" action="logintest.php"  method="post" >
 
-     	<?php if (isset($_GET['error'])) { ?>
-     		<p class="error"><?php echo $_GET['error']; ?></p>
-     	<?php } ?>
+     	<?php 
+        if(isset($_GET['error'])) {
+          echo("<p class='error'>".$_GET['error']."</p>");
+        }
+      ?>
      	<div class="form-outline mb-4">
                             <div class="form-floating">
                               <input type="uname" id="uname" name="uname"  class="form-control" placeholder="Username" >
