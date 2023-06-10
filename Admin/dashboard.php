@@ -218,7 +218,7 @@ if(isset($_GET['logout'])){
                     });
         </script>
 		<?php include(COMPONENTS_DIR . "/footer.php"); ?>
-
+<!-- nigga -->
     
  
     </div>
