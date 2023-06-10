@@ -28,4 +28,5 @@
     define("DB_PASS", "");
     define("DB_NAME", "hospital2");
 
+    // ABC
 ?>
