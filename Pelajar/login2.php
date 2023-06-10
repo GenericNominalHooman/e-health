@@ -1,4 +1,18 @@
 <?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
+<?php
+// Importing components
+require_once COMPONENTS_DIR."/models.php";
+require_once COMPONENTS_DIR."/redirect.php";
+require_once COMPONENTS_DIR."/verify.php";
+$verificationBuilderObj = VerificationRulesBuilder::createNew();
+$modelsFactoryObj = new ModelsFactory();
+$userModelObj = $modelsFactoryObj->createUserModel();
+$redirectObj = new Redirect();
+
 include 'config.php';
 
 if(isset($_POST['submit'])){
@@ -11,16 +25,19 @@ if(isset($_POST['submit'])){
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_img/'.$image;
 
+   // Check for each user input fields whether it conforms to the rules provided
+  //  $verificationBuilderObj->setIsNotEmpty()->set
+
    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE nokp = '$nokp' AND password = '$pass'") or die('query failed');
 
    if(mysqli_num_rows($select) > 0){
       $message[] = 'user already exist'; 
+      $redirectObj->redirectToWithError("/".SITE_NAME.'/Pelajar/login2.php', 'Nama pengguna sudah berada di dalam pangkalan data, sila gunakkan nama pengguna yang lain.');
    }else{
       if($image_size > 2000000){
          $message[] = 'image size is too large!';
       }else{
          $insert = mysqli_query($conn, "INSERT INTO `user_form`(nama, nokp, password, image) VALUES('$nama', '$nokp', '$pass', '$image')") or die('query failed');
-
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
             $message[] = 'registered successfully!';
@@ -84,13 +101,15 @@ if(isset($_POST['submit'])){
 </head>
 <body>
 
-<section class="vh-100 gradient-custom" >
+<section class="gradient-custom" >
   <div class="container py-5 h-100" >
     <div class="row justify-content-center align-items-center h-100" >
       <div class="col-12 col-lg-9 col-xl-7" >
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;" >
           <div class="card-body p-4 p-md-5" >
-          <img src="images/pelajar2.jpeg" class="rounded mx-auto d-block" witdh="200" height="150">
+            <?php
+              echo('<img src="'.IMG_URL.'/pelajar2remove.png" class="rounded mx-auto d-block" witdh="200" height="150">');
+            ?>
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">DAFTAR MASUK PELAJAR</h3>
             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
@@ -103,17 +122,12 @@ if(isset($_POST['submit'])){
   </li>
 </ul>
             <form autocomplete="off" action="login2.php" method="post" enctype="multipart/form-data">
-
-              
-                <div class="col-md-6 mb-4">
-                            
                 <?php
-      if(isset($message)){
-         foreach($message as $message){
-            echo '<div class="message">'.$message.'</div>';
-         }
-      }
-      ?>
+                if(isset($_GET['error'])) {
+                  echo("<div class='message'>".$_GET['error']."</div>");
+                }
+                ?>
+                <div class="col-md-6 mb-4">
                             </div>
                             <div class="form-outline mb-4">
                             <div class="form-floating">
@@ -171,9 +185,5 @@ if(isset($_POST['submit'])){
 </body>
 </html>
 <?php mysqli_close($conn); 
-include "footer.php";?>
-   
-	
-	
-	
-	
+include(COMPONENTS_DIR."/footer.php");
+?>

@@ -1,4 +1,9 @@
 <?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+?>
+<?php
 
 include 'config.php';
 session_start();
@@ -159,4 +164,4 @@ if(isset($_POST['update_jadual'])){
 	</script>
 </body>
 </html>
-<?php include "footer2.php";?>
+<?php include(COMPONENTS_DIR . "/footer.php");?>

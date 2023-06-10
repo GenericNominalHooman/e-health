@@ -1,4 +1,9 @@
 <?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
+<?php
 @include 'config.php';
 include 'auth.php';
 $id_pelajar = $_SESSION['id_pelajar'];
@@ -103,8 +108,6 @@ if(isset($_GET['logout'])){
     <a href="janjitemu.php" class="btn btn-primary">JANJI TEMU</a>
   </div>
   <!--<div class="card-footer text-muted">-->
-
-   <?} ?>
   </div>
 </div>
 </div>
@@ -115,5 +118,5 @@ if(isset($_GET['logout'])){
 </body>
 </html>
  
-<?php include('footer.php'); ?>
+<?php include(COMPONENTS_DIR."/footer.php"); ?>
 

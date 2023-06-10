@@ -1,3 +1,8 @@
+<?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -200,4 +205,4 @@
  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
  <script src="js/sidebar.js"></script>
     </html>
-    <?php include "footer2.php"; ?>
+    <?php include(COMPONENTS_DIR . "/footer.php"); ?>
