@@ -21,7 +21,7 @@ require_once("./components/login_header.php");
 
                     <img src="img/logo2remove.png" alt="Logo" width="290" height="130" class="rounded"></li>
 
-
+                      <!-- AH -->
                     <!--<a class="navbar-brand" href="#">
                   <center>
                     <img src="img/logoremove.png" alt="Logo" width="300" height="100" class="d-inline-block align-text-top">
