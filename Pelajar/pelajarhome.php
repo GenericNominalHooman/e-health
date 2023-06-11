@@ -4,6 +4,12 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 ?>
 <?php
+require_once(COMPONENTS_DIR."/models.php");
+$modelFactory = new ModelsFactory();
+$userModel = $modelFactory->createUserModel();
+// d($userModel->getAllGuruBertugas());
+
+
 @include 'config.php';
 include 'auth.php';
 $id_pelajar = $_SESSION['id_pelajar'];

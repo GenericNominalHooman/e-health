@@ -6,7 +6,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 <?php
 require_once(COMPONENTS_DIR."/auth_admin.php");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,7 +33,7 @@ require_once(COMPONENTS_DIR."/auth_admin.php");
         </header>
         <div class="book-details p-5 my-4">
             <?php
-            include("config.php");
+            include(COMPONENTS_DIR."/config.php");
             $id_janjitemu = $_GET['id_janjitemu'];
             if ($id_janjitemu) {
                 $sql = "SELECT * FROM janjitemu WHERE id_janjitemu = $id_janjitemu";
