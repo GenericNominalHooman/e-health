@@ -3,6 +3,7 @@
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
