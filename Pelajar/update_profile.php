@@ -5,6 +5,20 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
 <?php
 
+@include 'config.php';
+include 'auth.php';
+$id_pelajar = $_SESSION['id_pelajar'];
+
+if(!isset($id_pelajar)){
+  header('location:login3.php');
+};
+
+if(isset($_GET['logout'])){
+  unset($id_pelajar);
+  session_destroy();
+  header('location:login3.php');
+}
+
 include 'config.php';
 session_start();
 $id_pelajar = $_SESSION['id_pelajar'];
