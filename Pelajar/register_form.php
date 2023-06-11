@@ -51,7 +51,7 @@ if(isset($_POST['submit'])){
       }else{*/
          $insert = "INSERT INTO user_form(username, nama, nokp, notel, notelpen, alamat, program, tahun, jantina , email , password) VALUES('$username','$nama','$nokp','$notel','$notelpen', '$alamat','$program','$tahun','$jantina','$email','$pass')";
          mysqli_query($conn, $insert);
-         header('location:index2.php');
+         header('location:login3.php');
       }
    }
 
@@ -203,7 +203,7 @@ if(isset($_POST['submit'])){
               </div>
               <input type="submit" class="btn btn-outline-info" name="submit" value="DAFTAR">
               <div class="mt-3">
-              <p>Kembali untuk <a href="index2.php">Log In</a></p>
+              <p>Kembali untuk <a href="login3.php">Log In</a></p>
               </div> 
 
             </form>

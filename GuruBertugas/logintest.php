@@ -22,10 +22,10 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	$pass = validate($_POST['password']);
 
 	if (empty($uname)) {
-		header("Location: index2.php?error=<div class='alert alert-dark' role='alert'>Sila masukkan Username terlebih dahulu</div>");
+		header("Location: login3.php?error=<div class='alert alert-dark' role='alert'>Sila masukkan Username terlebih dahulu</div>");
 	    exit();
 	}else if(empty($pass)){
-        header("Location: index2.php?error=<div class='alert alert-dark' role='alert'>Sila masukkan password terlebih</div>");
+        header("Location: login.php?error=<div class='alert alert-dark' role='alert'>Sila masukkan password terlebih</div>");
 	    exit();
 	}else{
 		$sql = "SELECT * FROM gurubertugas WHERE username='$uname' AND password='$pass'";
@@ -41,18 +41,18 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             	header("Location: dashboard.php");
 		        exit();
             }else{
-				header("Location: index2.php?error=<div class='alert alert-dark' role='alert'>Kata Laluan atau Password salah</div>");
+				header("Location: login3.php?error=<div class='alert alert-dark' role='alert'>Kata Laluan atau Password salah</div>");
 		        exit();
 
 			}
 		}else{
 			$redirectObj = new Redirect();
-			$redirectObj->redirectToWithError("index2.php", "Kata laluan atau nama pengguna salah");
+			$redirectObj->redirectToWithError("login3.php", "Kata laluan atau nama pengguna salah");
 		}
 	}
 	
 }else{
-	header("Location: index2.php");
+	header("Location: login3.php");
 	exit();
 }
 ?>
