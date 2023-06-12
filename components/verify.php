@@ -40,7 +40,6 @@ class Verify{
                 $this->isPassVerification = false;
             }
         }
-        d($this->isPassVerification);
 
         return $this;
     }
@@ -58,7 +57,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;
     }
@@ -76,7 +74,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;
     }
@@ -94,7 +91,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;        
     }
@@ -112,7 +108,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;                
     }
@@ -123,7 +118,6 @@ class Verify{
         // Convert any special characters to HTML entities
         $filtered = htmlspecialchars($filtered, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Return the sanitized input
-        d($filtered);
         return $filtered;
     }
 }
@@ -183,7 +177,7 @@ class VerificationRulesBuilder{
     }
 
     public function clone(){
-        return VerificationRulesBuilder::createClone($this->notEmpty, $this->minLength, $this->maxLength, $this->aString);
+        return VerificationRulesBuilder::createClone($this->notEmpty, $this->minLength, $this->maxLength, $this->aString, $this->aNumber);
     }
 }
 ?>
