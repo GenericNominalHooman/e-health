@@ -9,14 +9,16 @@ class Verify{
     private $minLength;
     private $maxLength;
     private $aString;
+    private $aNumber;
     private $isPassVerification = true;
     private $sanitizedInput;
 
-    public function __construct($notEmpty, $minLength, $maxLength, $aString){
+    public function __construct($notEmpty, $minLength, $maxLength, $aString, $aNumber){
         $this->notEmpty = $notEmpty;
         $this->minLength = $minLength;
         $this->maxLength = $maxLength;
         $this->aString = $aString;
+        $this->aNumber = $aNumber;
     }
     
     public function verify($inputToVerify){
@@ -24,7 +26,7 @@ class Verify{
         $this->sanitizedInput = $this->sanitize($inputToVerify);
 
         // Run through all of the available filters
-        $this->isNotEmpty()->isMinLength()->isMaxLength()->isAString();
+        $this->isNotEmpty()->isMinLength()->isMaxLength()->isANumber()->isAString();
 
         // Return whether user input pass all verification parameters
         return $this->isPassVerification;
@@ -81,12 +83,12 @@ class Verify{
 
     private function isAString(){
         // Check whether check for empty is active
-        if($this->maxLength == true){
+        if($this->aString == true){
             // Check whether user input is empty - Iz,caninacanteen@gmail.com: PS: THIS CHECK IS REDUNDANT, FIND A WAY TO ALLOW METHOD CHAINING WHILE STILL ALLOWING NON CONFORMING USER INPUT TO EXIT PROPERLY
             if(empty($this->sanitizedInput)||$this->sanitizedInput == null){
                 $this->isPassVerification = false;
             }else{
-                // Check whether user input is over the minimum length
+                // Check whether user input is of the type string
                 if(!ctype_alpha($this->sanitizedInput)){
                     $this->isPassVerification = false;
                 }
@@ -95,6 +97,24 @@ class Verify{
         d($this->isPassVerification);
         
         return $this;        
+    }
+
+    private function isANumber(){
+        // Check whether check for empty is active
+        if($this->aNumber == true){
+            // Check whether user input is empty - Iz,caninacanteen@gmail.com: PS: THIS CHECK IS REDUNDANT, FIND A WAY TO ALLOW METHOD CHAINING WHILE STILL ALLOWING NON CONFORMING USER INPUT TO EXIT PROPERLY
+            if(empty($this->sanitizedInput)||$this->sanitizedInput == null){
+                $this->isPassVerification = false;
+            }else{
+                // Check whether user input is of the type number
+                if(!preg_match('/^\d+(\.\d+)?$/', $this->sanitizedInput)){
+                    $this->isPassVerification = false;
+                }
+            }
+        }
+        d($this->isPassVerification);
+        
+        return $this;                
     }
 
     private function sanitize($inputToVerify){
@@ -113,22 +133,24 @@ class VerificationRulesBuilder{
     private $minLength;
     private $maxLength;
     private $aString;
+    private $aNumber;
 
     // Public constructor
-    public function __construct($notEmpty, $minLength, $maxLength){
+    public function __construct($notEmpty, $minLength, $maxLength, $aNumber){
         $this->notEmpty = $notEmpty;
+        $this->aNumber = $aNumber;
         $this->minLength = $minLength;
         $this->maxLength = $maxLength;
     }
     
     // Private static constructor for cloning
-    private static function createClone($notEmpty, $minLength, $maxLength){
-        return new self($notEmpty, $minLength, $maxLength);
+    private static function createClone($notEmpty, $minLength, $maxLength, $aNumber){
+        return new self($notEmpty, $minLength, $maxLength, $aNumber);
     }
 
     // Public constructor for public instansiation
     public static function createNew(){
-        return new self(null, null, null);
+        return new self(null, null, null, null);
     }
 
     public function setIsNotEmpty(){
@@ -151,8 +173,13 @@ class VerificationRulesBuilder{
         return $this;
     }
 
+    public function isANumber(){
+        $this->aNumber = true;
+        return $this;
+    }
+
     public function build(){
-        return new Verify($this->notEmpty, $this->minLength, $this->maxLength, $this->aString);
+        return new Verify($this->notEmpty, $this->minLength, $this->maxLength, $this->aString, $this->aNumber);
     }
 
     public function clone(){
