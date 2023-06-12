@@ -15,10 +15,10 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 	$pass = validate($_POST['password']);
 
 	if (empty($uname)) {
-		header("Location: index2.php?error=User Name is required");
+		header("Location: login3.php?error=User Name is required");
 	    exit();
 	}else if(empty($pass)){
-        header("Location: index2.php?error=Password is required");
+        header("Location: login3.php?error=Password is required");
 	    exit();
 	}else{
 		$sql = "SELECT * FROM user_form WHERE username='$uname' AND password='$pass'";
@@ -34,14 +34,14 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
             	header("Location: pelajarhome.php");
 		        exit();
             }else{
-				header("Location: index2.php?error=Incorect User name or password");
+				header("Location: login3.php?error=Incorect User name or password");
 		        exit();
 			}
 		}
 	}
 	
 }else{
-	header("Location: index2.php");
+	header("Location: login3.php");
 	exit();
 }
 ?>

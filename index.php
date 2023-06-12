@@ -21,7 +21,7 @@ require_once("./components/login_header.php");
 
                     <img src="img/logo2remove.png" alt="Logo" width="290" height="130" class="rounded"></li>
 
-
+                      <!-- AH -->
                     <!--<a class="navbar-brand" href="#">
                   <center>
                     <img src="img/logoremove.png" alt="Logo" width="300" height="100" class="d-inline-block align-text-top">
@@ -93,7 +93,7 @@ alert("WELCOME");
 <a href="#">
 <img src="img/img2.png" class="img-fluid" alt="A WORD" width="200" height="200"></a>
 <H2>GURU BERTUGAS</H2>
-<button class="btn btn1"  onclick="window.location.href='GuruBertugas/index2.php';">LOG MASUK/DAFTAR</button>
+<button class="btn btn1"  onclick="window.location.href='GuruBertugas/login3.php';">LOG MASUK/DAFTAR</button>
 <script>
 function msg(){
 alert("WELCOME");
@@ -103,7 +103,7 @@ alert("WELCOME");
 <center>
 <img src="img/img2.png" class="img-fluid" alt="A WORD" width="200" height="200"></a>
 <H2>PELAJAR</H2>
-<button class="btn btn1"  onclick="window.location.href='Pelajar/index2.php';">LOG MASUK/DAFTAR</button>
+<button class="btn btn1"  onclick="window.location.href='Pelajar/login3.php';">LOG MASUK/DAFTAR</button>
 <script>
 function msg(){
 alert("WELCOME");

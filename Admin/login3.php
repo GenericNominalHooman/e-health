@@ -13,14 +13,13 @@ if(isset($_POST['submit'])){
    $pass = md5(mysqli_real_escape_string($conn, $_POST['password']));
 
    $select = mysqli_query($conn, "SELECT * FROM `loginadmin` WHERE  username = '$username' AND password = '$pass'") or die('query failed');
-
    if(mysqli_num_rows($select) > 0){
       $row = mysqli_fetch_assoc($select);
       $_SESSION['id'] = $row['id'];
       $_SESSION['username'] = $username;
             header("Location: dashboard.php");
           }else{
-            $message[] = 'Salah Kata laluan atau Nama Pengguna/username';
+            $message[] = 'Salah Kata laluan atau Nama Pengguna';
          }
         }
 ?>

@@ -10,5 +10,5 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
     $verificationBuilderObj->setMaxLength(3);
     $verificationBuilderObj->isAString();
     $verificationObj = $verificationBuilderObj->build();
-    d($verificationObj->verify(12));
+    d($verificationObj->verify("12"));
 ?>
