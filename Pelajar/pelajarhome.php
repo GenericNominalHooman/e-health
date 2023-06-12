@@ -61,7 +61,7 @@ if(isset($_GET['logout'])){
    </div></div>
   <div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
     <div class="card-header " style="background-color:skyblue; ">
-    <i class="fa-regular fa-pen-to-square"></i>&nbsp;KEMASKINI PROFILE
+    <i class="fa-regular fa-pen-to-square"></i>&nbsp;KEMASKINI PROFIL
     </div>
     <div class="card-body" style="background-color:aliceblue;">
       
@@ -80,7 +80,7 @@ if(isset($_GET['logout'])){
       
     <h5 class="card-title  mt-3">SILA MASUKKAN MAKLUMAT DENGAN BETUL</h5>
     <p class="card-text"></p>
-    <a href="update_profile.php" class="btn btn-primary">PROFILE</a>
+    <a href="update_profile.php" class="btn btn-primary">PROFIL</a>
   </div></div>
         
    <div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
@@ -91,7 +91,7 @@ if(isset($_GET['logout'])){
     <img src="images/check.webp" width="150" height="150">
     <h5 class="card-title">PROSES PENGESAHAN MENGAMBIL MASA SEKURANG-KURANGNYA 1 JAM SEBELUM </h5>
     <p class="card-text"> </p>
-    <a href="kemaskini.php" class="btn btn-primary">SEMAK STATUS/EDIT</a>
+    <a href="kemaskini.php" class="btn btn-primary">SEMAK STATUS / KEMASKINI</a>
   </div>
   <!--<div class="card-footer text-muted">-->
    

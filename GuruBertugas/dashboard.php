@@ -140,7 +140,7 @@ require_once(COMPONENTS_DIR."/auth_guru.php");
 			              <th>Tarikh Janji Temu</th>
 					          <th>No Telefon Penjaga</th>
 			              <th>Status</th>
-			              <th>Buang/delete </th>
+			              <th>Buang </th>
                 
                 </thead>
 			

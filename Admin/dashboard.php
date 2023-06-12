@@ -45,9 +45,9 @@ if(isset($_GET['logout'])){
 <div class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="dashboard.php" class="nav_link"> <i class="fa-solid fa-house"></i><span class="nav_logo-name">E - HEALTH</span> </a>
-                <div class="nav_list"> <a href="dashboard.php" class="nav_link active "> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 
-                <a href="jadual.php" class="nav_link "> <i class="fa-regular fa-calendar-days"></i><span class="nav_name">Jadual Guru Bertugas/span> </a>
-                <a href="display_pdf.php" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">MC/Time Slip Pelajar</span> </a>  
+                <div class="nav_list"> <a href="dashboard.php" class="nav_link active "> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Papan Pemuka</span> </a> 
+                <a href="jadual.php" class="nav_link "> <i class="fa-regular fa-calendar-days"></i><span class="nav_name">Jadual Guru Bertugas</span> </a>
+                <a href="display_pdf.php" class="nav_link"> <i class='bx bx-message-square-detail nav_icon'></i> <span class="nav_name">Sijil Cuti Sakit / Slip Masa Pelajar</span> </a>  
                  </div>
             </div> <a href="logout.php" class="nav_link "> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">Log Keluar</span> </a>
         </nav>

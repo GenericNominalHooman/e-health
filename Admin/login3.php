@@ -82,7 +82,7 @@ if(isset($_POST['submit'])){
                              <div class="form-floating">
                                 <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan" >
                                 <label class="form-label" for="password">Kata Laluan</label>
-                                <label for="floatingPassword">Password</label>
+                                <label for="floatingPassword">Kata Laluan</label>
                                 <div class="mt-3">
                                 <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan 
                               </div></div></div>
