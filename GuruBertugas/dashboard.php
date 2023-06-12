@@ -135,7 +135,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 			              <th>Tarikh Janji Temu</th>
 					          <th>No Telefon Penjaga</th>
 			              <th>Status</th>
-			              <th>Buang/delete </th>
+			              <th>Buang </th>
                 
                 </thead>
 			
