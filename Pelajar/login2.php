@@ -149,11 +149,11 @@ if(isset($_POST['submit'])){
                           <!-- Password input -->
                              <div class="form-outline mb-4">
                              <div class="form-floating">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
-                                <label class="form-label" for="password">Password</label>
-                                <label for="floatingPassword">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan"/>
+                                <label class="form-label" for="password">Kata Laluan</label>
+                                <label for="floatingPassword">Kata Laluan</label>
                                 <div class="mt-3">
-                                <input type="checkbox" onclick="myFunction()">&nbsp;Show Password
+                                <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan
                               </div></div></div>
                              <div class="mb-3">
                               <input type="file" id="image" name="image" class="box form-control" accept="image/jpg, image/jpeg, image/png" value="">
