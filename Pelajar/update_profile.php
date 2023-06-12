@@ -20,7 +20,7 @@ if(isset($_GET['logout'])){
 }
 
 include 'config.php';
-session_start();
+//session_start();
 $id_pelajar = $_SESSION['id_pelajar'];
 
 if (isset($_POST['update_profile'])) {
@@ -110,7 +110,7 @@ if (isset($_POST['update_profile'])) {
                         }
 
                         ?>
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">UPDATE PROFILE</h3>
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">KEMASKINI PROFIL</h3>
                         <?php
 
                         if (isset($message)) {

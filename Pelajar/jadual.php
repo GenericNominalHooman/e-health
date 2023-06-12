@@ -1,7 +1,7 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
 <?php
 @include 'config.php';
@@ -46,7 +46,7 @@ if(isset($_GET['logout'])){
             $fetch = mysqli_fetch_assoc($select);
          }
          if($fetch['image'] == ''){
-            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
+            echo '<img class="img-fluid  rounded mx-auto d-block" src="images/default-avatar.png" >';
          }else{
             echo '<img class="img-fluid  rounded mx-auto d-block"  src="uploaded_img/'.$fetch['image'].'">';
          }

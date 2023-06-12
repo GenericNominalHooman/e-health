@@ -4,12 +4,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
 <?php
-require_once("config.php");
-
-/*if(!isset($_SESSION["gurubertugas"])){
-  header("Location: gurubertugashome.php");
-}*/
-
+require_once(COMPONENTS_DIR."/auth_guru.php");
 ?>
 
 <!DOCTYPE html>

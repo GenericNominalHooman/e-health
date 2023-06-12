@@ -1,7 +1,7 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
 <?php
 @include 'config.php';
@@ -22,7 +22,6 @@ if(isset($_GET['logout'])){
 }*/
 
 ?>
-<?php @include 'config.php'; ?>
 <!DOCTYPE html>
 <html lang="en">
 <!DOCTYPE html>
@@ -49,7 +48,7 @@ if(isset($_GET['logout'])){
         <h4 class="alert-heading"><strong>NOTIS PEMBERITAHUAN :</strong></h4>
         <p class="text-dark">Pelajar hanya dibenarkan berurusan di Hospital Gerik,
           Klinik Komuniti, Klinik Kesihatan dan Hospital Taiping.
-          Pelajar hanya boleh dibenarkan pergi ke hospital
+          Pelajar hanya dibenarkan pergi ke hospital
           pada 2 waktu sahaja iaitu pada waktu <strong>9.00 pagi</strong> dan <strong>3.00 petang</strong>.
           Pihak asrama dan warden hanya boleh membawa pelajar ke
           hospital pada kes kecemasan sahaja.</p>
