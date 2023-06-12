@@ -47,10 +47,31 @@ class UserModel extends Models
   }
 }
 
+class JanjitemuModel extends Models{  
+  public function __construct($conn)
+  {
+    // Call parent constructor method
+    parent::__construct($conn);
+  }
+  
+  public function getAllJanjiTemu()
+  {
+    $query = "SELECT * FROM janjitemu";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+}
+
 class ModelsFactory{
   public function createUserModel(){
     $dbObj = new Database();
     return new UserModel($dbObj->getConnection());
+  }
+
+  public function createJanjitemuModel(){
+    $dbObj = new Database();
+    return new JanjitemuModel($dbObj->getConnection());
   }
 }
 ?>

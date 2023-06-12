@@ -3,13 +3,10 @@
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
+
 <?php
-require_once("config.php");
-
-/*if(!isset($_SESSION["gurubertugas"])){
-  header("Location: gurubertugashome.php");
-}*/
-
+require_once(COMPONENTS_DIR."/auth_guru.php");
+require_once(COMPONENTS_DIR."/models.php");
 ?>
 
 <!DOCTYPE html>
@@ -97,51 +94,50 @@ require_once("config.php");
     <div class="mycontainer">
     <div class="table-responsive">
             <table id="example" class="display" style="width:100%">
-            <thead>
-                    <th>No</th>
-                    <th>Nama</th>
-                    <th>No. Kad Pengenalan</th>
-                    <th>Program</th>
-                    <th>Tahun</th>	
-			        <th>Waktu Janji Temu</th>
-			        <th>Tarikh Janji Temu</th>
-                    <th>No Telefon Pelajar</th>
-					<th>No Telefon Penjaga</th>
-					<th>Sebab</th>
-			        <th>Status</th>
-			        
-                
-                </thead>
                 <tbody>
                         <!-- loading all leave applications from database -->
                         <?php
                                 global $row;
-                                $query = mysqli_query($conn,"SELECT * FROM janjitemu");
+                                $modelsFactory = new ModelsFactory();
+                                $janjitemuModel = $modelsFactory->createJanjitemuModel();
+                                $query = array_values($janjitemuModel->getAllJanjiTemu());
+                                $numrow = sizeof($query);
                                 
-                                $numrow = mysqli_num_rows($query);
-
-                               if($query){
+                                if($query){
                                     
                                     if($numrow!=0){
-                                         $cnt=1;
-
-                                          while($row = mysqli_fetch_assoc($query)){
-                                            
+                                        $cnt=0;
+                                        echo('
+                                        <thead>
+                                            <th>No</th>
+                                            <th>Nama</th>
+                                            <th>No. Kad Pengenalan</th>
+                                            <th>Program</th>
+                                            <th>Tahun</th>	
+                                            <th>Waktu Janji Temu</th>
+                                            <th>Tarikh Janji Temu</th>
+                                            <th>No Telefon Pelajar</th>
+                                            <th>No Telefon Penjaga</th>
+                                            <th>Sebab</th>
+                                            <th>Status</th>
+                                        </thead>
+                                        ');
+                                        
+                                        while($cnt<$numrow){
+                                            $row = $query[$cnt];
                                             
                                             echo "<tr>
-                                            <td>$cnt</td>
-                                            <td>{$row['nama']}</td>
-                                            <td>{$row['nokp']}</td>
-                                            <td>{$row['program']}</td>
-                                            <td>{$row['tahun']}</td>
-                                            <td>{$row['waktu']}</td>
-                                            <td>{$row['tarikh']}</td>
-                                            <td>{$row['notel']}</td>
-                                            <td>{$row['notelpen']}</td>
-                                            <td>{$row['sebab']}</td>
-                                            <td>{$row['status']}</td>
-                                          
-                                                    
+                                                    <td>$cnt</td>
+                                                    <td>{$row['nama']}</td>
+                                                    <td>{$row['nokp']}</td>
+                                                    <td>{$row['program']}</td>
+                                                    <td>{$row['tahun']}</td>
+                                                    <td>{$row['waktu']}</td>
+                                                    <td>{$row['tarikh']}</td>
+                                                    <td>{$row['notel']}</td>
+                                                    <td>{$row['notelpen']}</td>
+                                                    <td>{$row['sebab']}</td>
+                                                    <td>{$row['status']}</td>
                                                   </tr>";  
                                          $cnt++; }       
                                     }
@@ -149,7 +145,6 @@ require_once("config.php");
                                 else{
                                     echo "Query Error : " . "SELECT * FROM janjitemu WHERE status='dalam proses'" . "<br>" . mysqli_error($conn);
                                 }
-							
                        ?> 
                     
                 </tbody>
