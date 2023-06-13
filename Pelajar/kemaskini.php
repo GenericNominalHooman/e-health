@@ -24,6 +24,7 @@ if(isset($_GET['logout'])){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 ?>
 <?php
 @include 'config.php';
@@ -43,6 +44,8 @@ if(isset($_GET['logout'])){
    header('location:logintest.php');
 }*/
 
+=======
+>>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======

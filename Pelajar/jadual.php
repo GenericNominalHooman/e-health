@@ -5,7 +5,11 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+=======
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+>>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
 require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
@@ -66,7 +70,11 @@ if(isset($_GET['logout'])){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
             echo '<img class="img-fluid  rounded mx-auto d-block" src="images/default-avatar.png" >';
+=======
+            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
+>>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
             echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
