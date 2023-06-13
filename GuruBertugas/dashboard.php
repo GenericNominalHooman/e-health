@@ -3,11 +3,6 @@
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 ?>
-
-<?php
-require_once(COMPONENTS_DIR."/auth_guru.php");
-?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

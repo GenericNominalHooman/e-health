@@ -1,48 +1,57 @@
 <?php
-// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
-// Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
-?>
-
-
-<?php
 
 session_start();
 require 'config.php';
 
-$username = $_POST["username"];
-$password = $_POST["password"];
+  $username = $_POST["username"];
+  $password = $_POST["password"];
+  
+  $result = mysqli_query($conn, "SELECT * FROM gurubertugas WHERE username = '$username' AND password = '$password'");
+  
+  $row = mysqli_num_rows($result);
+  
+  if($row == 1){
+	  header('location:gurubertugashome.php');
+  }else{
+	  header('location:logingurubertugas.php');
+  }
 
-$result = mysqli_query($conn, "SELECT * FROM gurubertugas WHERE username = '$username' AND password = '$password'");
+	
+	
+    /*$result=mysqli_query("select*from loginadmin where username= '$username' and password = '$password'") or die("Failed".mysqli_error());
+  $row=mysqli_fetch_array($result);
 
-$row = mysqli_num_rows($result);
-
-if ($row == 1) {
-    header('Location: gurubertugashome.php');
-} else {
-    header('Location: logingurubertugas.php');
+  if ($row['username'] == $username && $row['password'] == $password){
+  echo "login succesful".$row['username'];
+  } else {
+  echo "failed";
+  }
+}
+    $sql="select * from loginadmin where username='".$username."AND pasword='".$password."limit 1";
+    
+    $result=mysqli_query($sql);
+    
+    if(mysqli_num_rows($result)==1){
+        echo " You Have Successfully Logged in";
+        exit();
+    }
+    else{
+        echo " You Have Entered Incorrect Password";
+        exit();
+    }
+        
 }
 
-$result = mysqli_query($conn, "SELECT * FROM loginadmin WHERE username = '$username' AND password = '$password' LIMIT 1");
+	/*$result=mysql_query("select*from loginadmin where username= '$username' and password = '$password'") or die("Failed".mysql_error());
+	$row=mysql_fetch_array($result);
 
-$row = mysqli_fetch_array($result);
-
-if ($row && $row['username'] == $username && $row['password'] == $password) {
-    echo "Login successful: " . $row['username'];
-} else {
-    echo "Login failed";
-}
+if ($row['username'] == $username && $row['password'] == $password){
+echo "login succesful".$row['username'];
+}else {
+echo "failed";
+}*/
 ?>
-
-
-
-
-
-
-
-
-
- <!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html>
 <head>
     
@@ -73,25 +82,7 @@ if ($row && $row['username'] == $username && $row['password'] == $password) {
     </form>
 </main>
 </body>
-</html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+</html>-->
 
 <!DOCTYPE html>
 <html lang="en">

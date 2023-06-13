@@ -3,28 +3,6 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 ?>
 
-<?php 
-include 'config.php';
-session_start();
-
-if(isset($_POST['submit'])){
-
-   $nokp = mysqli_real_escape_string($conn, $_POST['nokp']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
-
-   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE nokp = '$nokp' AND password = '$pass'") or die('query failed');
-
-   if(mysqli_num_rows($select) > 0){
-      $row = mysqli_fetch_assoc($select);
-      $_SESSION['id_pelajar'] = $row['id_pelajar'];
-      $_SESSION['nokp'] = $nokp;
-            header("Location: dashboard.php");
-          }else{
-            $message[] = 'Salah Kata laluan atau Nama Pengguna/username';
-         }
-    } 
-?>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -56,17 +34,12 @@ if(isset($_POST['submit'])){
 		  <h2 class="text-center mb-3">LOG MASUK GURU BERTUGAS</h2>
      <form autocomplte="off" action="logintest.php"  method="post" >
 
-     <?php
-        
-        if(isset($message)){
-           foreach($message as $message){
-              echo '<div class="message alert alert-dark" role="alert">'.$message.'</div>';
-           }
-          }
-        
-     ?>
-                          <!-- Username Input -->
-     	                      <div class="form-outline mb-4">
+     	<?php 
+        if(isset($_GET['error'])) {
+          echo("<p class='error'>".$_GET['error']."</p>");
+        }
+      ?>
+     	<div class="form-outline mb-4">
                             <div class="form-floating">
                               <input type="uname" id="uname" name="uname"  class="form-control" placeholder="Username" >
                               <label  for="floatingPassword">Username</label></div>

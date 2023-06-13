@@ -58,7 +58,7 @@ if(isset($_POST['submit'])){
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">LOG MASUK PELAJAR</h3>
             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
-    <a href ="login3.php" class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+    <a href ="login2.php" class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
       aria-controls="pills-login" aria-selected="true">Log Masuk</a>
   </li>
   <li class="nav-item" role="presentation">

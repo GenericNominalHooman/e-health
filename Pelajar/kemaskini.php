@@ -3,6 +3,7 @@
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 ?>
+<<<<<<< HEAD
 <?php
 @include 'config.php';
 include 'auth.php';
@@ -53,6 +54,9 @@ if(isset($_GET['logout'])){
 =======
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 ?>
+=======
+<?php include "config.php"; ?>
+>>>>>>> parent of b702cee (WIP - Componentize table for janji temu)
 <!DOCTYPE html>
 <html lang="en">
 
