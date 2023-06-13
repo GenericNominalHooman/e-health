@@ -8,13 +8,8 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 require_once COMPONENTS_DIR."/models.php";
 require_once COMPONENTS_DIR."/redirect.php";
 require_once COMPONENTS_DIR."/verify.php";
-$verificationBuilderObj = VerificationRulesBuilder::createNew();
 $modelsFactoryObj = new ModelsFactory();
 $userModelObj = $modelsFactoryObj->createUserModel();
-$redirectObj = new Redirect();
-$verificationRulesNama = $verificationBuilderObj->isAString()->setMaxLength(100);
-$verificationRulesNoKP = $verificationRulesNama->clone()->setMaxLength(12);
-$verificationRulesPassword = $verificationRulesNama->clone()->setMinLength(6)->setMaxLength(100);
 
 include 'config.php';
 
@@ -30,8 +25,23 @@ if(isset($_POST['submit'])){
 
    
 
-   // Check for each user input fields whether it conforms to the rules provided
-  //  $verificationBuilderObj->setIsNotEmpty()->set
+    //  Check for each user input fields whether it conforms to the rules provided
+    $verificationRulesNama = VerificationRulesBuilder::createNew()->setIsNotEmpty()->isAString()->setMaxLength(100);
+    $verificationRulesNoKP = VerificationRulesBuilder::createNew()->isANumber()->setMinLength(12)->setMaxLength(13);
+    $verificationRulesPassword = VerificationRulesBuilder::createNew()->setIsNotempty()->setMinLength(6);
+
+    // Redirect user to login page with appropiate error code
+    $redirectObj = new Redirect();
+    if(!$verificationRulesNama->build()->verify($nama)){ 
+      $redirectObj->redirectToWithError(PELAJAR_URL."/login2.php", "Jumlah bilangan huruf nama pengguna mesti melebihi 100 huruf");
+    }else if(!$verificationRulesNoKP->build()->verify($nokp)){
+      $redirectObj->redirectToWithError(PELAJAR_URL."/login2.php", "Jumlah bilangan angka nombor kad pengenalan mestilah 12");
+    }else if(!$verificationRulesPassword->build()->verify($pass)){
+      // var_dump($pass);
+      // exit();
+      $redirectObj->redirectToWithError(PELAJAR_URL."/login2.php", "Kata laluan mestilah berjenis string dan mestilah mengandungi minima 6 huruf");
+    }
+
 
    $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE nokp = '$nokp' AND password = '$pass'") or die('query failed');
 

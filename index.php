@@ -52,7 +52,7 @@ require_once("./components/login_header.php");
                   <h5 class="card-title">GURU BERTUGAS</h5>
                   <img src="img/gururemove.png" width="95" height="100">
                   <p class="card-text"></p>
-                  <a href="GuruBertugas/index2.php" class="btn btn-primary">LOG MASUK</a>
+                  <a href="GuruBertugas/login3.php" class="btn btn-primary">LOG MASUK</a>
                 </div>
               </div>
             </div>
