@@ -7,7 +7,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 require_once(COMPONENTS_DIR."/auth_admin.php");
 
 include 'config.php';
-session_start();
 $id = $_SESSION['id'];
 
 if(isset($_POST['update_jadual'])){

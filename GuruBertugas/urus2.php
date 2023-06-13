@@ -93,7 +93,7 @@ require_once(COMPONENTS_DIR."/auth_guru.php");
                 <tbody>
                         <!-- loading all leave applications from database -->
                         <?php
-
+                                include "config.php";
                                 global $row;
                                 $query = mysqli_query($conn,"SELECT * FROM janjitemu");
                                 

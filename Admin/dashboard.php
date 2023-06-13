@@ -7,17 +7,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 require_once(COMPONENTS_DIR."/auth_admin.php");
 
 @include 'config.php';
-include 'auth.php';
-$id= $_SESSION['id'];
-
-if(!isset($id)){
-  header('location:login3.php');
-}
-if(isset($_GET['logout'])){
-  unset($id);
-  session_destroy();
-  header('location:login3.php');
-}
 
 
 ?>

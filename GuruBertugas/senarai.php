@@ -97,6 +97,7 @@ require_once(COMPONENTS_DIR."/models.php");
                 <tbody>
                         <!-- loading all leave applications from database -->
                         <?php
+                                include "config.php";
                                 global $row;
                                 $modelsFactory = new ModelsFactory();
                                 $janjitemuModel = $modelsFactory->createJanjitemuModel();
