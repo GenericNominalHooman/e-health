@@ -50,6 +50,7 @@ if(isset($_GET['logout'])){
     </style>
 </head>
 <body >
+  
 
    <?php include "index.html";?>
    
@@ -58,8 +59,8 @@ if(isset($_GET['logout'])){
    <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
   <div>
   <h4 class="alert-heading"><strong>NOTIS PEMBERITAHUAN:</strong></h4>
-                      <p class="text-dark">Pelajar hanya dibenarkan berurusan di Hospital Gerik,
-                         Klinik Komuniti, Klinik Kesihatan dan Hospital Taiping. 
+                      <p class="text-dark">Pelajar hanya dibenarkan pergi ke Hospital Gerik,
+                         Klinik Komuniti, Klinik Kesihatan dan Hospital Taiping hanya pada pukul 2 
                          Pelajar hanya boleh dibenarkan pergi ke hospital hanya
                          pada 2 waktu sahaja iaitu pada waktu <strong>9.00 pagi</strong> dan <strong>3.00 petang</strong>.  
                          Pihak asrama dan warden hanya boleh membawa pelajar ke  

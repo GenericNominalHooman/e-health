@@ -104,13 +104,14 @@ if (isset($_POST['update_profile'])) {
                      <div class="card-body p-4 p-md-5">
                         <?php
                         if ($fetch['image'] == '') {
-                           echo '<img class=" rounded-circle rounded mx-auto d-block" width="95" height="150" src="images/default-avatar.png">';
+                           echo '<img class=" rounded-circle rounded mx-auto d-block" width="130px" height="130px" src="images/default-avatar.png">';
                         } else {
-                           echo '<img class=" rounded-circle rounded mx-auto d-block" width="160" height="100" src="uploaded_img/' . $fetch['image'] . '">';
+                           echo '<img class=" rounded-circle rounded mx-auto d-block" width="130px" height="130px" src="uploaded_img/' . $fetch['image'] . '">';
                         }
 
                         ?>
-                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">UPDATE PROFILE</h3>
+                        <br>
+                        <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">KEMASKINI PROFIL</h3>
                         <?php
 
                         if (isset($message)) {
@@ -121,13 +122,15 @@ if (isset($_POST['update_profile'])) {
                         ?>
                         <form autocomplete="off" action="" method="post" enctype="multipart/form-data">
 
+                           <!-- Nama Penuh Pelajar -->
                            <div class="form-outline mb-4">
                               <div class="form-floating">
                                  <input type="text" name="update_nama" value="<?php echo $fetch['nama']; ?>" class="form-control" placeholder="Nama Penuh" />
-                                 <label for="floatingPassword">Nama Penuh</label>
+                                 <label for="floatingPassword">Nama Penuh Pelajar</label>
                               </div>
                            </div>
-
+                           
+                           <!-- No. Kad Pengenalan -->
                            <div class="form-outline mb-4">
                               <div class="form-floating">
                                  <input type="text" name="update_nokp" value="<?php echo $fetch['nokp']; ?>" class="form-control" placeholder="No.Kad Pengenalan" />
@@ -135,7 +138,91 @@ if (isset($_POST['update_profile'])) {
                               </div>
                            </div>
 
+                           <!-- No. Matrik -->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="bigint" name="update_nmPenjaga2" class="form-control" placeholder="No. Matrik" />
+                                 <label for="floatingPassword">No. Matrik</label>
+                              </div>
+                           </div>
 
+                           <!-- Dorm -->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="bigint" name="update_nmPenjaga2" class="form-control" placeholder="Dorm" />
+                                 <label for="floatingPassword">Dorm</label>
+                              </div>
+                           </div>
+
+                           <!-- Nombor Telefon Pelajar-->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="bigint" name="update_nmPenjaga2" class="form-control" placeholder="Nombor Telefon Pelajar" />
+                                 <label for="floatingPassword">Nombor Telefon Pelajar</label>
+                              </div>
+                           </div>
+
+                           <!-- Nama Bapa-->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="text" name="update_nmPenjaga2" class="form-control" placeholder="Nama Penuh Bapa" />
+                                 <label for="floatingPassword">Nama Penuh Bapa</label>
+                              </div>
+                           </div>
+                            
+                           <!-- Nombor Telefon Bapa-->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="bigint" name="update_nmPenjaga2" class="form-control" placeholder="Nombor Telefon Bapa" />
+                                 <label for="floatingPassword">Nombor Telefon Bapa</label>
+                              </div>
+                           </div>
+
+                           <!-- Nama Ibu-->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="text" name="update_nmPenjaga" class="form-control" placeholder="Nama Penuh Ibu" />
+                                 <label for="floatingPassword">Nama Penuh Ibu</label>
+                              </div>
+                           </div>
+
+                           <!-- Nombor Telefon Ibu-->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="bigint" name="update_nmPenjaga2" class="form-control" placeholder="Nombor Telefon Ibu" />
+                                 <label for="floatingPassword">Nombor Telefon Ibu</label>
+                              </div>
+                           </div>
+
+                           <!-- Alahan -->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="text" name="update_nmPenjaga2" class="form-control" placeholder="Alahan" />
+                                 <label for="floatingPassword">Alahan (Jika Ada)</label>
+                              </div>
+                           </div>
+
+                            
+                           <!-- Penyakit -->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="bigint" name="update_nmPenjaga2" class="form-control" placeholder="Penyakit" />
+                                 <label for="floatingPassword">Penyakit</label>
+                              </div>
+                           </div>
+
+                           <!-- Alamat -->
+                           <div class="form-outline mb-4">
+                              <div class="form-floating">
+                                 <input type="varchar" name="update_nmPenjaga2" class="form-control" placeholder="Alamat" />
+                                 <label for="floatingPassword">Alamat</label>
+                              </div>
+                           </div>
+
+                           
+
+                            
+                           
                            <!-- Password input -->
                            <div class="form-outline mb-4">
                               <div class="form-floating">
