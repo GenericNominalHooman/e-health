@@ -12,6 +12,9 @@ $verificationBuilderObj = VerificationRulesBuilder::createNew();
 $modelsFactoryObj = new ModelsFactory();
 $userModelObj = $modelsFactoryObj->createUserModel();
 $redirectObj = new Redirect();
+$verificationRulesNama = $verificationBuilderObj->isAString()->setMaxLength(100);
+$verificationRulesNoKP = $verificationRulesNama->clone()->setMaxLength(12);
+$verificationRulesPassword = $verificationRulesNama->clone()->setMinLength(6)->setMaxLength(100);
 
 include 'config.php';
 
@@ -24,6 +27,8 @@ if(isset($_POST['submit'])){
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_img/'.$image;
+
+   
 
    // Check for each user input fields whether it conforms to the rules provided
   //  $verificationBuilderObj->setIsNotEmpty()->set
