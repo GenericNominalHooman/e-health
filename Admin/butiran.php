@@ -1,3 +1,8 @@
+<?php
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,7 +30,7 @@
         </header>
         <div class="book-details p-5 my-4">
             <?php
-            include("config.php");
+            include(COMPONENTS_DIR."/config.php");
             $id_janjitemu = $_GET['id_janjitemu'];
             if ($id_janjitemu) {
                 $sql = "SELECT * FROM janjitemu WHERE id_janjitemu = $id_janjitemu";

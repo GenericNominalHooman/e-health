@@ -28,4 +28,13 @@
     define("DB_PASS", "");
     define("DB_NAME", "hospital2");
 
+    // User profile pages(directories)
+    define("PELAJAR_DIR", SITE_DIR."/"."Pelajar");
+    define("GURU_DIR", SITE_DIR."/"."GuruBertugas");
+    define("ADMIN_DIR", SITE_DIR."/"."Admin");
+
+    // Static content resources(URLs)
+    define("PELAJAR_URL", SITE_URL."/"."Pelajar");
+    define("GURU_URL", SITE_URL."/"."GuruBertugas");
+    define("ADMIN_URL", SITE_URL."/"."Admin");
 ?>

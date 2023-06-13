@@ -21,7 +21,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
     <?php include "index.html"?>  
     <center>
     <?php
-    include "config.php";
+    require_once COMPONENTS_DIR."/models.php";
+   $modelsFactoryObj = new ModelsFactory();
+   $userModel = $modelsFactoryObj->createUserModel();
+
          $select = mysqli_query($conn, "SELECT image FROM `loginadmin` WHERE id = 4 ") or die('query failed');
          if(mysqli_num_rows($select) > 0){
             $fetch = mysqli_fetch_assoc($select);

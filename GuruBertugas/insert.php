@@ -28,7 +28,7 @@ echo"Record inserted succesfully<br/>";
 //close database connection
 mysqli_close($conn);*/
 
-
+//rename
 if (isset($_POST['submit'])) {
 	
 	$waktu=$_POST['waktu'];

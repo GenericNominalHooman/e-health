@@ -12,6 +12,9 @@ $verificationBuilderObj = VerificationRulesBuilder::createNew();
 $modelsFactoryObj = new ModelsFactory();
 $userModelObj = $modelsFactoryObj->createUserModel();
 $redirectObj = new Redirect();
+$verificationRulesNama = $verificationBuilderObj->isAString()->setMaxLength(100);
+$verificationRulesNoKP = $verificationRulesNama->clone()->setMaxLength(12);
+$verificationRulesPassword = $verificationRulesNama->clone()->setMinLength(6)->setMaxLength(100);
 
 include 'config.php';
 
@@ -24,6 +27,8 @@ if(isset($_POST['submit'])){
    $image_size = $_FILES['image']['size'];
    $image_tmp_name = $_FILES['image']['tmp_name'];
    $image_folder = 'uploaded_img/'.$image;
+
+   
 
    // Check for each user input fields whether it conforms to the rules provided
   //  $verificationBuilderObj->setIsNotEmpty()->set
@@ -144,11 +149,11 @@ if(isset($_POST['submit'])){
                           <!-- Password input -->
                              <div class="form-outline mb-4">
                              <div class="form-floating">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
-                                <label class="form-label" for="password">Password</label>
-                                <label for="floatingPassword">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan"/>
+                                <label class="form-label" for="password">Kata Laluan</label>
+                                <label for="floatingPassword">Kata Laluan</label>
                                 <div class="mt-3">
-                                <input type="checkbox" onclick="myFunction()">&nbsp;Show Password
+                                <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan
                               </div></div></div>
                              <div class="mb-3">
                               <input type="file" id="image" name="image" class="box form-control" accept="image/jpg, image/jpeg, image/png" value="">

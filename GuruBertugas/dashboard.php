@@ -141,7 +141,7 @@ require_once("config.php");
 			              <th>Tarikh Janji Temu</th>
 					          <th>No Telefon Penjaga</th>
 			              <th>Status</th>
-			              <th>Buang/delete </th>
+			              <th>Buang </th>
                 
                 </thead>
 			

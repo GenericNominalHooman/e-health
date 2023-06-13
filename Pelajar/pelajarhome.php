@@ -5,6 +5,12 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
 require_once(COMPONENTS_DIR."/auth_pelajar.php");
 ?>
 <?php
+require_once(COMPONENTS_DIR."/models.php");
+$modelFactory = new ModelsFactory();
+$userModel = $modelFactory->createUserModel();
+// d($userModel->getAllGuruBertugas());
+
+
 @include 'config.php';
 include 'auth.php';
 $id_pelajar = $_SESSION['id_pelajar'];
@@ -32,6 +38,7 @@ $id_pelajar = $_SESSION['id_pelajar'];
     </style>
 </head>
 <body >
+  
 
    <?php include "index.html";?>
    
@@ -40,8 +47,8 @@ $id_pelajar = $_SESSION['id_pelajar'];
    <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
   <div>
   <h4 class="alert-heading"><strong>NOTIS PEMBERITAHUAN:</strong></h4>
-                      <p class="text-dark">Pelajar hanya dibenarkan berurusan di Hospital Gerik,
-                         Klinik Komuniti, Klinik Kesihatan dan Hospital Taiping. 
+                      <p class="text-dark">Pelajar hanya dibenarkan pergi ke Hospital Gerik,
+                         Klinik Komuniti, Klinik Kesihatan dan Hospital Taiping hanya pada pukul 2 
                          Pelajar hanya boleh dibenarkan pergi ke hospital hanya
                          pada 2 waktu sahaja iaitu pada waktu <strong>9.00 pagi</strong> dan <strong>3.00 petang</strong>.  
                          Pihak asrama dan warden hanya boleh membawa pelajar ke  
@@ -49,7 +56,7 @@ $id_pelajar = $_SESSION['id_pelajar'];
    </div></div>
   <div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
     <div class="card-header " style="background-color:skyblue; ">
-    <i class="fa-regular fa-pen-to-square"></i>&nbsp;KEMASKINI PROFILE
+    <i class="fa-regular fa-pen-to-square"></i>&nbsp;KEMASKINI PROFIL
     </div>
     <div class="card-body" style="background-color:aliceblue;">
       
@@ -68,7 +75,7 @@ $id_pelajar = $_SESSION['id_pelajar'];
       
     <h5 class="card-title  mt-3">SILA MASUKKAN MAKLUMAT DENGAN BETUL</h5>
     <p class="card-text"></p>
-    <a href="update_profile.php" class="btn btn-primary">PROFILE</a>
+    <a href="update_profile.php" class="btn btn-primary">PROFIL</a>
   </div></div>
         
    <div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
@@ -79,7 +86,7 @@ $id_pelajar = $_SESSION['id_pelajar'];
     <img src="images/check.webp" width="150" height="150">
     <h5 class="card-title">PROSES PENGESAHAN MENGAMBIL MASA SEKURANG-KURANGNYA 1 JAM SEBELUM </h5>
     <p class="card-text"> </p>
-    <a href="kemaskini.php" class="btn btn-primary">SEMAK STATUS/EDIT</a>
+    <a href="kemaskini.php" class="btn btn-primary">SEMAK STATUS / KEMASKINI</a>
   </div>
   <!--<div class="card-footer text-muted">-->
    

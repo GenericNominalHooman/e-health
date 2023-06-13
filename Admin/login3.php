@@ -13,14 +13,13 @@ if(isset($_POST['submit'])){
    $pass = md5(mysqli_real_escape_string($conn, $_POST['password']));
 
    $select = mysqli_query($conn, "SELECT * FROM `loginadmin` WHERE  username = '$username' AND password = '$pass'") or die('query failed');
-
    if(mysqli_num_rows($select) > 0){
       $row = mysqli_fetch_assoc($select);
       $_SESSION['id'] = $row['id'];
       $_SESSION['username'] = $username;
             header("Location: dashboard.php");
           }else{
-            $message[] = 'Salah Kata laluan atau Nama Pengguna/username';
+            $message[] = 'Salah Kata laluan atau Nama Pengguna';
          }
         }
 ?>
@@ -73,18 +72,18 @@ if(isset($_POST['submit'])){
               
                             <div class="form-outline mb-4">
                             <div class="form-floating">
-                              <input type="text" autocomplete="off"  name="username" class="form-control" placeholder="Username" >
-                              <label  for="floatingPassword">Username</label></div>
+                              <input type="text" autocomplete="off"  name="username" class="form-control" placeholder="Nama Pengguna" >
+                              <label  for="floatingPassword">Nama Pengguna</label></div>
                                 </div>
 
                           <!-- Password input -->
                              <div class="form-outline mb-4">
                              <div class="form-floating">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password" >
-                                <label class="form-label" for="password">Password</label>
-                                <label for="floatingPassword">Password</label>
+                                <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan" >
+                                <label class="form-label" for="password">Kata Laluan</label>
+                                <label for="floatingPassword">Kata Laluan</label>
                                 <div class="mt-3">
-                                <input type="checkbox" onclick="myFunction()">&nbsp;Show Password
+                                <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan 
                               </div></div></div>
                                 
                               

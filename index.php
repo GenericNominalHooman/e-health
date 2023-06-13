@@ -21,7 +21,7 @@ require_once("./components/login_header.php");
 
                     <img src="img/logo2remove.png" alt="Logo" width="290" height="130" class="rounded"></li>
 
-
+                      <!-- AH -->
                     <!--<a class="navbar-brand" href="#">
                   <center>
                     <img src="img/logoremove.png" alt="Logo" width="300" height="100" class="d-inline-block align-text-top">
@@ -39,10 +39,10 @@ require_once("./components/login_header.php");
             <div class="col-sm-4">
               <div class="card card text-center mb-3  img-fluid rounded" style=" border-color:skyblue;">
                 <div class="card-body ">
-                  <h5 class="card-title">ADMIN/PENDTADBIR</h5>
+                  <h5 class="card-title">PENDTADBIR</h5>
                   <img src="img/admin.png" width="90" height="100">
                   <p class="card-text"></p>
-                  <a href="Admin/login3.php" class="btn btn-primary">LOG MASUK/LOG IN</a>
+                  <a href="Admin/login3.php" class="btn btn-primary">LOG MASUK</a>
                 </div>
               </div>
             </div>
@@ -52,7 +52,7 @@ require_once("./components/login_header.php");
                   <h5 class="card-title">GURU BERTUGAS</h5>
                   <img src="img/gururemove.png" width="95" height="100">
                   <p class="card-text"></p>
-                  <a href="GuruBertugas/index2.php" class="btn btn-primary">LOG IN/LOG MASUK</a>
+                  <a href="GuruBertugas/index2.php" class="btn btn-primary">LOG MASUK</a>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@ require_once("./components/login_header.php");
                   <img src="img/pelajar2remove.png" width="95" height="100">
                   <p class="card-text"></p>
 
-                  <a href="Pelajar/login3.php" class="btn btn-primary">LOG IN/LOG MASUK</a>
+                  <a href="Pelajar/login3.php" class="btn btn-primary">LOG MASUK</a>
 
                 </div>
               </div>
@@ -93,7 +93,7 @@ alert("WELCOME");
 <a href="#">
 <img src="img/img2.png" class="img-fluid" alt="A WORD" width="200" height="200"></a>
 <H2>GURU BERTUGAS</H2>
-<button class="btn btn1"  onclick="window.location.href='GuruBertugas/index2.php';">LOG MASUK/DAFTAR</button>
+<button class="btn btn1"  onclick="window.location.href='GuruBertugas/login3.php';">LOG MASUK/DAFTAR</button>
 <script>
 function msg(){
 alert("WELCOME");
@@ -103,7 +103,7 @@ alert("WELCOME");
 <center>
 <img src="img/img2.png" class="img-fluid" alt="A WORD" width="200" height="200"></a>
 <H2>PELAJAR</H2>
-<button class="btn btn1"  onclick="window.location.href='Pelajar/index2.php';">LOG MASUK/DAFTAR</button>
+<button class="btn btn1"  onclick="window.location.href='Pelajar/login3.php';">LOG MASUK/DAFTAR</button>
 <script>
 function msg(){
 alert("WELCOME");
