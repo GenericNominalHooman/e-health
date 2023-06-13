@@ -2,6 +2,7 @@
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once(COMPONENTS_DIR."/auth_guru.php");
 ?>
 <?php
 require_once("config.php");
@@ -115,6 +116,7 @@ require_once("config.php");
                 <tbody>
                         <!-- loading all leave applications from database -->
                         <?php
+                                include "config.php";
                                 global $row;
                                 $query = mysqli_query($conn,"SELECT * FROM janjitemu");
                                 
