@@ -45,6 +45,21 @@ class UserModel extends Models
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);
   }
+
+  public function getAllPelajar()
+  {
+    $query = "SELECT * FROM user_form";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getPelajarWhere($columnName, $columnValue){
+    $query = "SELECT * FROM user_form WHERE $columnName='$columnValue'";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
 }
 
 class ModelsFactory{
