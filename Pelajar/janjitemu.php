@@ -28,6 +28,12 @@ $id_pelajar = $_SESSION['id_pelajar'];
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 
 </head>
+<?php
+      $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id_pelajar = '$id_pelajar'") or die('query failed');
+      if (mysqli_num_rows($select) > 0) {
+         $fetch = mysqli_fetch_assoc($select);
+      }
+      ?>
 
 <body>
   <div class="container">
@@ -60,8 +66,8 @@ $id_pelajar = $_SESSION['id_pelajar'];
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
                       <div class="form-floating">
-                        <input type="text" name="nama" class="form-control form-control-lg" placeholder="Nama" />
-                        <label for="floatingPassword">Nama</label>
+                      <input type="text" name="update_nama" value="<?php echo $fetch['nama']; ?>" class="form-control" placeholder="Nama Penuh" />
+                                 <label for="floatingPassword">Nama Penuh Pelajar</label>
                       </div>
                     </div>
 
@@ -69,9 +75,8 @@ $id_pelajar = $_SESSION['id_pelajar'];
                   <div class="col-md-6 mb-4">
                     <div class="form-outline">
                       <div class="form-floating">
-                        <input type="text" name="nokp" class="form-control form-control-lg" placeholder="No.Kad Pengenalan" />
-                        <label class="form-label" for="nokp">No. Kad Pengenalan</label>
-                        <label for="floatingPassword">No. Kad Pengenalan</label>
+                        <input type="text" name="update_nokp" value="<?php echo $fetch['nokp']; ?>" class="form-control" placeholder="No.Kad Pengenalan" />
+                                 <label for="floatingPassword">No. Kad Pengenalan</label>
                       </div>
                     </div>
                   </div>
