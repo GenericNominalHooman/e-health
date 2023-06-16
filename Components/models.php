@@ -145,7 +145,7 @@ class JadualModel extends Models{
 
 }
 
-class MCSlip extends Models{
+class MCSlipModel extends Models{
     // Guru Bertugas 
     public function getAllMCSlip() {
         $stmt = $this->conn->prepare("SELECT * FROM mcslip");
