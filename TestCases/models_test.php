@@ -8,6 +8,8 @@ require_once(COMPONENTS_DIR."/config.php");
 $modelDatabaseObj = new Database();
 $modelMysqliConn = $modelDatabaseObj->getConnection();
 d($modelMysqliConn);
-$userModelObj = new UserModel($modelMysqliConn);
+$userModelObj = new LoginModel($modelMysqliConn);
 d($userModelObj->getAllAdmin());
+d($userModelObj->getAllGuruBertugas());
+d($userModelObj->getAllWarden());
 ?>
