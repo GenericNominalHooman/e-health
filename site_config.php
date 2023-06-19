@@ -4,10 +4,10 @@
     // 
     require_once('vendor/autoload.php');
 
-    // Hospital site configuration
+    // E-health site configuration
     define("HOST", $_SERVER['SERVER_NAME']);
     define("HOST_URL", "http://".HOST);
-    define("SITE_NAME", "hospital");
+    define("SITE_NAME", "e-health");
     define("SITE_URL", HOST_URL."/".SITE_NAME);
     define("SITE_DIR", $_SERVER["DOCUMENT_ROOT"]."/".SITE_NAME);
 
