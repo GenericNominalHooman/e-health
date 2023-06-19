@@ -1,5 +1,20 @@
 {
     "require": {
-        "kint-php/kint": "^5.0"
+        "kint-php/kint": "^5.0",
+        "twbs/bootstrap": "5.3.0",
+        "components/jquery": "^3.6",
+        "robloach/component-installer": "^0.0.12"
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "rm -rf Resources/bootstrap",
+            "cp -R vendor/twbs/bootstrap/dist Resources/bootstrap"
+        ]
+    },
+    "config": {
+        "component-dir": "Resources/components",
+        "allow-plugins": {
+            "robloach/component-installer": true
+        }
     }
 }
