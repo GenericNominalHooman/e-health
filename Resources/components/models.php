@@ -1,5 +1,8 @@
 <?php
 // Import site config
+
+use function PHPSTORM_META\map;
+
 require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 ?>
 <?php
@@ -164,5 +167,83 @@ class MCSlipModel extends Models{
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }    
+}
+
+class JanjitemuModel extends Models{
+    // Janjitemu 
+    public function getAllJanjitemu() {
+        $stmt = $this->conn->prepare("SELECT * FROM janjitemupelajar");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllJanjitemuWhere($columnName, $columnValue) {
+        $stmt = $this->conn->prepare("SELECT * FROM janjitemupelajar WHERE $columnName='$columnValue'");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }    
+
+    public function getAllJanjitemuColumns($columns) {
+        // Sanitize column names to avoid SQL injection
+        $sanitizedColumns = array_map(function($column) {
+            return preg_replace('/[^a-zA-Z0-9_]/', '', $column);
+        }, $columns);
+    
+        // Create a comma-separated list of column names
+        $columnList = implode(',', $sanitizedColumns);
+    
+        // Prepare and execute the SELECT statement
+        $stmt = $this->conn->prepare("SELECT $columnList FROM janjitemupelajar");
+        $stmt->execute();
+    
+        // Fetch the result as an associative array
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllJanjitemuColumnsWhere($columns, $whereRules) {
+        // Sanitize column names to avoid SQL injection
+        $sanitizedColumns = array_map(function($column) {
+            return preg_replace('/[^a-zA-Z0-9_]/', '', $column);
+        }, $columns);
+    
+        // Create a comma-separated list of column names
+        $columnList = implode(',', $sanitizedColumns);
+    
+        // Prepare and execute the SELECT statement
+        $stmt = $this->conn->prepare("SELECT $columnList FROM janjitemupelajar WHERE $whereRules");
+        $stmt->execute();
+    
+        // Fetch the result as an associative array
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllJanjitemuCountWhere($columnName, $columnValue) {
+        $stmt = $this->conn->prepare("SELECT COUNT(*) AS TOTAL FROM janjitemupelajar WHERE $columnName='$columnValue'");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }    
+
+    public function getAllJanjitemuColumnsCountWhere($columns, $columnName, $columnValue) {
+        // Sanitize column names to avoid SQL injection
+        $sanitizedColumns = array_map(function($column) {
+            return preg_replace('/[^a-zA-Z0-9_]/', '', $column);
+        }, $columns);
+    
+        // Create a comma-separated list of column names
+        $columnList = implode(',', $sanitizedColumns);
+    
+        // Prepare and execute the SELECT statement
+        $stmt = $this->conn->prepare("SELECT COUNT($columnList) FROM janjitemupelajar WHERE $columnName='$columnValue'");
+        $stmt->execute();
+    
+        // Fetch the result as an associative array
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
 }
 ?>

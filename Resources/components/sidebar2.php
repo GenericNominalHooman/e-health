@@ -71,8 +71,7 @@
             top: 0;
             left: -30%;
             width: var(--nav-width);
-            height: 100vh;
-            background-color: var(--first-color);
+            height: 100%;
             padding: .5rem 1rem 0 0;
             transition: .5s;
             z-index: var(--z-fixed)
@@ -184,7 +183,7 @@
         }
     </style>
 </header>
-<div class="l-navbar" id="nav-bar">
+<div class="l-navbar bg-secondary-custom" id="nav-bar">
     <nav class="nav">
         <div>
             <a href="#" class="nav_logo">
