@@ -1,5 +1,5 @@
 <header class="header" id="header">
-    <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
+    <div class="header_toggle secondary-custom"> <i class='bx bx-menu' id="header-toggle"></i> </div>
     <style>
         @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap");
 
@@ -48,7 +48,6 @@
         }
 
         .header_toggle {
-            color: var(--first-color);
             font-size: 1.5rem;
             cursor: pointer
         }
