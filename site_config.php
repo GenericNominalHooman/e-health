@@ -25,6 +25,12 @@
     define("IMG_URL", RESOURCES_URL."/img");
     define("COMPONENTS_URL", RESOURCES_URL."/components");
 
+    // Templates directory
+    define("TEMPLATE_DIR", SITE_DIR."/Templates");
+
+    // Templates directory
+    define("TEMPLATE_URL", SITE_URL."/Templates");
+    
     // DB configuration
     define("DB_HOST", "localhost");
     define("DB_USER", "root");

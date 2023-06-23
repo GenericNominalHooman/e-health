@@ -8,10 +8,13 @@ require_once(COMPONENTS_DIR . "/header.php");
 ?>
 <?php
 // Import sidebar
-require_once(COMPONENTS_DIR . "/sidebar.php");
 require_once(COMPONENTS_DIR . "/config.php");
 $databaseObj = new Database();
 $conn = $databaseObj->getConnection();
+?>
+<?php
+// Import pelajar sidebar template
+require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 ?>
 <!-- Content Here -->
 <div class="update-profile">

@@ -184,10 +184,10 @@
 </header>
 <div class="l-navbar bg-secondary-custom" id="nav-bar">
     <nav class="nav">
-        <div>
-            <a href="<?php echo(SITE_URL);?>" class="nav_logo">
+        <div id="">
+            <a href="<?php echo (SITE_URL); ?>" class="nav_logo">
                 <i class='bx bx-plus-medical nav_logo-icon'></i>
-                <span class="nav_logo-name"><?php echo(SITE_NAME);?></span>
+                <span class="nav_logo-name"><?php echo (SITE_NAME); ?></span>
             </a>
             <div class="nav_list">
                 <script>
@@ -200,14 +200,16 @@
 
                         render() {
                             return `<a href="${this.url}" class="nav_link">` +
-                                        `<i class='bx nav_icon ${this.icon_class}'></i>` +
-                                        `<span class="nav_name">${this.name}</span>` +
-                                    `</a>`;
+                                `<i class='bx nav_icon ${this.icon_class}'></i>` +
+                                `<span class="nav_name">${this.name}</span>` +
+                                `</a>`;
                         }
                     }
                 </script>
             </div>
-        </div> <a href="#" class="nav_link"> <i class='bx bx-log-out nav_icon'></i> <span class="nav_name">SignOut</span> </a>
+        </div>
+        <div id="nav_logout">
+        </div>
     </nav>
 </div>
 <!--Container Main end-->
