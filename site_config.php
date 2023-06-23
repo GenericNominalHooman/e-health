@@ -28,7 +28,7 @@
     // DB configuration
     define("DB_HOST", "localhost");
     define("DB_USER", "root");
-    define("DB_PASS", "");
+    define("DB_PASS", "Kafin-12");
     define("DB_NAME", "e-health");
 
     // User profile pages(directories)
