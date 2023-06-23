@@ -1,8 +1,4 @@
  <!--Slick Carousel Slider-->
- <div class="container-fluid text-center p-4">
-     <h2>Jadual Guru & Warden Bertugas</h2>
-     <hr>
- </div>
  <div class="items p-4 m-4">
      <div><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190720/gallery/preview/02_o_car.jpg"></div>
      <div><img src="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190715/gallery/preview/03_r_car.jpg"></div>

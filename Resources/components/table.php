@@ -2,8 +2,8 @@
 // Import site config
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
-<div class="container-xxl">
-    <table id="table_janjitemu" class="table table-striped table-bordered" style="width:100%">
+<div class="container-xxl overflow-auto">
+    <table id="table_janjitemu" class="table table-striped table-bordered col-md-12">
     </table>
 </div>
 <script>

@@ -185,7 +185,7 @@
 <div class="l-navbar bg-secondary-custom" id="nav-bar">
     <nav class="nav">
         <div>
-            <a href="#" class="nav_logo">
+            <a href="<?php echo(SITE_URL);?>" class="nav_logo">
                 <i class='bx bx-plus-medical nav_logo-icon'></i>
                 <span class="nav_logo-name"><?php echo(SITE_NAME);?></span>
             </a>
