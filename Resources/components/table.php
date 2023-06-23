@@ -1,6 +1,7 @@
 <?php
 // Import site config
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+require_once(COMPONENTS_DIR."/header.php");
 ?>
 <div class="container-xxl overflow-auto">
     <table id="table_janjitemu" class="table table-striped table-bordered col-md-12">
