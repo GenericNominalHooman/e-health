@@ -1,88 +1,98 @@
 <?php
     // Import site config
     require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+    // Auth component is dependent on header and config component
+    require_once(COMPONENTS_DIR."/header.php");
+    require_once(COMPONENTS_DIR . "/config.php");
 ?>
 <?php
 class Auth {
-    public $userModel;
+    private $loginModel;
     
-    public function __construct($dbObj)
+    public function __construct($conn)
     {
         require_once(COMPONENTS_DIR."/models.php");
-        $this->dbObj = $dbObj;
-
+        $this->loginModel = new LoginModel($conn);
     }
     
     public function isAuth() {
         return isset($_SESSION["Auth"]);
     }
+    
+    public function authPelajar($nama, $katalaluan) {
+        $pelajar = $this->loginModel->getAllPelajarWhere("namapelajar", $nama);
+        d($pelajar);
 
-    public function authPelajar($no_kad_pengenalan, $password) {
-        // Assuming you have a function to query the database
-        $pelajar = get_pelajar_by_no_kad_pengenalan_and_password($no_kad_pengenalan, $password);
-
-        if ($pelajar) {
-            $_SESSION["Auth"] = [
-                'id' => $pelajar['id'],
-                'nama' => $pelajar['nama'],
-                'no_kad_pengenalan' => $pelajar['no_kad_pengenalan'],
-                'no_matrik' => $pelajar['no_matrik'],
-                'no_telefon_pelajar' => $pelajar['no_telefon_pelajar'],
-                'nama_bapa_pelajar' => $pelajar['nama_bapa_pelajar'],
-                'no_telefon_bapa_pelajar' => $pelajar['no_telefon_bapa_pelajar'],
-                'nama_ibu_pelajar' => $pelajar['nama_ibu_pelajar'],
-                'no_telefon_ibu_pelajar' => $pelajar['no_telefon_ibu_pelajar'],
-                'penyakit_pelajar' => $pelajar['penyakit_pelajar'],
-                'alamat_pelajar' => $pelajar['alamat_pelajar'],
-                'alahan' => $pelajar['alahan'],
-                'profil_gambar' => $pelajar['profil_gambar']
-            ];
-            return true;
+        if(!empty($pelajar)){
+            if(password_verify($katalaluan, $pelajar[0]["katalaluanpelajar"])){
+                if ($pelajar) {
+                    $_SESSION["Auth"] = [
+                        'id' => $pelajar[0]['id'],
+                        'nama' => $pelajar[0]['namapelajar'],
+                        'gambarprofilpelajar' => $pelajar[0]['gambarprofilpelajar'],
+                        'jenispengguna' => "pelajar",
+                    ];
+                    return true;
+                }
+            }
         }
         return false;
     }
 
-    public function authPentadbir($no_kad_pengenalan, $password) {
-        $pentadbir = get_pentadbir_by_no_kad_pengenalan_and_password($no_kad_pengenalan, $password);
+    public function authPentadbir($nama, $katalaluan) {
+        $pentadbir = $this->loginModel->getAllAdminWhere("namapentadbir", $nama);
 
-        if ($pentadbir) {
-            $_SESSION["Auth"] = [
-                'id' => $pentadbir['id'],
-                'nama' => $pentadbir['nama'],
-                'no_kad_pengenalan' => $pentadbir['no_kad_pengenalan'],
-                'profil_gambar' => $pentadbir['profil_gambar']
-            ];
-            return true;
+        if(!empty($pentadbir)){
+            if(password_verify($katalaluan, $pentadbir[0]["katalaluanpentadbir"])){
+                if ($pentadbir) {
+                    $_SESSION["Auth"] = [
+                        'id' => $pentadbir[0]['id'],
+                        'nama' => $pentadbir[0]['namapentadbir'],
+                        'gambarprofilpentadbir' => $pentadbir[0]['gambarprofilpentadbir'],
+                        'jenispengguna' => "pentadbir",
+                    ];
+                    return true;
+                }
+            }
         }
         return false;
     }
 
-    public function authGuru($no_kad_pengenalan, $password) {
-        $guru = get_guru_by_no_kad_pengenalan_and_password($no_kad_pengenalan, $password);
-
-        if ($guru) {
-            $_SESSION["Auth"] = [
-                'id' => $guru['id'],
-                'nama' => $guru['nama'],
-                'no_kad_pengenalan' => $guru['no_kad_pengenalan'],
-                'profil_gambar' => $guru['profil_gambar']
-            ];
-            return true;
+    public function authGuru($nama, $katalaluan) {
+        $guru = $this->loginModel->getAllGuruBertugasWhere("namaguru", $nama);
+        
+        if(!empty($guru)){
+            if(password_verify($katalaluan, $guru[0]["katalaluanguru"])){
+                if ($guru) {
+                    $_SESSION["Auth"] = [
+                        'id' => $guru[0]['id'],
+                        'nama' => $guru[0]['namaguru'],
+                        'gambarprofilguru' => $guru[0]['gambarprofilguru'],
+                        'jenispengguna' => "guru",
+                    ];
+                    return true;
+                }
+            }
         }
         return false;
+        
     }
 
-    public function authWarden($no_kad_pengenalan, $password) {
-        $warden = get_warden_by_no_kad_pengenalan_and_password($no_kad_pengenalan, $password);
+    public function authWarden($nama, $katalaluan) {
+        $warden = $this->loginModel->getAllWardenWhere("namawarden", $nama);
 
-        if ($warden) {
-            $_SESSION["Auth"] = [
-                'id' => $warden['id'],
-                'nama' => $warden['nama'],
-                'no_kad_pengenalan' => $warden['no_kad_pengenalan'],
-                'profil_gambar' => $warden['profil_gambar']
-            ];
-            return true;
+        if(!empty($warden)){
+            if(password_verify($katalaluan, $warden[0]["katalaluanguru"])){
+                if ($warden) {
+                    $_SESSION["Auth"] = [
+                        'id' => $warden[0]['id'],
+                        'nama' => $warden[0]['namawarden'],
+                        'gambarprofilwarden' => $warden[0]['gambarprofilwarden'],
+                        'jenispengguna' => "warden",
+                    ];
+                    return true;
+                }
+            }
         }
         return false;
     }

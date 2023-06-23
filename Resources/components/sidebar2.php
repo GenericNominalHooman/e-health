@@ -1,3 +1,9 @@
+<?php
+    // Import site config
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+    // Sidebar component is dependent on header component
+    require_once(COMPONENTS_DIR."/header.php");
+?>
 <header class="header" id="header">
     <div class="header_toggle secondary-custom"> <i class='bx bx-menu' id="header-toggle"></i> </div>
     <style>

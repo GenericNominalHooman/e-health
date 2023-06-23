@@ -1,6 +1,8 @@
 <?php
 // Import site config
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+// Starting session
+session_start();
 ?>
 <!DOCTYPE html>
 <html lang="en">

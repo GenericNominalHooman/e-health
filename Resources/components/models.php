@@ -1,9 +1,7 @@
 <?php
 // Import site config
-
-use function PHPSTORM_META\map;
-
 require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
+require_once(COMPONENTS_DIR."/config.php");
 ?>
 <?php
 class Models{
@@ -65,6 +63,21 @@ class LoginModel extends Models{
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
+
+    // Warden 
+    public function getAllPelajar() {
+        $stmt = $this->conn->prepare("SELECT * FROM loginpelajar");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }
+
+    public function getAllPelajarWhere($columnName, $columnValue) {
+        $stmt = $this->conn->prepare("SELECT * FROM loginpelajar WHERE $columnName='$columnValue'");
+        $stmt->execute();
+        $result = $stmt->get_result();
+        return $result->fetch_all(MYSQLI_ASSOC);
+    }    
 }
 
 class ProfilModel extends Models{
