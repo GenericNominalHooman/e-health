@@ -23,7 +23,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
 
          // Pentadbir(sidebar item)
          const linkDataLoginPentadbir = {
-             url: <?php echo ("'" . ADMIN_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . PENTADBIR_URL . "/login.php'"); ?>,
              name: 'Login Pentadbir',
              icon_class: 'bxs-user',
          };

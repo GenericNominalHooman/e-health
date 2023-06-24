@@ -23,7 +23,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
 
          // Profil
          const linkDataProfil = {
-             url: <?php echo ("'" . ADMIN_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . PENTADBIR_URL . "/login.php'"); ?>,
              name: 'Profil',
              icon_class: 'bx bx-user-circle',
          };
