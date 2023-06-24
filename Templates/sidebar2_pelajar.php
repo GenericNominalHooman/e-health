@@ -14,7 +14,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
      $(document).ready(function() {
          // Utama
          const linkDataHome = {
-             url: <?php echo ("'" . PELAJAR_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . PELAJAR_URL . "/utama.php'"); ?>,
              name: 'Utama',
              icon_class: 'bx bx-home',
          };
@@ -23,7 +23,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
 
          // Profil
          const linkDataProfil = {
-             url: <?php echo ("'" . PENTADBIR_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . PELAJAR_URL . "/Profil/profil.php'"); ?>,
              name: 'Profil',
              icon_class: 'bx bx-user-circle',
          };
@@ -32,7 +32,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
 
          // Janjitemu
          const linkDataJanjiTemu = {
-             url: <?php echo ("'" . WARDEN_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . PELAJAR_URL . "/JanjiTemu/login.php'"); ?>,
              name: 'Janji Temu',
              icon_class: 'bx bx-list-ol',
          };

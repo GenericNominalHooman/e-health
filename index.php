@@ -4,7 +4,7 @@
     ?>
  <?php
     require_once(COMPONENTS_DIR . "/header.php");
-    // Import sidebar components
+    // Import guest sidebar template
     require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
     ?>
  <!-- CONTENT -->
