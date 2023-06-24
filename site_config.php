@@ -39,13 +39,13 @@
 
     // User profile pages(directories)
     define("PELAJAR_DIR", SITE_DIR."/"."Pelajar");
-    define("GURU_DIR", SITE_DIR."/"."GuruBertugas");
+    define("GURU_DIR", SITE_DIR."/"."Guru");
     define("ADMIN_DIR", SITE_DIR."/"."Admin");
     define("WARDEN_DIR", SITE_DIR."/"."Warden");
 
     // Static content resources(URLs)
     define("PELAJAR_URL", SITE_URL."/"."Pelajar");
-    define("GURU_URL", SITE_URL."/"."GuruBertugas");
+    define("GURU_URL", SITE_URL."/"."Guru");
     define("ADMIN_URL", SITE_URL."/"."Admin");
     define("WARDEN_URL", SITE_URL."/"."Warden");
 ?>
