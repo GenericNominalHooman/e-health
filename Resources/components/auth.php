@@ -8,11 +8,13 @@
 <?php
 class Auth {
     private $loginModel;
+    private $registerModel;
     
     public function __construct($conn)
     {
         require_once(COMPONENTS_DIR."/models.php");
         $this->loginModel = new LoginModel($conn);
+        $this->registerModel = new RegisterModel($conn);
     }
     
     public function isAuth() {
@@ -82,7 +84,7 @@ class Auth {
         $warden = $this->loginModel->getAllWardenWhere("namawarden", $nama);
 
         if(!empty($warden)){
-            if(password_verify($katalaluan, $warden[0]["katalaluanguru"])){
+            if(password_verify($katalaluan, $warden[0]["katalaluanwarden"])){
                 if ($warden) {
                     $_SESSION["Auth"] = [
                         'id' => $warden[0]['id'],
@@ -95,6 +97,26 @@ class Auth {
             }
         }
         return false;
+    }
+
+    public function registerPelajar($nama, $katalaluan, $gambarprofilpelajar, $id = null) {
+        $hashed_katalaluan = password_hash($katalaluan, PASSWORD_BCRYPT);
+        return $this->registerModel->createPelajar($id, $nama, $hashed_katalaluan, $gambarprofilpelajar);
+    }
+
+    public function registerPentadbir($nama, $katalaluan, $gambarprofilpentadbir, $id = null) {
+        $hashed_katalaluan = password_hash($katalaluan, PASSWORD_BCRYPT);
+        return $this->registerModel->createPentadbir($id, $nama, $hashed_katalaluan, $gambarprofilpentadbir);
+    }
+
+    public function registerGuru($nama, $katalaluan, $gambarprofilguru, $id = null) {
+        $hashed_katalaluan = password_hash($katalaluan, PASSWORD_BCRYPT);
+        return $this->registerModel->createGuru($id, $nama, $hashed_katalaluan, $gambarprofilguru);
+    }
+
+    public function registerWarden($nama, $katalaluan, $gambarprofilwarden, $id = null) {
+        $hashed_katalaluan = password_hash($katalaluan, PASSWORD_BCRYPT);
+        return $this->registerModel->createWarden($id, $nama, $hashed_katalaluan, $gambarprofilwarden);
     }
 }
 ?>

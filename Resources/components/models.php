@@ -80,6 +80,36 @@ class LoginModel extends Models{
     }    
 }
 
+class RegisterModel extends Models{
+    public function createPelajar($id, $nama, $hashed_katalaluan, $gambarprofilpelajar) {
+        $sql = "INSERT INTO loginpelajar (id, namapelajar, katalaluanpelajar, gambarprofilpelajar) VALUES (?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("isss", $id, $nama, $hashed_katalaluan, $gambarprofilpelajar);
+        return $stmt->execute();
+    }
+
+    public function createPentadbir($id, $nama, $hashed_katalaluan, $gambarprofilpentadbir) {
+        $sql = "INSERT INTO loginadmin (id, namapentadbir, katalaluanpentadbir, gambarprofilpentadbir) VALUES (?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("isss", $id, $nama, $hashed_katalaluan, $gambarprofilpentadbir);
+        return $stmt->execute();
+    }
+
+    public function createGuru($id, $nama, $hashed_katalaluan, $gambarprofilguru) {
+        $sql = "INSERT INTO loginguru (id, namaguru, katalaluanguru, gambarprofilguru) VALUES (?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("isss", $id, $nama, $hashed_katalaluan, $gambarprofilguru);
+        return $stmt->execute();
+    }
+
+    public function createWarden($id, $nama, $hashed_katalaluan, $gambarprofilwarden) {
+        $sql = "INSERT INTO loginwarden (id, namawarden, katalaluanwarden, gambarprofilwarden) VALUES (?, ?, ?, ?)";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param("isss", $id, $nama, $hashed_katalaluan, $gambarprofilwarden);
+        return $stmt->execute();
+    }
+}
+
 class ProfilModel extends Models{
     public function __construct($conn){
       // Call parent constructor method
