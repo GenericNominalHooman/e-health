@@ -121,7 +121,4 @@ if ($authObj->isAuth()) {
 } else {
     echo ("<br>Hello I'm a guest, I'm not yet authenthicated<br>");
 }
-
-// Erase all session variables PS: do this only on logout
-session_unset();
 ?>
