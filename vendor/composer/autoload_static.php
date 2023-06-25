@@ -7,10 +7,15 @@ namespace Composer\Autoload;
 class ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb
 {
     public static $files = array (
+        'ce89ac35a6c330c55f4710717db9ff78' => __DIR__ . '/..' . '/kriswallsmith/assetic/src/functions.php',
         '3917c79c5052b270641b5a200963dbc2' => __DIR__ . '/..' . '/kint-php/kint/init.php',
     );
 
     public static $prefixLengthsPsr4 = array (
+        'S' => 
+        array (
+            'Symfony\\Component\\Process\\' => 26,
+        ),
         'K' => 
         array (
             'Kint\\' => 5,
@@ -18,9 +23,30 @@ class ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb
     );
 
     public static $prefixDirsPsr4 = array (
+        'Symfony\\Component\\Process\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/symfony/process',
+        ),
         'Kint\\' => 
         array (
             0 => __DIR__ . '/..' . '/kint-php/kint/src',
+        ),
+    );
+
+    public static $prefixesPsr0 = array (
+        'C' => 
+        array (
+            'ComponentInstaller' => 
+            array (
+                0 => __DIR__ . '/..' . '/robloach/component-installer/src',
+            ),
+        ),
+        'A' => 
+        array (
+            'Assetic' => 
+            array (
+                0 => __DIR__ . '/..' . '/kriswallsmith/assetic/src',
+            ),
         ),
     );
 
@@ -33,6 +59,7 @@ class ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb
         return \Closure::bind(function () use ($loader) {
             $loader->prefixLengthsPsr4 = ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb::$prefixLengthsPsr4;
             $loader->prefixDirsPsr4 = ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb::$prefixDirsPsr4;
+            $loader->prefixesPsr0 = ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb::$prefixesPsr0;
             $loader->classMap = ComposerStaticInitee448193b37b38aa764e8bffcebfa3bb::$classMap;
 
         }, null, ClassLoader::class);

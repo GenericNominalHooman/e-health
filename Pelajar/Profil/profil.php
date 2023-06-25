@@ -1,6 +1,6 @@
 <?php
 // Import site config
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
 // Import header
@@ -8,10 +8,13 @@ require_once(COMPONENTS_DIR . "/header.php");
 ?>
 <?php
 // Import sidebar
-require_once(COMPONENTS_DIR . "/sidebar.php");
 require_once(COMPONENTS_DIR . "/config.php");
 $databaseObj = new Database();
 $conn = $databaseObj->getConnection();
+?>
+<?php
+// Import pelajar sidebar template
+require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 ?>
 <!-- Content Here -->
 <div class="update-profile">

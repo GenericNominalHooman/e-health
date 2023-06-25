@@ -4,25 +4,33 @@
     // 
     require_once('vendor/autoload.php');
 
-    // Hospital site configuration
+    // E-health site configuration
     define("HOST", $_SERVER['SERVER_NAME']);
     define("HOST_URL", "http://".HOST);
-    define("SITE_NAME", "hospital");
+    define("SITE_NAME", "e-health");
     define("SITE_URL", HOST_URL."/".SITE_NAME);
     define("SITE_DIR", $_SERVER["DOCUMENT_ROOT"]."/".SITE_NAME);
 
     // Static content resources(directories)
-    define("CSS_DIR", SITE_DIR."/"."css");
-    define("JS_DIR", SITE_DIR."/"."js");
-    define("IMG_DIR", SITE_DIR."/"."img");
-    define("COMPONENTS_DIR", SITE_DIR."/"."Components");
+    define("RESOURCES_DIR", SITE_DIR."/Resources");
+    define("CSS_DIR", RESOURCES_DIR."/css");
+    define("JS_DIR", RESOURCES_DIR."/js");
+    define("IMG_DIR", RESOURCES_DIR."/img");
+    define("COMPONENTS_DIR", RESOURCES_DIR."/components");
 
     // Static content resources(URLs)
-    define("CSS_URL", SITE_URL."/"."css");
-    define("JS_URL", SITE_URL."/"."js");
-    define("IMG_URL", SITE_URL."/"."img");
-    define("COMPONENTS_URL", SITE_URL."/"."Components");
+    define("RESOURCES_URL", SITE_URL."/Resources");
+    define("CSS_URL", RESOURCES_URL."/css");
+    define("JS_URL", RESOURCES_URL."/js");
+    define("IMG_URL", RESOURCES_URL."/img");
+    define("COMPONENTS_URL", RESOURCES_URL."/components");
 
+    // Templates directory
+    define("TEMPLATE_DIR", SITE_DIR."/Templates");
+
+    // Templates directory
+    define("TEMPLATE_URL", SITE_URL."/Templates");
+    
     // DB configuration
     define("DB_HOST", "localhost");
     define("DB_USER", "root");
@@ -31,11 +39,13 @@
 
     // User profile pages(directories)
     define("PELAJAR_DIR", SITE_DIR."/"."Pelajar");
-    define("GURU_DIR", SITE_DIR."/"."GuruBertugas");
-    define("ADMIN_DIR", SITE_DIR."/"."Admin");
+    define("GURU_DIR", SITE_DIR."/"."Guru");
+    define("PENTADBIR_DIR", SITE_DIR."/"."Pentadbir");
+    define("WARDEN_DIR", SITE_DIR."/"."Warden");
 
     // Static content resources(URLs)
     define("PELAJAR_URL", SITE_URL."/"."Pelajar");
-    define("GURU_URL", SITE_URL."/"."GuruBertugas");
-    define("ADMIN_URL", SITE_URL."/"."Admin");
+    define("GURU_URL", SITE_URL."/"."Guru");
+    define("PENTADBIR_URL", SITE_URL."/"."Pentadbir");
+    define("WARDEN_URL", SITE_URL."/"."Warden");
 ?>
