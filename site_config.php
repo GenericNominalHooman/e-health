@@ -17,7 +17,7 @@
     define("JS_DIR", RESOURCES_DIR."/js");
     define("IMG_DIR", RESOURCES_DIR."/img");
     define("COMPONENTS_DIR", RESOURCES_DIR."/components");
-
+    
     // Static content resources(URLs)
     define("RESOURCES_URL", SITE_URL."/Resources");
     define("CSS_URL", RESOURCES_URL."/css");
@@ -42,6 +42,10 @@
     define("GURU_DIR", SITE_DIR."/"."Guru");
     define("PENTADBIR_DIR", SITE_DIR."/"."Pentadbir");
     define("WARDEN_DIR", SITE_DIR."/"."Warden");
+
+    // Profile image upload directory
+    define("UPLOAD_DIR", SITE_DIR."/Uploads/profile_images");
+    define("UPLOAD_URL", SITE_URL."/Uploads/profile_images");
 
     // Static content resources(URLs)
     define("PELAJAR_URL", SITE_URL."/"."Pelajar");

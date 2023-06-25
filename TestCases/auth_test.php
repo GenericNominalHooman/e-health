@@ -8,43 +8,28 @@
 
     $dbObj = new Database();
     $authObj = new Auth($dbObj->getConnection());
+?>
+<h2>Login Pelajar</h2>
+<form action="<?php echo($_SERVER["PHP_SELF"]);?>" method="POST">
+    <input type="text" name="nama">
+    <input type="text" name="password">
+    <button type="submit" name="submit">Submit</button>
+</form>
+<?php
+    // Login pelajar
+    if(isset($_POST["submit"])){
 
-    // Check whether the current user is currently authenthicated by checking whether the sesion key Auth has been set(Set = True, X Set = False)
-    if($authObj->isAuth()){
-        echo("<br>Hello I'm an authenthicated user and this is a message for authenthicated user<br>This is my user information<br>");
-        d($_SESSION["Auth"]);
-    }else{
-        echo("<br>Hello I'm a guest, I'm not yet authenthicated<br>");
+        if($authObj->authPelajar($_POST["nama"], $_POST["password"])){
+            // Mesej untuk user yang dah login
+            d($_SESSION["Auth"]); // OK
+            echo("BERJAYA LOG MASUK");
+        }else{
+            // Mesej untuk user yang x berjaya login
+            echo("PASSWORD ANDA SALAH");
+        }
     }
-
-    // Authenthicate as pelajar, accepts 2 parameters (name, password)
-    if($authObj->authPelajar("Iz", "password")){
-        echo("<br>Successfully authenthicated as a pelajar<br>");
-    }
-
-    // Authenthicate as guru, accepts 2 parameters (name, password)
-    if($authObj->authGuru("Guru 1", "password")){
-        echo("<br>Successfully authenthicated as a guru<br>");
-    }
-    
-    // Authenthicate as warden, accepts 2 parameters (name, password)
-    if($authObj->authWarden("Warden 1", "password")){
-        echo("<br>Successfully authenthicated as a warden<br>");
-    }
-
-    // Authenthicate as warden, accepts 2 parameters (name, password)
-    if($authObj->authPentadbir("Pentadbir 1", "password")){
-        echo("<br>Successfully authenthicated as a pentadbir<br>");
-    }
-
-    // Check whether the current user is currently authenthicated by checking whether the sesion key Auth has been set(Set = True, X Set = False)
-    if($authObj->isAuth()){
-        echo("<br>Hello I'm an authenthicated user and this is a message for authenthicated user<br>This is my user information<br>");
-        d($_SESSION["Auth"]);
-    }else{
-        echo("<br>Hello I'm a guest, I'm not yet authenthicated<br>");
-    }
-
+?>
+<?php
     // Erase all session variables PS: do this only on logout
     session_unset();
 ?>

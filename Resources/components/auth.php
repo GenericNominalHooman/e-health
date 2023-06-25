@@ -23,7 +23,6 @@ class Auth {
     
     public function authPelajar($nama, $katalaluan) {
         $pelajar = $this->loginModel->getAllPelajarWhere("namapelajar", $nama);
-        d($pelajar);
 
         if(!empty($pelajar)){
             if(password_verify($katalaluan, $pelajar[0]["katalaluanpelajar"])){

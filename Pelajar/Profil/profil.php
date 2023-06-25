@@ -5,6 +5,9 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 <?php
 // Import header
 require_once(COMPONENTS_DIR . "/header.php");
+// Import message handler
+require_once(COMPONENTS_DIR . "/message_handler.php");
+$messageHandler = new MessageHandler();
 ?>
 <?php
 // Import sidebar
@@ -249,6 +252,79 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         padding: .75rem 1.25rem;
     }
 </style>
+<style>
+    /* Alert Message */
+    .container{
+       
+       margin-top:100px;
+   }
+   
+   
+   
+    .alert.alert-general {
+    	background: #d9d9d9
+    }
+    
+    .alert.alert-help {
+    	background: #91e3fd
+    }
+    
+    .alert.alert-error {
+    	background: #f6bcc3
+    }
+    
+    .alert .close,
+    .info-box .close {
+    	filter: alpha(opacity=100);
+    	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+    	-moz-opacity: 1;
+    	-khtml-opacity: 1;
+    	opacity: 1;
+    	font-weight: normal;
+    	color: #fff;
+    	font-size: 12px;
+    	cursor: pointer;
+    	text-shadow: none;
+    	float: none;
+    	position: absolute;
+    	top: 8px;
+    	right: 8px
+    }
+    
+     .close:before
+     {
+    	content: "\f00d"; 
+    	font-family: FontAwesome
+    }
+    
+    .fa {
+  color: #fff;
+}
+/* End Alert Message */
+</style>
+<!-- Alert Message -->
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <div class="col-12 container" id="errorMessageContainer">
+               <div class="alert alert-general">
+                  <i class="fa fa-info"></i> General Message. Your Message Comes Here
+                  <span class="close"></span>
+               </div>
+               <div class="alert alert-error">
+                  <i class="fa fa-columns"></i> Error Message. Your Message Comes Here
+                  <span class="close"></span>
+               </div>
+               <div class="alert alert-help">
+                  <i class="fa fa-columns"></i> Help Message. Your Message Comes Here
+                  <span class="close"></span>
+               </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- End Alert Message -->
+<!-- User Profile & Navigation Menu -->
 <div class="container-xxl justify-content-center align-items-start">
     <div class="row">
         <div class="col-12 col-md-6 mt-4">
@@ -260,6 +336,14 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                                 constructor(data) {
                                     this.title = data.title;
                                     this.data = data.data;
+                                }
+
+                                renderImage() {
+                                    return "<div class='inputs'>"+
+                                                "<div class='card__img d-flex justify-content-center align-items-center'>"+
+                                                    "<img src='"+this.data+"' alt='Gambar Profil' width='100%' height='auto'>"+
+                                                "</div>"+
+                                            "</div>";
                                 }
 
                                 render() {
@@ -296,7 +380,7 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                         ?>
 
                         <script>
-                            console.log(userProfileArray);
+                        console.log(userProfileArray);
                         if(userProfileArray != null && userLoginArray != null){
                                 // Instansiate ProfileInfoManager
                                 let nama = new ProfileInfoManager({
@@ -304,21 +388,21 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                                     data : userLoginArray['nama'],
                                 });
                                 let gambarLocation = new ProfileInfoManager({
-                                    title : 'Location Gambar Profil',
+                                    title : 'Gambar Profil',
                                     data : userLoginArray['gambarprofilpelajar'],
                                 });
         
                                 // Render user profile
                                 $(document).ready(function(){
                                     console.log(nama.render());
-                                    $('.forms').html(nama.render()+gambarLocation.render());
+                                    $('.forms').html(gambarLocation.renderImage()+nama.render());
                                 });
                         }
                         </script>
                     <div class="forms">
-                        <div class="inputs">
-                            <div class="card__img d-flex justify-content-center align-items-center">
-                                <img src="https://phongvu.vn/cong-nghe/wp-content/uploads/2019/09/img_7866.jpg" alt="nhan" width="100%" height="auto">
+                        <div class='inputs'>
+                            <div class='card__img d-flex justify-content-center align-items-center'>
+                                <img src='https://phongvu.vn/cong-nghe/wp-content/uploads/2019/09/img_7866.jpg' alt='nhan' width='100%' height='auto'>
                             </div>
                         </div>
                         <div class='inputs'>
@@ -419,6 +503,13 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         </div>
     </div>
 </div>
+<?php
+// MESSAGE HANDLER BEGIN
+if($messageHandler->getMessages()){
+    $messageHandler->getMessages();
+}
+// MESSAGE HANDLER ENDS
+?>
 <script>
     var savebutton = document.getElementById('savebutton');
     var readonly = true;

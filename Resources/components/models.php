@@ -11,6 +11,45 @@ class Models{
     {
         $this->conn = $conn;
     }
+
+    // Create a new user
+    public function createUser($tableName, $data)
+    {
+        $columns = implode(',', array_keys($data));
+        $values = implode(',', array_map(function ($value) {
+            return "?";
+        }, $data));
+        $sql = "INSERT INTO $tableName ($columns) VALUES ($values)";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param(str_repeat('s', count($data)), ...array_values($data));
+        $stmt->execute();
+        return $stmt->affected_rows > 0;
+    }
+
+    // Update an existing user
+    public function updateUser($tableName, $idColumnName, $id, $data)
+    {
+        $updateColumns = implode(',', array_map(function ($column) {
+            return "$column=?";
+        }, array_keys($data)));
+        $sql = "UPDATE $tableName SET $updateColumns WHERE $idColumnName=?";
+
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param(str_repeat('s', count($data) + 1), ...array_merge(array_values($data), [$id]));
+        $stmt->execute();
+        return $stmt->affected_rows > 0;
+    }
+
+    // Delete a user
+    public function deleteUser($tableName, $idColumnName, $id)
+    {
+        $sql = "DELETE FROM $tableName WHERE $idColumnName=?";
+        $stmt = $this->conn->prepare($sql);
+        $stmt->bind_param('s', $id);
+        $stmt->execute();
+        return $stmt->affected_rows > 0;
+    }
 }
 
 class LoginModel extends Models{
