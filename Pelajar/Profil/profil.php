@@ -3,6 +3,8 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
+// Import verification
+require_once(COMPONENTS_DIR . "/verification.php");
 // Import header
 require_once(COMPONENTS_DIR . "/header.php");
 // Import message handler
@@ -55,7 +57,8 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 
     .card-profile .info button {
         height: 30px;
-        width: 80px;
+        width: auto;
+        padding: 4px;
         border: none;
         color: #fff;
         border-radius: 4px;
@@ -254,71 +257,59 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 </style>
 <style>
     /* Alert Message */
-    .container{
-       
-       margin-top:100px;
-   }
-   
-   
-   
+    .container {
+
+        margin-top: 100px;
+    }
+
+
+
     .alert.alert-general {
-    	background: #d9d9d9
+        background: #d9d9d9
     }
-    
+
     .alert.alert-help {
-    	background: #91e3fd
+        background: #91e3fd
     }
-    
+
     .alert.alert-error {
-    	background: #f6bcc3
+        background: #f6bcc3
     }
-    
+
     .alert .close,
     .info-box .close {
-    	filter: alpha(opacity=100);
-    	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
-    	-moz-opacity: 1;
-    	-khtml-opacity: 1;
-    	opacity: 1;
-    	font-weight: normal;
-    	color: #fff;
-    	font-size: 12px;
-    	cursor: pointer;
-    	text-shadow: none;
-    	float: none;
-    	position: absolute;
-    	top: 8px;
-    	right: 8px
+        filter: alpha(opacity=100);
+        -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+        -moz-opacity: 1;
+        -khtml-opacity: 1;
+        opacity: 1;
+        font-weight: normal;
+        color: #fff;
+        font-size: 12px;
+        cursor: pointer;
+        text-shadow: none;
+        float: none;
+        position: absolute;
+        top: 8px;
+        right: 8px
     }
-    
-     .close:before
-     {
-    	content: "\f00d"; 
-    	font-family: FontAwesome
+
+    .close:before {
+        content: "\f00d";
+        font-family: FontAwesome
     }
-    
+
     .fa {
-  color: #fff;
-}
-/* End Alert Message */
+        color: #fff;
+    }
+
+    /* End Alert Message */
 </style>
 <!-- Alert Message -->
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
             <div class="col-12 container" id="errorMessageContainer">
-               <div class="alert alert-general">
-                  <i class="fa fa-info"></i> General Message. Your Message Comes Here
-                  <span class="close"></span>
-               </div>
-               <div class="alert alert-error">
-                  <i class="fa fa-columns"></i> Error Message. Your Message Comes Here
-                  <span class="close"></span>
-               </div>
-               <div class="alert alert-help">
-                  <i class="fa fa-columns"></i> Help Message. Your Message Comes Here
-                  <span class="close"></span>
-               </div>
             </div>
         </div>
     </div>
@@ -330,75 +321,163 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         <div class="col-12 col-md-6 mt-4">
             <div class="container-profile-form">
                 <div class="card-profile">
-                    <div class="info"> <span>Edit form</span> <button id="savebutton">edit</button> </div>
-                        <script>
-                            class ProfileInfoManager {
-                                constructor(data) {
-                                    this.title = data.title;
-                                    this.data = data.data;
-                                }
+                    <div class="info"> <span>Profil</span> <button id="savebutton">Kemaskini</button> </div>
 
-                                renderImage() {
-                                    return "<div class='inputs'>"+
-                                                "<div class='card__img d-flex justify-content-center align-items-center'>"+
-                                                    "<img src='"+this.data+"' alt='Gambar Profil' width='100%' height='auto'>"+
-                                                "</div>"+
-                                            "</div>";
-                                }
+                    <!-- PROFILE INFO MANAGER BEGINS -->
+                    <script>
+                        let userProfileArray = null;
+                        let userLoginArray = null;
+                    </script>
 
-                                render() {
-                                    return "<div class='inputs'>"+
-                                            "<span>" + this.title + "</span>"+
-                                            "<input type='text' readonly value='"+this.data+"'>"+
-                                        "</div>";
-                                }
-                            }
-                            let userProfileArray = null;
-                            let userLoginArray = null;
-                        </script>
+                    <?php
+                    // Profile manager backend
+                    // Import model & config
+                    require_once(COMPONENTS_DIR . "/config.php");
+                    require_once(COMPONENTS_DIR . "/models.php");
+                    require_once(COMPONENTS_DIR . "/auth.php");
+                    $dbObj = new Database();
+                    $profilModel = new ProfilModel($dbObj->getConnection());
+                    $authObj = new Auth($dbObj->getConnection());
+                    // Check whether current user has been authenthicated
+                    if ($authObj->isAuth()) {
+                        // Fetches appropiate user profile page for addiitonal user information
+                        d($_SESSION["Auth"]);
+                        $userProfile = $profilModel->getAllPelajarWhere("id_login", $_SESSION["Auth"]["id"]);
 
-                        <?php
-                        // Import model & config
-                        require_once(COMPONENTS_DIR . "/config.php");
-                        require_once(COMPONENTS_DIR . "/models.php");
-                        require_once(COMPONENTS_DIR . "/auth.php");
-                        $dbObj = new Database();
-                        $profilModel = new ProfilModel($dbObj->getConnection());
-                        $authObj = new Auth($dbObj->getConnection());
-                        // Check whether current user has been authenthicated
-                        if ($authObj->isAuth()) {
-                            d($_SESSION["Auth"]);
-                            $userProfile = $profilModel->getAllPelajarWhere("id_login", $_SESSION["Auth"]["id"]);
+                        // Check whether the current user has filled out its own profile page credentials
+                        if (empty($userProfile)) {
+                            $messageHandler->addMessage("help", "Anda perlu melengkapkan senarai maklumat peribadi anda sebelum boleh membuat temu janji.");
+                        }
 
-                            echo("
+                        echo ("
                                 <script>
-                                    userProfileArray = JSON.parse('".json_encode($userProfile)."');
-                                    userLoginArray = JSON.parse('".json_encode($_SESSION['Auth'])."');
+                                    userProfileArray = JSON.parse('" . json_encode($userProfile) . "');
+                                    userLoginArray = JSON.parse('" . json_encode($_SESSION['Auth']) . "');
                                 </script>
                             ");
-                        }                        
-                        ?>
+                    }
+                    ?>
 
-                        <script>
-                        console.log(userProfileArray);
-                        if(userProfileArray != null && userLoginArray != null){
-                                // Instansiate ProfileInfoManager
-                                let nama = new ProfileInfoManager({
-                                    title : 'Nama',
-                                    data : userLoginArray['nama'],
-                                });
-                                let gambarLocation = new ProfileInfoManager({
-                                    title : 'Gambar Profil',
-                                    data : userLoginArray['gambarprofilpelajar'],
-                                });
-        
-                                // Render user profile
-                                $(document).ready(function(){
-                                    console.log(nama.render());
-                                    $('.forms').html(gambarLocation.renderImage()+nama.render());
-                                });
+                    <script>
+                        // JS class to handle rendition of userProfle and userLogin info to the frontend
+                        class ProfileInfoManager {
+                            constructor(data) {
+                                this.post_name = data.post_name;
+                                this.title = data.title;
+                                this.data = data.data;
+                            }
+
+                            renderImage() {
+                                return "<div class='inputs'>" +
+                                    "<div class='card__img d-flex justify-content-center align-items-center'>" +
+                                    "<img src='" + this.data + "' alt='Gambar Profil' width='100%' height='auto'>" +
+                                    "</div>" +
+                                    "</div>";
+                            }
+
+                            render() {
+                                return "<div class='inputs'>" +
+                                    "<span>" + this.title + "</span>" +
+                                    "<input type='text' name='" + this.post_name + "' value='" + this.data + "' readonly='readonly'>" +
+                                    "</div>";
+                            }
+
+                            renderForgotPassword(url) {
+                                return "<div class='inputs'>" +
+                                    "<a href='" + url + "'>Lupa kata laluan?</a>" +
+                                    "</div>";
+                            }
                         }
-                        </script>
+
+                        console.log(userProfileArray);
+                        console.log(userLoginArray);
+                        let verificationObj = new Verification();
+
+                        if (!verificationObj.isEmpty(userLoginArray)) { // User has registered
+                            // Instansiate ProfileInfoManager
+                            let nama = new ProfileInfoManager({
+                                title: 'Nama',
+                                post_name: 'nama',
+                                data: userLoginArray['nama'],
+                            });
+                            let gambarLocation = new ProfileInfoManager({
+                                title: 'Gambar Profil',
+                                post_name: 'gambar_profil',
+                                data: userLoginArray['gambarprofilpelajar'],
+                            });
+
+                            let profileHTML = gambarLocation.renderImage() + nama.render();
+
+                            // User has completed user profile information
+                            if (!verificationObj.isEmpty(userProfileArray)) {
+                                let no_kp = new ProfileInfoManager({
+                                    title: 'No Kad Pengenalan',
+                                    post_name: 'no_kad_pengenalan',
+                                    data: userProfileArray[0]['nokp'],
+                                });
+                                let no_matrik = new ProfileInfoManager({
+                                    title: 'No Matrik',
+                                    post_name: 'no_matrik',
+                                    data: userProfileArray[0]['nomatrikpelajar'],
+                                });
+                                let dorm = new ProfileInfoManager({
+                                    title: 'Dorm',
+                                    post_name: 'dorm',
+                                    data: userProfileArray[0]['dorm'],
+                                });
+                                let no_telefon_pelajar = new ProfileInfoManager({
+                                    title: 'No Telefon',
+                                    post_name: 'no_telefon',
+                                    data: userProfileArray[0]['notelpelajar'],
+                                });
+                                let nama_bapa = new ProfileInfoManager({
+                                    title: 'Bapa',
+                                    post_name: 'bapa',
+                                    data: userProfileArray[0]['namabapapelajar'],
+                                });
+                                let no_telefon_bapa = new ProfileInfoManager({
+                                    title: 'No Telefon Bapa',
+                                    post_name: 'no_telefon_bapa',
+                                    data: userProfileArray[0]['notelbapapelajar'],
+                                });
+                                let nama_ibu = new ProfileInfoManager({
+                                    title: 'Ibu',
+                                    post_name: 'ibu',
+                                    data: userProfileArray[0]['namaibupelajar'],
+                                });
+                                let no_telefon_ibu = new ProfileInfoManager({
+                                    title: 'No Telefon Ibu',
+                                    post_name: 'no_telefon_ibu',
+                                    data: userProfileArray[0]['notelibupelajar'],
+                                });
+                                let penyakit_pelajar = new ProfileInfoManager({
+                                    title: 'Penyakit Kronik',
+                                    post_name: 'penyakit',
+                                    data: userProfileArray[0]['penyakitpelajar'],
+                                });
+                                let alamat = new ProfileInfoManager({
+                                    title: 'Alamat Rumah',
+                                    post_name: 'alamat_rumah',
+                                    data: userProfileArray[0]['alamatpelajar'],
+                                });
+                                let alahan_pelajar = new ProfileInfoManager({
+                                    title: 'Alahan',
+                                    post_name: 'alahan',
+                                    data: userProfileArray[0]['alahan'],
+                                });
+
+                                // Add additional elements to render
+                                profileHTML += no_kp.render() + no_matrik.render() + dorm.render() + no_telefon_pelajar.render() + nama_bapa.render() + no_telefon_bapa.render() + nama_ibu.render() + no_telefon_ibu.render() + penyakit_pelajar.render() + alamat.render() + alahan_pelajar.render();
+                            }
+
+                            // Render as HTML
+                            $(document).ready(function() {
+                                $('.forms').html(profileHTML + gambarLocation.renderForgotPassword('<?php echo (PELAJAR_URL . "/Profil/tukar_kata_laluan.php"); ?>'));
+                            });
+                        }
+                    </script>
+                    <!-- PROFILE INFO MANAGER ENDS -->
+
                     <div class="forms">
                         <div class='inputs'>
                             <div class='card__img d-flex justify-content-center align-items-center'>
@@ -504,29 +583,60 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
     </div>
 </div>
 <?php
-// MESSAGE HANDLER BEGIN
-if($messageHandler->getMessages()){
-    $messageHandler->getMessages();
-}
-// MESSAGE HANDLER ENDS
 ?>
 <script>
-    var savebutton = document.getElementById('savebutton');
-    var readonly = true;
-    var inputs = document.querySelectorAll('input[type="text"]');
-    savebutton.addEventListener('click', function() {
+    $(document).ready(function() {
+        var savebutton = document.getElementById('savebutton');
+        var readonly = true;
+        var inputs = document.querySelectorAll('input[type="text"]');
+        // Front end styling
+        savebutton.addEventListener('click', function() {
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].toggleAttribute('readonly');
+            };
 
-        for (var i = 0; i < inputs.length; i++) {
-            inputs[i].toggleAttribute('readonly');
-        };
+            if (savebutton.innerHTML == "Kemaskini") {
+                savebutton.innerHTML = "Simpan";
+            } else {
+                savebutton.innerHTML = "Kemaskini";
+            }
+        });
 
-        if (savebutton.innerHTML == "edit") {
-            savebutton.innerHTML = "save";
-        } else {
-            savebutton.innerHTML = "edit";
+        if(savebutton.innerHTML == "Simpan"){
+            // Store each input values into an array
+            let inputValues = [];
+            // Iterate through every input and add to inputValues
+            $(".input").each(function(){
+                inputValues 
+            })
+
+            // AJAX for updating DB
+            $.ajax({
+                url: 'profil_kemaskini.php',
+                type: 'POST',
+                data: {
+                    'profile_data': "ABC",
+                },
+                success: function(result) {
+                    console.log(result);
+                },
+                error: function(error) {
+                    console.log(error);
+                }
+            });
         }
-    });
+
+    })
 </script>
+<!-- MESSAGE HANDLER BEGIN(JS) -->
+<?php
+d($messageHandler->getMessagesJSON());
+?>
+<script>
+    let messageHandlerJSONObj = new MessageHandlerJSON('<?php echo ($messageHandler->getMessagesJSON()); ?>');
+    messageHandlerJSONObj.displayMessages("errorMessageContainer");
+</script>
+<!-- MESSAGE HANDLER ENDS(JS) -->
 <!-- End Content -->
 <?php
 // Import footer

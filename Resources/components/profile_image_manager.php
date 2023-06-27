@@ -16,7 +16,7 @@ class ProfileImageManager {
         $users = $this->loginModel->$methodName('id', $id);
 
         if (count($users) > 0) {
-            return UPLOAD_DIR . $users[0]["gambarprofil"];
+            return UPLOADS_DIR . $users[0]["gambarprofil"];
         } else {
             return null;
         }
@@ -28,9 +28,12 @@ class ProfileImageManager {
 
         d($image["name"]);
         // Upload the image to the "/uploads" directory
-        $uploadsDir = UPLOAD_DIR;
+        $uploadsDir = UPLOADS_DIR;
         $imageName = $userType . '_' . $id . '_' . basename($image["name"]);
         $uploadPath = $uploadsDir . '/' . $imageName;
+
+        d(dirname($uploadsDir));
+        d(is_writeable("/usr/share/nginx/html"));
 
         if (move_uploaded_file($image["tmp_name"], $uploadPath)) {
             // Update the user's "gambarprofil" value in the database

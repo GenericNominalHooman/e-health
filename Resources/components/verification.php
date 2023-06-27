@@ -67,3 +67,47 @@ class Verification {
     }
 }
 ?>
+<script>
+    class Verification {
+    sanitize(input) {
+      return input.trim().replace(/\\/g, "").replace(/</g, "&lt;").replace(/>/g, "&gt;");
+    }
+  
+    validateEmail(email) {
+      return /\S+@\S+\.\S+/.test(email);
+    }
+  
+    validateURL(url) {
+      try {
+        new URL(url);
+        return true;
+      } catch (_) {
+        return false;
+      }
+    }
+  
+    validateInt(integer) {
+      return Number.isInteger(integer);
+    }
+  
+    escapeOutput(output) {
+      return output.replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+    }
+
+    isNull(value){
+        return value!=null;
+    }
+
+    isEmpty(value) {
+        if (value === null || 
+            value === undefined ||
+            (typeof value === 'string' && value.trim() === '') ||
+            (Array.isArray(value) && value.length === 0) ||
+            (typeof value === 'object' && Object.keys(value).length === 0)) {
+                return true;
+        } else {
+            return false;
+        }
+      }
+}
+</script>
