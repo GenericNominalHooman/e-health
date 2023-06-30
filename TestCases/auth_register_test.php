@@ -36,7 +36,7 @@ if ($authObj->isAuth()) {
             </select>
             <br>
         </div>
-        <div class="inputField"><button type="submit">Register</button><br></div>
+        <div class="inputField"><button type="submit" name="submit_register">Register</button><br></div>
     </form>
 
     <!-- Clear session variables button(NOT RELATED TO auth COMPONENT, PLEASE IGNORE) -->
@@ -44,48 +44,50 @@ if ($authObj->isAuth()) {
 </div>
 <?php
 // Handle user registeration attempt
-// Only allow guest to register
-if (!$authObj->isAuth()) {
-    // Determine whether user has submit a registeration request
-    if (isset($_POST["jenispengguna"])) {
-        // Determine user type to register
-        switch ($_POST["jenispengguna"]) {
-            case "pelajar": // Register as pelajar
-                if ($authObj->registerPelajar($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
-                    // User successfully registered as pelajar
-                    $authObj->authPelajar($_POST["nama"], $_POST["katalaluan"]); // Login user as pelajar
-                } else {
-                    // Error occured while registeration
-                    echo ("Error occured while registering pelajar");
-                }
-                break;
-            case "guru": // Register as guru
-                if ($authObj->registerGuru($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
-                    // User successfully registered as guru
-                    $authObj->authGuru($_POST["nama"], $_POST["katalaluan"]); // Login user as guru
-                } else {
-                    // Error occured while registeration
-                    echo ("Error occured while registering guru");
-                }
-                break;
-            case "warden": // Register as warden
-                if ($authObj->registerWarden($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
-                    // User successfully registered as warden
-                    $authObj->authWarden($_POST["nama"], $_POST["katalaluan"]); // Login user as warden
-                } else {
-                    // Error occured while registeration
-                    echo ("Error occured while registering warden");
-                }
-                break;
-            case "pentadbir": // Register as pentadbir
-                if ($authObj->registerPentadbir($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
-                    // User successfully registered as pentadbir
-                    $authObj->authPentadbir($_POST["nama"], $_POST["katalaluan"]); // Login user as pentadbir
-                } else {
-                    // Error occured while registeration
-                    echo ("Error occured while registering pentadbir");
-                }
-                break;
+if(isset($_POST["submit_register"])){
+    // Only allow guest to register
+    if (!$authObj->isAuth()) {
+        // Determine whether user has submit a registeration request
+        if (isset($_POST["jenispengguna"])) {
+            // Determine user type to register
+            switch ($_POST["jenispengguna"]) {
+                case "pelajar": // Register as pelajar
+                    if ($authObj->registerPelajar($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
+                        // User successfully registered as pelajar
+                        $authObj->authPelajar($_POST["nama"], $_POST["katalaluan"]); // Login user as pelajar
+                    } else {
+                        // Error occured while registeration
+                        echo ("Error occured while registering pelajar");
+                    }
+                    break;
+                case "guru": // Register as guru
+                    if ($authObj->registerGuru($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
+                        // User successfully registered as guru
+                        $authObj->authGuru($_POST["nama"], $_POST["katalaluan"]); // Login user as guru
+                    } else {
+                        // Error occured while registeration
+                        echo ("Error occured while registering guru");
+                    }
+                    break;
+                case "warden": // Register as warden
+                    if ($authObj->registerWarden($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
+                        // User successfully registered as warden
+                        $authObj->authWarden($_POST["nama"], $_POST["katalaluan"]); // Login user as warden
+                    } else {
+                        // Error occured while registeration
+                        echo ("Error occured while registering warden");
+                    }
+                    break;
+                case "pentadbir": // Register as pentadbir
+                    if ($authObj->registerPentadbir($_POST["nama"], $_POST["katalaluan"], $_POST["gambarprofil"])) { // PS ideally sanitize each field first before parssed into here
+                        // User successfully registered as pentadbir
+                        $authObj->authPentadbir($_POST["nama"], $_POST["katalaluan"]); // Login user as pentadbir
+                    } else {
+                        // Error occured while registeration
+                        echo ("Error occured while registering pentadbir");
+                    }
+                    break;
+            }
         }
     }
 }
@@ -121,7 +123,4 @@ if ($authObj->isAuth()) {
 } else {
     echo ("<br>Hello I'm a guest, I'm not yet authenthicated<br>");
 }
-
-// Erase all session variables PS: do this only on logout
-session_unset();
 ?>
