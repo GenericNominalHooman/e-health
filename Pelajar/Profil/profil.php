@@ -7,6 +7,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 require_once(COMPONENTS_DIR . "/verification.php");
 // Import header
 require_once(COMPONENTS_DIR . "/header.php");
+// Import profile image manager
+require_once(COMPONENTS_DIR."/profile_image_manager.php");
+// Import models
+require_once(COMPONENTS_DIR."/models.php");
 // Import message handler
 require_once(COMPONENTS_DIR . "/message_handler.php");
 $messageHandler = new MessageHandler();
@@ -52,7 +56,7 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         display: flex;
         justify-content: space-between;
         border-bottom: 1px solid #e1dede;
-        background-color: #e5e5e5
+        background-color: var(--bs-body-bg);
     }
 
     .card-profile .info button {
@@ -62,12 +66,13 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         border: none;
         color: #fff;
         border-radius: 4px;
-        background-color: #000;
+        background-color: #172065;
         cursor: pointer;
         text-transform: uppercase
     }
 
     .card-profile .forms {
+        background-color: var(--bs-body-bg);
         padding: 15px
     }
 
@@ -341,7 +346,6 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                     // Check whether current user has been authenthicated
                     if ($authObj->isAuth()) {
                         // Fetches appropiate user profile page for addiitonal user information
-                        d($_SESSION["Auth"]);
                         $userProfile = $profilModel->getAllPelajarWhere("id_login", $_SESSION["Auth"]["id"]);
 
                         // Check whether the current user has filled out its own profile page credentials
@@ -375,38 +379,52 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                                     "</div>";
                             }
 
+                            renderImageInput() {
+                                return "<div class='inputs d-none' id='gambarProfilBaru'>" +
+                                    "<span>" + this.title + "</span>" +
+                                    "<input class='input_field' type='file' name='" + this.post_name + "' value='" + this.data + "' readonly='readonly'>" +
+                                    "</div>";
+                            }
+
                             render() {
                                 return "<div class='inputs'>" +
                                     "<span>" + this.title + "</span>" +
-                                    "<input type='text' name='" + this.post_name + "' value='" + this.data + "' readonly='readonly'>" +
+                                    "<input class='input_field' type='text' name='" + this.post_name + "' value='" + this.data + "' readonly='readonly'>" +
                                     "</div>";
                             }
 
                             renderForgotPassword(url) {
                                 return "<div class='inputs'>" +
-                                    "<a href='" + url + "'>Lupa kata laluan?</a>" +
+                                    "<a href='" + url + "'>Tukar kata laluan</a>" +
                                     "</div>";
                             }
                         }
-
-                        console.log(userProfileArray);
-                        console.log(userLoginArray);
-                        let verificationObj = new Verification();
-
+                        function rerenderProfile(verificationObj){
                         if (!verificationObj.isEmpty(userLoginArray)) { // User has registered
-                            // Instansiate ProfileInfoManager
+                            // Instansiate ProfileInfoManager & render basic user information(user hasn't completed the profile page yet)
                             let nama = new ProfileInfoManager({
                                 title: 'Nama',
                                 post_name: 'nama',
                                 data: userLoginArray['nama'],
                             });
+                            <?php
+                                // Instansiating profile image manager object for gambarLocation & gambarInput
+                                $dbObj = new Database();
+                                $loginModel = new LoginModel($dbObj->getConnection());
+                                $profileImageManger = new ProfileImageManager($loginModel);
+                            ?>
                             let gambarLocation = new ProfileInfoManager({
                                 title: 'Gambar Profil',
                                 post_name: 'gambar_profil',
-                                data: userLoginArray['gambarprofilpelajar'],
+                                data: '<?php echo(UPLOADS_URL."/profile_images"."/".$profileImageManger->getProfileImage("pelajar", $_SESSION["Auth"]["id"]));?>',
+                            });
+                            let gambarInput = new ProfileInfoManager({
+                                title: 'Gambar Profil(Muat Naik)',
+                                post_name: 'gambar_profil_baru',
+                                data: "",
                             });
 
-                            let profileHTML = gambarLocation.renderImage() + nama.render();
+                            let profileHTML = gambarLocation.renderImage() + gambarInput.renderImageInput() + nama.render();
 
                             // User has completed user profile information
                             if (!verificationObj.isEmpty(userProfileArray)) {
@@ -475,64 +493,17 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                                 $('.forms').html(profileHTML + gambarLocation.renderForgotPassword('<?php echo (PELAJAR_URL . "/Profil/tukar_kata_laluan.php"); ?>'));
                             });
                         }
+                    }
+
+                    // Render profile
+                    let verificationObj = new Verification();
+                    rerenderProfile(verificationObj);
                     </script>
                     <!-- PROFILE INFO MANAGER ENDS -->
-
-                    <div class="forms">
-                        <div class='inputs'>
-                            <div class='card__img d-flex justify-content-center align-items-center'>
-                                <img src='https://phongvu.vn/cong-nghe/wp-content/uploads/2019/09/img_7866.jpg' alt='nhan' width='100%' height='auto'>
-                            </div>
+                    <form action="profil_kemaskini.php" method="post" enctype="multipart/form-data" id="uploadProfil">
+                        <div class="forms">
                         </div>
-                        <div class='inputs'>
-                            <span>Nama</span>
-                            <input type='text' readonly value='Nama Pengguna'>
-                        </div>
-                        <div class="inputs">
-                            <span>No Kad Pengenalan</span>
-                            <input type="text" readonly value="Doe">
-                        </div>
-                        <div class="inputs">
-                            <span>No Matrik</span>
-                            <input type="text" readonly value="john.doe12@gmail.com">
-                        </div>
-                        <div class="inputs">
-                            <span>Dorm</span>
-                            <input type="text" readonly value="johndoe12">
-                        </div>
-                        <div class="inputs">
-                            <span>No Telefon</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>Nama Bapa</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>No Telefon Bapa</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>Nama Ibu</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>No Telefon Ibu</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>Alamat Rumah</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>Penyakit Kronik</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                        <div class="inputs">
-                            <span>Alahan</span>
-                            <input type="text" readonly value="United States">
-                        </div>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
@@ -589,49 +560,65 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         var savebutton = document.getElementById('savebutton');
         var readonly = true;
         var inputs = document.querySelectorAll('input[type="text"]');
-        // Front end styling
-        savebutton.addEventListener('click', function() {
+        var fileInput = document.querySelector('input[type="file"]');
+        
+        savebutton.addEventListener('click', function(e) {
+            // Prevent sending POST form
+            e.preventDefault();
+            
+            // Frontend: Change text based on savebutton state
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].toggleAttribute('readonly');
             };
 
+            // Toggle upload profile image field when editing
+            if(fileInput.parentElement.classList.contains("d-none")){
+                fileInput.parentElement.classList.remove("d-none");
+                fileInput.value = "";
+            }else{
+                fileInput.parentElement.classList.add("d-none");
+            }
+            
             if (savebutton.innerHTML == "Kemaskini") {
                 savebutton.innerHTML = "Simpan";
             } else {
                 savebutton.innerHTML = "Kemaskini";
             }
+
+            // Backend: Create an ppdate query to the database
+            if(savebutton.innerHTML == "Kemaskini"){
+                // Change id field name to avoid conflicting entry 
+                userLoginArray.id_login = userLoginArray.id;
+                delete userLoginArray.id;
+                userProfileArray[0].id_profil = userProfileArray[0].id;
+                delete userProfileArray[0].id;
+                // Grab old profile data from the database
+                let userLoginProfileArray = {...userLoginArray, ...userProfileArray[0]};
+
+                // AJAX for updating DB
+                let formData = new FormData($("#uploadProfil")[0]);
+                formData.append("profile_data_old", JSON.stringify(userLoginProfileArray));
+                $.ajax({
+                    url: '<?php echo(PELAJAR_URL."/Profil/profil_kemaskini.php");?>',
+                    type: 'POST',
+                    data: formData,
+                    contentType: false,
+                    processData: false,
+                    success: function(result) {
+                        // Reloading the page for reflecting profile iamge changes
+                        location.reload();
+                    },
+                    error: function(error) {
+                        console.log(error);
+                    }
+                });
+            }
         });
 
-        if(savebutton.innerHTML == "Simpan"){
-            // Store each input values into an array
-            let inputValues = [];
-            // Iterate through every input and add to inputValues
-            $(".input").each(function(){
-                inputValues 
-            })
-
-            // AJAX for updating DB
-            $.ajax({
-                url: 'profil_kemaskini.php',
-                type: 'POST',
-                data: {
-                    'profile_data': "ABC",
-                },
-                success: function(result) {
-                    console.log(result);
-                },
-                error: function(error) {
-                    console.log(error);
-                }
-            });
-        }
 
     })
 </script>
 <!-- MESSAGE HANDLER BEGIN(JS) -->
-<?php
-d($messageHandler->getMessagesJSON());
-?>
 <script>
     let messageHandlerJSONObj = new MessageHandlerJSON('<?php echo ($messageHandler->getMessagesJSON()); ?>');
     messageHandlerJSONObj.displayMessages("errorMessageContainer");

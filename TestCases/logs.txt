@@ -1,0 +1,33 @@
+nokp: 123546
+nomatrikpelajar: 123456
+dorm: 123456
+notelpelajar: 123456
+namabapapelajar: Bapa 1
+notelbapapelajar: 123456
+namaibupelajar: Ibu 1
+notelibupelajar: 123456
+penyakitpelajar: Penyakit 1
+alamatpelajar: Alamat 1 
+alahan: Alahan 1
+nokp: 123546
+nomatrikpelajar: 123456
+dorm: 123456
+notelpelajar: 123456
+namabapapelajar: Bapa 1
+notelbapapelajar: 123456
+namaibupelajar: Ibu 1
+notelibupelajar: 123456
+penyakitpelajar: Penyakit 1
+alamatpelajar: Alamat 1 
+alahan: Alahan 1
+nokp: 123546
+nomatrikpelajar: 123456
+dorm: 123456
+notelpelajar: 123456
+namabapapelajar: Bapa 1
+notelbapapelajar: 123456
+namaibupelajar: Ibu 1
+notelibupelajar: 123456
+penyakitpelajar: Penyakit 1
+alamatpelajar: Alamat 1 
+alahan: Alahan 1

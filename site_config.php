@@ -44,8 +44,8 @@
     define("WARDEN_DIR", SITE_DIR."/"."Warden");
 
     // Profile image upload directory
-    define("UPLOADS_DIR", SITE_DIR."/Uploads/profile_images");
-    define("UPLOADS_URL", SITE_URL."/Uploads/profile_images");
+    define("UPLOADS_DIR", SITE_DIR."/Uploads");
+    define("UPLOADS_URL", SITE_URL."/Uploads");
 
     // Static content resources(URLs)
     define("PELAJAR_URL", SITE_URL."/"."Pelajar");
