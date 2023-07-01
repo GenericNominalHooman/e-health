@@ -7,6 +7,7 @@ require_once(COMPONENTS_DIR . "/redirect.php");
 require_once(COMPONENTS_DIR . "/auth.php");
 require_once(COMPONENTS_DIR . "/message_handler.php");
 require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
+require_once(COMPONENTS_DIR . "/header.php");
 ?>
 
 <?php
@@ -51,20 +52,9 @@ if (isset($_POST["submit"])) {
 }
 ?>
 
-<!DOCTYPE html>
-<html lang="en">
-
-<meta charset="UTF-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log Masuk</title>
-</head>
-
-<body>
-
-  <section class="vh-100 gradient-custom">
-    <div class="container py-5 h-100">
-      <div class="row justify-content-center align-items-center h-100">
+  <section class="gradient-custom">
+    <div class="container py-5">
+      <div class="row justify-content-center align-items-center">
         <div class="col-12 col-lg-9 col-xl-7">
           <div class="card shadow-lg card-registration" style="border-radius: 15px;">
             <div class="card-body p-4 p-md-5">
@@ -160,7 +150,6 @@ if (isset($_POST["submit"])) {
     }
   </script>
 <!-- MESSAGE HANDLER FRONTEND END -->
-</body>
 <!-- CONTENT END -->
 
 <?php
