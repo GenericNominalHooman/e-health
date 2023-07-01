@@ -4,9 +4,38 @@
     ?>
  <?php
     require_once(COMPONENTS_DIR . "/header.php");
-    // Import guest sidebar template
-    require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
+    require_once(COMPONENTS_DIR . "/config.php");
+    require_once(COMPONENTS_DIR . "/auth.php");
+    
+    // Display sidebar based on user type
+    $dbObj = new Database();
+    $authObj = new Auth($dbObj->getConnection());
+    if($authObj->isAuth()){ // User has logged in
+        $userAuth = $_SESSION["Auth"];
+        switch($userAuth["jenispengguna"]){
+            case "pelajar":
+                // Import peljar sidebar template
+                require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
+                break;
+            case "pentadbir":
+                // Import pentadbir sidebar template
+                require_once(TEMPLATE_DIR . "/sidebar2_pentadbir.php");
+                break;
+            case "warden":
+                // Import warden sidebar template
+                require_once(TEMPLATE_DIR . "/sidebar2_warden.php");
+                break;
+            case "guru":
+                // Import guru sidebar template
+                require_once(TEMPLATE_DIR . "/sidebar2_guru.php");
+            break;
+        }
+    }else{ // User hasn't logged in
+        // Import guest sidebar template
+        require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
+    }
     ?>
+    
  <!-- CONTENT -->
  <div class="container-xxl m-4 p-4 rounded shadow-lg bg-primary-custom">
      <div class="container-fluid p-4">
