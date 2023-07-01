@@ -1,6 +1,3 @@
-
-
-
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
@@ -12,25 +9,37 @@ $dbObj = new Database();
 $authObj = new Auth($dbObj->getConnection());
 $conn = ($dbObj->getConnection());
 
+?>
+
+<?php 
 
 
 if(isset($_POST['submit'])){
 
-   $username = mysqli_real_escape_string($conn, $_POST['username']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+  //auth perlu ditukar
+  if($authObj->registerPelajar($_POST["namapelajar"], $_POST["katalaluan"], "")){
+    
+    echo("BERJAYA MENDAFTAR");
+}else{
+    // Mesej untuk user yang x berjaya login
 
-   $select = mysqli_query($conn, "SELECT * FROM `loginpelajar` WHERE  password = '$pass'") or die('query failed');
+}
+
+  $namapelajar= mysqli_real_escape_string($conn, $_POST['namapelajar']);
+  $katalaluan = mysqli_real_escape_string($conn, $_POST['katalaluan']);
+
+   $select = mysqli_query($conn, "SELECT * FROM `loginpelajar` WHERE  namapelajar = '$namapelajar'") or die('query failed');
 
    if(mysqli_num_rows($select) > 0){
-      $message[] = 'user already exist'; 
+
 
       }else{
-         $insert = mysqli_query($conn, "INSERT INTO `loginadmin`(username, password, image) VALUES('$username',  '$pass', '$image')") or die('query failed');
+         $insert = mysqli_query($conn, "INSERT INTO `loginpelajar`(namapelajar, katalaluanpelajar,) VALUES('$namapelajar',  '$katalaluan')") or die('query failed');
 
          if($insert){
             move_uploaded_file($image_tmp_name, $image_folder);
             $message[] = 'registered successfully!';
-            header('location:login3.php');
+            header('location:register.php');
          }else{
             $message[] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
             <p><strong>Pendaftaran tidak berjaya</strong> Sila cuba sekali lagi. Sila pastikan No Kad Pengenalan anda tidak pernah didaftarkan di sistem ini.</p>
@@ -78,7 +87,7 @@ if(isset($_POST['submit'])){
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">DAFTAR MASUK PELAJAR</h3>
             <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
   <li class="nav-item" role="presentation">
-    <a href ="login2.php" class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
+    <a href ="register.php" class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
       aria-controls="pills-login" aria-selected="true">Daftar Masuk</a>
   </li>
   <li class="nav-item" role="presentation">
@@ -86,7 +95,7 @@ if(isset($_POST['submit'])){
       aria-controls="pills-register" aria-selected="false">Log Masuk</a>
   </li>
 </ul>
-            <form autocomplete="off" action="login.php" method="post" enctype="multipart/form-data">
+            <form autocomplete="off" action="register.php" method="post" enctype="multipart/form-data">
 
               
                 <div class="col-md-6 mb-4">
@@ -101,7 +110,7 @@ if(isset($_POST['submit'])){
                             </div>
                             <div class="form-outline mb-4">
                             <div class="form-floating">
-                              <input type="text"  name="username" class="form-control" placeholder="Username" />
+                              <input type="text"  name="namapelajar" class="form-control" placeholder="Username" />
                               <label  for="floatingPassword">Username</label></div>
                                 </div>
 
@@ -109,7 +118,7 @@ if(isset($_POST['submit'])){
                           <!-- Password input -->
                              <div class="form-outline mb-4">
                              <div class="form-floating">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Password"/>
+                                <input type="password" id="password" name="katalaluan" class="form-control" placeholder="Password"/>
                                 <label class="form-label" for="password">Password</label>
                                 <label for="floatingPassword">Password</label>
                                 <div class="mt-3">
@@ -120,7 +129,7 @@ if(isset($_POST['submit'])){
     </div>
                               <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">Daftar </button>
               <div class="mt-3">
-              <p>Kembali untuk <a href="login3.php">Log In</a></p>
+              
               </div> 
           
             </form>
