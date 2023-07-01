@@ -13,7 +13,7 @@ $conn = ($dbObj->getConnection());
     // Login pelajar
     if(isset($_POST["submit"])){
 //auth perlu ditukar
-        if($authObj->authGuru($_POST["namapelajar"], $_POST["katalaluanpelajar"])){
+        if($authObj->authPelajar($_POST["namapelajar"], $_POST["katalaluanpelajar"])){
             // Mesej untuk user yang dah login
             d($_SESSION["Auth"]); // OK
             echo("BERJAYA LOG MASUK");
