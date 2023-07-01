@@ -85,7 +85,7 @@ class MessageHandler
 
         displayMessages(containerId) {
             const container = document.getElementById(containerId);
-
+            
             this.messages.forEach((message) => {
                 const alert = document.createElement('div');
                 const icon = document.createElement('i');

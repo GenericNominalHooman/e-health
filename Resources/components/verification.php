@@ -11,7 +11,7 @@ class Verification {
     private $loginModel;
     private $profilModel;
 
-    public function __construct(MessageHandler $messageHandler, LoginModel $loginModel=null, ProfilModel $profilModel=null) {
+    public function __construct(MessageHandler $messageHandler = null, LoginModel $loginModel=null, ProfilModel $profilModel=null) {
         $this->messageHandler = $messageHandler;
         $this->loginModel = $loginModel;
         $this->profilModel = $profilModel;

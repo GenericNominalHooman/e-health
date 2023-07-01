@@ -4,22 +4,53 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 require_once(COMPONENTS_DIR . "/config.php");
 require_once(COMPONENTS_DIR . "/redirect.php");
-
 require_once(COMPONENTS_DIR . "/auth.php");
+require_once(COMPONENTS_DIR . "/message_handler.php");
+require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
+?>
+
+<?php
+// Declaring Global Variables
 $dbObj = new Database();
 $authObj = new Auth($dbObj->getConnection());
 $conn = ($dbObj->getConnection());
 ?>
+
+<?php
+// Redirect to profile page if user has already logged on
+if($authObj->isAuth()){
+  $userAuth = $_SESSION["Auth"];
+  switch($userAuth["jenispengguna"]){
+    case "pelajar":
+      Redirect::redirectWithMsg(PELAJAR_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
+    break;
+    case "pentadbir":
+      Redirect::redirectWithMsg(PENTADBIR_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
+    break;
+    case "guru":
+      Redirect::redirectWithMsg(GURU_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
+    break;
+    case "warden":
+      Redirect::redirectWithMsg(WARDEN_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
+    break;
+  }
+}
+?>
+
+<!-- CONTENT START -->
 <?php
 // Login pelajar
 if (isset($_POST["submit"])) {
   //auth perlu ditukar
   if ($authObj->authPelajar($_POST["namapelajar"], $_POST["katalaluanpelajar"])) {
-    // Mesej untuk user yang dah login
-    Redirect::redirect(PELAJAR_URL."/Profil/profil.php");
+    // Redirect user to the profile page
+    Redirect::redirect(PELAJAR_URL . "/Profil/profil.php");
+  } else {
+    Redirect::redirectWithMsg(PELAJAR_URL . "/login.php", "Kombinasi nama pengguna atau kata laluan yang digunakan adalah salah.");
   }
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -30,14 +61,7 @@ if (isset($_POST["submit"])) {
 
 <!-- custom css file link  
    <link rel="stylesheet" href="css/style.css">-->
-<link rel="shortcut icon" href="images/logo2remove.png" type="image/x-icon">
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<style>
-  body {
-    background-color: aliceblue;
-  }
-</style>
-
 </head>
 
 <body>
@@ -46,34 +70,44 @@ if (isset($_POST["submit"])) {
     <div class="container py-5 h-100">
       <div class="row justify-content-center align-items-center h-100">
         <div class="col-12 col-lg-9 col-xl-7">
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
+          <div class="card shadow-lg card-registration" style="border-radius: 15px;">
             <div class="card-body p-4 p-md-5">
-              <?php
-              echo "<img src='" . IMG_URL . "/pelajar2remove.png' alt='Admin Icon' class='rounded mx-auto d-block' width='200' height='150'>";
-              ?>
+              <!-- MESSAGE HANDLER BACKEND BEGIN -->
+                <!-- Container to display error message -->
+                <div id="errorMessageContainer">
+                </div>
+                <!-- Handle failed login attempt -->
+                <div class="col-md-6 mb-4">
+                    <?php
+                    if (isset($_POST["msg"])) {
+                      $message = $_POST["msg"];
+                      $messageHandlerObj = new MessageHandler();
+                      $messageHandlerObj->addMessage("error", $message);
+                    }
+                    ?>
+                </div>
+              <!-- MESSAGE HANDLER BACKEND ENDS -->
 
+              <img src="<?php echo (IMG_URL . "/pelajar2remove.png"); ?>" class="rounded mx-auto d-block" witdh="200" height="150">
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">LOG MASUK PELAJAR</h3>
 
-              <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="POST">
+              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a href="<?php echo (PELAJAR_URL . "/register.php"); ?>" class="nav-link" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Daftar Masuk</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="<?php echo (PELAJAR_URL . "/login.php"); ?>" class="nav-link active" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Log Masuk</a>
+                </li>
+              </ul>
 
-
-                <?php
-
-                if (isset($message)) {
-                  foreach ($message as $message) {
-                    echo '<div class="message alert alert-dark" role="alert">' . $message . '</div>';
-                  }
-                }
-
-                ?>
-
+              <form action="<?php echo ($_SERVER["PHP_SELF"]); ?>" method="POST">                
 
                 <!-- No K/P input -->
 
                 <div class="form-outline mb-4">
                   <div class="form-floating">
-                    <input type="text" autocomplete="off" name="namapelajar" class="form-control" placeholder="Nama Pengguna">
-                    <label for="floatingPassword">Nama Pengguna</label>
+                    <input type="text" autocomplete="off" name="namapelajar" class="form-control" placeholder="Nama">
+                    <label for="floatingPassword">Nama</label>
                   </div>
                 </div>
 
@@ -96,7 +130,7 @@ if (isset($_POST["submit"])) {
                 <div class="form-outline mb-4">
                   <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">Log Masuk</button>
                 </div>
-                Kembali&nbsp;<a href="../index.php">Halaman Utama</a>
+                Kembali&nbsp;<a href='<?php echo(SITE_URL."/index.php")?>'>Halaman Utama</a>
               </form>
             </div>
           </div>
@@ -120,8 +154,19 @@ if (isset($_POST["submit"])) {
       }
     }
   </script>
+  
+<!-- MESSAGE HANDLER FRONTEND BEGIN -->
+  <script>
+    let messageHandlerObj = '<?php echo($messageHandlerObj->getMessagesJSON());?>'||null;
+    if(messageHandlerObj!=null){
+      let messageHandlerJSON = new MessageHandlerJSON(messageHandlerObj);
+      messageHandlerJSON.displayMessages("errorMessageContainer");
+    }
+  </script>
+<!-- MESSAGE HANDLER FRONTEND END -->
 
 </body>
+<!-- CONTENT END -->
 
-</html>
 <?php include(COMPONENTS_DIR . "/footer.php"); ?>
+</html>

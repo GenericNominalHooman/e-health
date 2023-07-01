@@ -3,6 +3,7 @@
     require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
     // Auth component is dependent on header and config component
     require_once(COMPONENTS_DIR."/header.php");
+    require_once(COMPONENTS_DIR."/models.php");
     require_once(COMPONENTS_DIR . "/config.php");
 ?>
 <?php

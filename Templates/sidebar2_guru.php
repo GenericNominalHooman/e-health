@@ -14,7 +14,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
      $(document).ready(function() {
          // Utama
          const linkDataHome = {
-             url: <?php echo ("'" . PELAJAR_URL . "/utama.php'"); ?>,
+             url: <?php echo ("'" . GURU_URL . "/utama.php'"); ?>,
              name: 'Utama',
              icon_class: 'bx bx-home',
          };
@@ -23,34 +23,44 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
 
          // Profil
          const linkDataProfil = {
-             url: <?php echo ("'" . PELAJAR_URL . "/Profil/profil.php'"); ?>,
+             url: <?php echo ("'" . GURU_URL . "/Profil/profil.php'"); ?>,
              name: 'Profil',
              icon_class: 'bx bx-user-circle',
          };
          const linkProfil = new NavLink(linkDataProfil);
          const linkProfilHTML = linkProfil.render();
 
-         // Janjitemu urus
-         const linkDataJanjiTemuUrus = {
-             url: <?php echo ("'" . PELAJAR_URL . "/JanjiTemu/janji_temu_urus.php'"); ?>,
+        // Janjitemu
+        //  PS: ADD JANJI TEMU URUS CHILD ITEM UNDER THIS
+         const linkDataJanjiTemu = {
+             url: <?php echo ("'" . GURU_URL . "/JanjiTemu/janji_temu_urus.php'"); ?>,
              name: 'Urus Janji Temu',
              icon_class: 'bx bx-list-ol',
          };
-         const linkJanjiTemuUrus = new NavLink(linkDataJanjiTemuUrus);
-         const linkJanjiTemuUrusHTML = linkJanjiTemuUrus.render();
+         const linkJanjiTemu = new NavLink(linkDataJanjiTemu);
+         const linkJanjiTemuHTML = linkJanjiTemu.render();
 
-         // Janjitemu buat
-         const linkDataJanjiTemuBuat = {
-             url: <?php echo ("'" . PELAJAR_URL . "/JanjiTemu/janji_temu_buat.php'"); ?>,
-             name: 'Buat Janji Temu',
-             icon_class: 'bx bx-plus',
+         // Pelajar
+         const linkDataUrusPelajar = {
+             url: <?php echo ("'" . GURU_URL . "/Pelajar/pelajar_urus.php'"); ?>,
+             name: 'Urus Pelajar',
+             icon_class: 'bx bxs-user',
          };
-         const linkJanjiTemuBuat = new NavLink(linkDataJanjiTemuBuat);
-         const linkJanjiTemuBuatHTML = linkJanjiTemuBuat.render();
+         const linkUrusPelajar = new NavLink(linkDataUrusPelajar);
+         const linkUrusPelajarHTML = linkUrusPelajar.render();
+
+         // Urus Jadual Guru
+         const linkDataUrusJadualGuru = {
+             url: <?php echo ("'" . GURU_URL . "/Jadual/jadual_guru_urus.php'"); ?>,
+             name: 'Urus Jadual Guru',
+             icon_class: 'bx bx-table',
+         };
+         const linkUrusJadualGuru = new NavLink(linkDataUrusJadualGuru);
+         const linkUrusJadualGuruHTML = linkUrusJadualGuru.render();
 
           // Sign out
           const linkDataSignOut = {
-             url: <?php echo ("'" . PELAJAR_URL . "/logout.php'"); ?>,
+             url: <?php echo ("'" . GURU_URL . "/logout.php'"); ?>,
              name: 'Log Keluar',
              icon_class: 'bx bx-log-out',
          };
@@ -58,7 +68,7 @@ require_once(COMPONENTS_DIR . "/sidebar2.php");
          const linkSignOutHTML = linkSignOut.render();
          
          // Render all sidebar items
-        $(".nav_list").html(linkHomeHTML + linkProfilHTML + linkJanjiTemuUrusHTML + linkJanjiTemuBuatHTML);
+        $(".nav_list").html(linkHomeHTML + linkProfilHTML + linkJanjiTemuHTML + linkUrusPelajarHTML + linkUrusJadualGuruHTML);
         //  Render signout
         $("#nav_logout").html(linkSignOutHTML);
      });

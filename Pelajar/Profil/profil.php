@@ -8,24 +8,25 @@ require_once(COMPONENTS_DIR . "/verification.php");
 // Import header
 require_once(COMPONENTS_DIR . "/header.php");
 // Import profile image manager
-require_once(COMPONENTS_DIR."/profile_image_manager.php");
+require_once(COMPONENTS_DIR . "/profile_image_manager.php");
 // Import models
-require_once(COMPONENTS_DIR."/models.php");
+require_once(COMPONENTS_DIR . "/models.php");
 // Import message handler
 require_once(COMPONENTS_DIR . "/message_handler.php");
-$messageHandler = new MessageHandler();
-?>
-<?php
-// Import sidebar
+// Import config
 require_once(COMPONENTS_DIR . "/config.php");
-$databaseObj = new Database();
-$conn = $databaseObj->getConnection();
-?>
-<?php
 // Import pelajar sidebar template
 require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 ?>
-<!-- Content Here -->
+
+<!-- CONTENT BEGIN -->
+<?php
+// Declaring Global Variables
+$messageHandlerObj = new MessageHandler();
+$databaseObj = new Database();
+$conn = $databaseObj->getConnection();
+?>
+
 <style>
     /* User Profile Card styling */
     @import url('https://fonts.googleapis.com/css2?family=Poppins&display=swap');
@@ -314,8 +315,20 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 <div class="container-fluid">
     <div class="row">
         <div class="col-12">
-            <div class="col-12 container" id="errorMessageContainer">
+            <!-- MESSAGE HANDLER BACKEND BEGIN -->
+            <!-- Container to display error message -->
+            <div id="errorMessageContainer">
             </div>
+            <!-- Handle failed login attempt -->
+            <div class="col-md-6 mb-4">
+                <?php
+                if (isset($_POST["msg"])) {
+                    $message = $_POST["msg"];
+                    $messageHandlerObj->addMessage("error", $message);
+                }
+                ?>
+            </div>
+            <!-- MESSAGE HANDLER BACKEND ENDS -->
         </div>
     </div>
 </div>
@@ -350,7 +363,7 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 
                         // Check whether the current user has filled out its own profile page credentials
                         if (empty($userProfile)) {
-                            $messageHandler->addMessage("help", "Anda perlu melengkapkan senarai maklumat peribadi anda sebelum boleh membuat temu janji.");
+                            $messageHandlerObj->addMessage("help", "Anda perlu melengkapkan senarai maklumat peribadi anda sebelum boleh membuat temu janji.");
                         }
 
                         echo ("
@@ -399,105 +412,166 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
                                     "</div>";
                             }
                         }
-                        function rerenderProfile(verificationObj){
-                        if (!verificationObj.isEmpty(userLoginArray)) { // User has registered
-                            // Instansiate ProfileInfoManager & render basic user information(user hasn't completed the profile page yet)
-                            let nama = new ProfileInfoManager({
-                                title: 'Nama',
-                                post_name: 'nama',
-                                data: userLoginArray['nama'],
-                            });
-                            <?php
+
+                        function rerenderProfile(verificationObj) {
+                            if (!verificationObj.isEmpty(userLoginArray)) { // User has registered
+                                // Instansiate ProfileInfoManager & render basic user information(user hasn't completed the profile page yet)
+                                let nama = new ProfileInfoManager({
+                                    title: 'Nama',
+                                    post_name: 'nama',
+                                    data: userLoginArray['nama'],
+                                });
+                                <?php
                                 // Instansiating profile image manager object for gambarLocation & gambarInput
                                 $dbObj = new Database();
                                 $loginModel = new LoginModel($dbObj->getConnection());
                                 $profileImageManger = new ProfileImageManager($loginModel);
-                            ?>
-                            let gambarLocation = new ProfileInfoManager({
-                                title: 'Gambar Profil',
-                                post_name: 'gambar_profil',
-                                data: '<?php echo(UPLOADS_URL."/profile_images"."/".$profileImageManger->getProfileImage("pelajar", $_SESSION["Auth"]["id"]));?>',
-                            });
-                            let gambarInput = new ProfileInfoManager({
-                                title: 'Gambar Profil(Muat Naik)',
-                                post_name: 'gambar_profil_baru',
-                                data: "",
-                            });
-
-                            let profileHTML = gambarLocation.renderImage() + gambarInput.renderImageInput() + nama.render();
-
-                            // User has completed user profile information
-                            if (!verificationObj.isEmpty(userProfileArray)) {
-                                let no_kp = new ProfileInfoManager({
-                                    title: 'No Kad Pengenalan',
-                                    post_name: 'no_kad_pengenalan',
-                                    data: userProfileArray[0]['nokp'],
+                                ?>
+                                let gambarLocation = new ProfileInfoManager({
+                                    title: 'Gambar Profil',
+                                    post_name: 'gambar_profil',
+                                    data: '<?php echo (UPLOADS_URL . "/profile_images" . "/" . $profileImageManger->getProfileImage("pelajar", $_SESSION["Auth"]["id"])); ?>',
                                 });
-                                let no_matrik = new ProfileInfoManager({
-                                    title: 'No Matrik',
-                                    post_name: 'no_matrik',
-                                    data: userProfileArray[0]['nomatrikpelajar'],
-                                });
-                                let dorm = new ProfileInfoManager({
-                                    title: 'Dorm',
-                                    post_name: 'dorm',
-                                    data: userProfileArray[0]['dorm'],
-                                });
-                                let no_telefon_pelajar = new ProfileInfoManager({
-                                    title: 'No Telefon',
-                                    post_name: 'no_telefon',
-                                    data: userProfileArray[0]['notelpelajar'],
-                                });
-                                let nama_bapa = new ProfileInfoManager({
-                                    title: 'Bapa',
-                                    post_name: 'bapa',
-                                    data: userProfileArray[0]['namabapapelajar'],
-                                });
-                                let no_telefon_bapa = new ProfileInfoManager({
-                                    title: 'No Telefon Bapa',
-                                    post_name: 'no_telefon_bapa',
-                                    data: userProfileArray[0]['notelbapapelajar'],
-                                });
-                                let nama_ibu = new ProfileInfoManager({
-                                    title: 'Ibu',
-                                    post_name: 'ibu',
-                                    data: userProfileArray[0]['namaibupelajar'],
-                                });
-                                let no_telefon_ibu = new ProfileInfoManager({
-                                    title: 'No Telefon Ibu',
-                                    post_name: 'no_telefon_ibu',
-                                    data: userProfileArray[0]['notelibupelajar'],
-                                });
-                                let penyakit_pelajar = new ProfileInfoManager({
-                                    title: 'Penyakit Kronik',
-                                    post_name: 'penyakit',
-                                    data: userProfileArray[0]['penyakitpelajar'],
-                                });
-                                let alamat = new ProfileInfoManager({
-                                    title: 'Alamat Rumah',
-                                    post_name: 'alamat_rumah',
-                                    data: userProfileArray[0]['alamatpelajar'],
-                                });
-                                let alahan_pelajar = new ProfileInfoManager({
-                                    title: 'Alahan',
-                                    post_name: 'alahan',
-                                    data: userProfileArray[0]['alahan'],
+                                let gambarInput = new ProfileInfoManager({
+                                    title: 'Gambar Profil(Muat Naik)',
+                                    post_name: 'gambar_profil_baru',
+                                    data: "",
                                 });
 
-                                // Add additional elements to render
-                                profileHTML += no_kp.render() + no_matrik.render() + dorm.render() + no_telefon_pelajar.render() + nama_bapa.render() + no_telefon_bapa.render() + nama_ibu.render() + no_telefon_ibu.render() + penyakit_pelajar.render() + alamat.render() + alahan_pelajar.render();
+                                let profileHTML = gambarLocation.renderImage() + gambarInput.renderImageInput() + nama.render();
+
+                                // User has completed user profile information
+                                if (!verificationObj.isEmpty(userProfileArray)) {
+                                    let no_kp = new ProfileInfoManager({
+                                        title: 'No Kad Pengenalan',
+                                        post_name: 'no_kad_pengenalan',
+                                        data: userProfileArray[0]['nokp'],
+                                    });
+                                    let no_matrik = new ProfileInfoManager({
+                                        title: 'No Matrik',
+                                        post_name: 'no_matrik',
+                                        data: userProfileArray[0]['nomatrikpelajar'],
+                                    });
+                                    let dorm = new ProfileInfoManager({
+                                        title: 'Dorm',
+                                        post_name: 'dorm',
+                                        data: userProfileArray[0]['dorm'],
+                                    });
+                                    let no_telefon_pelajar = new ProfileInfoManager({
+                                        title: 'No Telefon',
+                                        post_name: 'no_telefon',
+                                        data: userProfileArray[0]['notelpelajar'],
+                                    });
+                                    let nama_bapa = new ProfileInfoManager({
+                                        title: 'Bapa',
+                                        post_name: 'bapa',
+                                        data: userProfileArray[0]['namabapapelajar'],
+                                    });
+                                    let no_telefon_bapa = new ProfileInfoManager({
+                                        title: 'No Telefon Bapa',
+                                        post_name: 'no_telefon_bapa',
+                                        data: userProfileArray[0]['notelbapapelajar'],
+                                    });
+                                    let nama_ibu = new ProfileInfoManager({
+                                        title: 'Ibu',
+                                        post_name: 'ibu',
+                                        data: userProfileArray[0]['namaibupelajar'],
+                                    });
+                                    let no_telefon_ibu = new ProfileInfoManager({
+                                        title: 'No Telefon Ibu',
+                                        post_name: 'no_telefon_ibu',
+                                        data: userProfileArray[0]['notelibupelajar'],
+                                    });
+                                    let penyakit_pelajar = new ProfileInfoManager({
+                                        title: 'Penyakit Kronik',
+                                        post_name: 'penyakit',
+                                        data: userProfileArray[0]['penyakitpelajar'],
+                                    });
+                                    let alamat = new ProfileInfoManager({
+                                        title: 'Alamat Rumah',
+                                        post_name: 'alamat_rumah',
+                                        data: userProfileArray[0]['alamatpelajar'],
+                                    });
+                                    let alahan_pelajar = new ProfileInfoManager({
+                                        title: 'Alahan',
+                                        post_name: 'alahan',
+                                        data: userProfileArray[0]['alahan'],
+                                    });
+
+                                    // Add additional elements to render
+                                    profileHTML += no_kp.render() + no_matrik.render() + dorm.render() + no_telefon_pelajar.render() + nama_bapa.render() + no_telefon_bapa.render() + nama_ibu.render() + no_telefon_ibu.render() + penyakit_pelajar.render() + alamat.render() + alahan_pelajar.render();
+                                }else{ // Empty placeholder field for users to fill out
+                                    let no_kp = new ProfileInfoManager({
+                                        title: 'No Kad Pengenalan',
+                                        post_name: 'no_kad_pengenalan',
+                                        data: '',
+                                    });
+                                    let no_matrik = new ProfileInfoManager({
+                                        title: 'No Matrik',
+                                        post_name: 'no_matrik',
+                                        data: '',
+                                    });
+                                    let dorm = new ProfileInfoManager({
+                                        title: 'Dorm',
+                                        post_name: 'dorm',
+                                        data: '',
+                                    });
+                                    let no_telefon_pelajar = new ProfileInfoManager({
+                                        title: 'No Telefon',
+                                        post_name: 'no_telefon',
+                                        data: '',
+                                    });
+                                    let nama_bapa = new ProfileInfoManager({
+                                        title: 'Bapa',
+                                        post_name: 'bapa',
+                                        data: '',
+                                    });
+                                    let no_telefon_bapa = new ProfileInfoManager({
+                                        title: 'No Telefon Bapa',
+                                        post_name: 'no_telefon_bapa',
+                                        data: '',
+                                    });
+                                    let nama_ibu = new ProfileInfoManager({
+                                        title: 'Ibu',
+                                        post_name: 'ibu',
+                                        data: '',
+                                    });
+                                    let no_telefon_ibu = new ProfileInfoManager({
+                                        title: 'No Telefon Ibu',
+                                        post_name: 'no_telefon_ibu',
+                                        data: '',
+                                    });
+                                    let penyakit_pelajar = new ProfileInfoManager({
+                                        title: 'Penyakit Kronik',
+                                        post_name: 'penyakit',
+                                        data: '',
+                                    });
+                                    let alamat = new ProfileInfoManager({
+                                        title: 'Alamat Rumah',
+                                        post_name: 'alamat_rumah',
+                                        data: '',
+                                    });
+                                    let alahan_pelajar = new ProfileInfoManager({
+                                        title: 'Alahan',
+                                        post_name: 'alahan',
+                                        data: '',
+                                    });
+
+                                    // Add additional elements to render
+                                    profileHTML += no_kp.render() + no_matrik.render() + dorm.render() + no_telefon_pelajar.render() + nama_bapa.render() + no_telefon_bapa.render() + nama_ibu.render() + no_telefon_ibu.render() + penyakit_pelajar.render() + alamat.render() + alahan_pelajar.render();
+
+                                }
+
+                                // Render as HTML
+                                $(document).ready(function() {
+                                    $('.forms').html(profileHTML + gambarLocation.renderForgotPassword('<?php echo (PELAJAR_URL . "/Profil/tukar_kata_laluan.php"); ?>'));
+                                });
                             }
-
-                            // Render as HTML
-                            $(document).ready(function() {
-                                $('.forms').html(profileHTML + gambarLocation.renderForgotPassword('<?php echo (PELAJAR_URL . "/Profil/tukar_kata_laluan.php"); ?>'));
-                            });
                         }
-                    }
 
-                    // Render profile
-                    let verificationObj = new Verification();
-                    rerenderProfile(verificationObj);
+                        // Render profile
+                        let verificationObj = new Verification();
+                        rerenderProfile(verificationObj);
                     </script>
                     <!-- PROFILE INFO MANAGER ENDS -->
                     <form action="profil_kemaskini.php" method="post" enctype="multipart/form-data" id="uploadProfil">
@@ -561,24 +635,24 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
         var readonly = true;
         var inputs = document.querySelectorAll('input[type="text"]');
         var fileInput = document.querySelector('input[type="file"]');
-        
+
         savebutton.addEventListener('click', function(e) {
             // Prevent sending POST form
             e.preventDefault();
-            
+
             // Frontend: Change text based on savebutton state
             for (var i = 0; i < inputs.length; i++) {
                 inputs[i].toggleAttribute('readonly');
             };
 
             // Toggle upload profile image field when editing
-            if(fileInput.parentElement.classList.contains("d-none")){
+            if (fileInput.parentElement.classList.contains("d-none")) {
                 fileInput.parentElement.classList.remove("d-none");
                 fileInput.value = "";
-            }else{
+            } else {
                 fileInput.parentElement.classList.add("d-none");
             }
-            
+
             if (savebutton.innerHTML == "Kemaskini") {
                 savebutton.innerHTML = "Simpan";
             } else {
@@ -586,20 +660,23 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
             }
 
             // Backend: Create an ppdate query to the database
-            if(savebutton.innerHTML == "Kemaskini"){
+            if (savebutton.innerHTML == "Kemaskini") {
                 // Change id field name to avoid conflicting entry 
                 userLoginArray.id_login = userLoginArray.id;
                 delete userLoginArray.id;
                 userProfileArray[0].id_profil = userProfileArray[0].id;
                 delete userProfileArray[0].id;
                 // Grab old profile data from the database
-                let userLoginProfileArray = {...userLoginArray, ...userProfileArray[0]};
+                let userLoginProfileArray = {
+                    ...userLoginArray,
+                    ...userProfileArray[0]
+                };
 
                 // AJAX for updating DB
                 let formData = new FormData($("#uploadProfil")[0]);
                 formData.append("profile_data_old", JSON.stringify(userLoginProfileArray));
                 $.ajax({
-                    url: '<?php echo(PELAJAR_URL."/Profil/profil_kemaskini.php");?>',
+                    url: '<?php echo (PELAJAR_URL . "/Profil/profil_kemaskini.php"); ?>',
                     type: 'POST',
                     data: formData,
                     contentType: false,
@@ -618,12 +695,17 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
 
     })
 </script>
-<!-- MESSAGE HANDLER BEGIN(JS) -->
+
+<!-- MESSAGE HANDLER FRONTEND BEGIN -->
 <script>
-    let messageHandlerJSONObj = new MessageHandlerJSON('<?php echo ($messageHandler->getMessagesJSON()); ?>');
-    messageHandlerJSONObj.displayMessages("errorMessageContainer");
+    let messageHandlerObj = '<?php echo ($messageHandlerObj->getMessagesJSON()); ?>' || null;
+    if (messageHandlerObj != null) {
+        let messageHandlerJSON = new MessageHandlerJSON(messageHandlerObj);
+        messageHandlerJSON.displayMessages("errorMessageContainer");
+    }
 </script>
-<!-- MESSAGE HANDLER ENDS(JS) -->
+<!-- MESSAGE HANDLER FRONTEND END -->
+
 <!-- End Content -->
 <?php
 // Import footer
