@@ -74,7 +74,13 @@ if (isset($_POST["submit"])) {
                 </div>
               <!-- MESSAGE HANDLER BACKEND ENDS -->
 
-              <img src="<?php echo (IMG_URL . "/pelajar2remove.png"); ?>" class="rounded mx-auto d-block" witdh="200" height="150">
+              <div class="container-xxl justify-content-center align-items-center text-center">
+                <div class="row">
+                  <div class="col-12 p-4">
+                    <i class="fa-5x fa-solid fa-graduation-cap"></i>
+                  </div>
+                </div>
+              </div>
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">LOG MASUK PELAJAR</h3>
 
               <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
@@ -124,12 +130,6 @@ if (isset($_POST["submit"])) {
       </div>
     </div>
   </section>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
-  <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-  <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
-  <script src="./js/app.js"></script>
   <script>
     function myFunction() {
       var x = document.getElementById("password");
