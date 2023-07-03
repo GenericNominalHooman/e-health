@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Jun 15, 2023 at 05:36 AM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Host: localhost
+-- Generation Time: Jun 24, 2023 at 01:56 PM
+-- Server version: 10.11.4-MariaDB
+-- PHP Version: 8.2.7
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -31,7 +31,7 @@ CREATE TABLE `jadualguru` (
   `uploaded_at` date DEFAULT current_timestamp(),
   `gambar` varchar(255) NOT NULL,
   `id_gambar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -42,7 +42,7 @@ CREATE TABLE `jadualguru` (
 CREATE TABLE `jadualwarden` (
   `uploaded_at` date DEFAULT NULL,
   `id_gambar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -64,7 +64,16 @@ CREATE TABLE `janjitemupelajar` (
   `status` varchar(255) NOT NULL,
   `jantinapelajar` varchar(255) NOT NULL,
   `alahanpelajar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `janjitemupelajar`
+--
+
+INSERT INTO `janjitemupelajar` (`namapelajar`, `nokppelajar`, `programjtpelajar`, `tahunjtpelajar`, `waktujtpelajar`, `tarikhjtpelajar`, `notelpelajar`, `notelpenpelajar`, `alamatpelajar`, `sebabjt`, `status`, `jantinapelajar`, `alahanpelajar`) VALUES
+('Iz', '111111111111', 'KPD', '2023', '2023-06-20 07:38:26', '2023-06-20', '111111111111', '111111111111', 'alamat', 'Isap Gam', 'Sihat', 'L', 1),
+('abc ', '329108', 'KPD', '1999', '2023-06-21 06:54:29', '2023-06-21', '3489028', '48239048', 'Alamat 1', 'Sebab 1', 'Status 1', 'L', 1),
+('ABC', '329048', 'KPD', '2020', '2023-06-21 08:05:51', '2023-06-21', '328940', '438092', 'Alamat 1', 'Sakit hati ', 'Dibenarkan', 'L', 1);
 
 -- --------------------------------------------------------
 
@@ -75,9 +84,16 @@ CREATE TABLE `janjitemupelajar` (
 CREATE TABLE `loginadmin` (
   `id` int(11) NOT NULL,
   `namapentadbir` varchar(225) NOT NULL,
-  `katalaluanpentadbir` varchar(255) NOT NULL,
+  `katalaluanpentadbir` char(60) NOT NULL,
   `gambarprofilpentadbir` varchar(225) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `loginadmin`
+--
+
+INSERT INTO `loginadmin` (`id`, `namapentadbir`, `katalaluanpentadbir`, `gambarprofilpentadbir`) VALUES
+(2, 'Pentadbir 1', '$2y$10$VMs0t./pvcqWNu4JWwlkEuZ3vv7zkf3kJn6TLMaNcGJ1oWfhO8hNG', '');
 
 -- --------------------------------------------------------
 
@@ -86,9 +102,34 @@ CREATE TABLE `loginadmin` (
 --
 
 CREATE TABLE `loginguru` (
-  `npenggunaguru` varchar(255) NOT NULL,
-  `klaluanguru` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `namaguru` varchar(255) NOT NULL,
+  `katalaluanguru` char(60) NOT NULL,
+  `id` int(11) NOT NULL,
+  `gambarprofilguru` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `loginpelajar`
+--
+
+CREATE TABLE `loginpelajar` (
+  `namapelajar` varchar(255) NOT NULL,
+  `katalaluanpelajar` char(60) NOT NULL,
+  `gambarprofilpelajar` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Dumping data for table `loginpelajar`
+--
+
+INSERT INTO `loginpelajar` (`namapelajar`, `katalaluanpelajar`, `gambarprofilpelajar`, `id`) VALUES
+('Iz', '$2y$10$NIqmauqaH8.YNPW.LXdsSOFJXSowTYK7mVzKoFRzFouRBwerUHdgG', '', 1),
+('Pelajar 1', '$2y$10$bBsqcUiABBNy1CYdIhHi8.pY.b2k4fo5lzDMJos2qmkESfCstwhmC', '', 2),
+('Pelajar 2', '$2y$10$f.lD2urtJv5SwflSxPHo7eyIXbZ4OIHGNgKXQ5MspQ853x/gs3wqy', '', 3),
+('Pelajar 3', '$2y$10$za2dgsYPGCUAfBWnSBq0t.i1uFwV0FfbbrBGDBVxyVmtcRaJnnRJq', '', 5);
 
 -- --------------------------------------------------------
 
@@ -97,9 +138,11 @@ CREATE TABLE `loginguru` (
 --
 
 CREATE TABLE `loginwarden` (
-  `npenggunawarden` varchar(255) NOT NULL,
-  `klaluanwarden` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `namawarden` varchar(255) NOT NULL,
+  `katalaluanwarden` char(60) NOT NULL,
+  `gambarprofilwarden` text NOT NULL,
+  `id` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -110,7 +153,7 @@ CREATE TABLE `loginwarden` (
 CREATE TABLE `mcslip` (
   `id` int(11) NOT NULL,
   `mcslip` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -119,13 +162,13 @@ CREATE TABLE `mcslip` (
 --
 
 CREATE TABLE `profilguru` (
-  `namaguru` varchar(255) NOT NULL,
   `nokpguru` char(12) NOT NULL,
   `notelguru` char(12) NOT NULL,
   `noplatguru` varchar(8) NOT NULL,
   `programguru` varchar(255) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL,
+  `id_login` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -134,7 +177,6 @@ CREATE TABLE `profilguru` (
 --
 
 CREATE TABLE `profilpelajar` (
-  `namapfpelajar` varchar(255) NOT NULL,
   `nokppfpelajar` char(12) NOT NULL,
   `nomatrikpelajar` varchar(12) NOT NULL,
   `dorm` varchar(6) NOT NULL,
@@ -146,8 +188,9 @@ CREATE TABLE `profilpelajar` (
   `penyakitpelajar` varchar(255) NOT NULL,
   `alamatpelajar` varchar(255) NOT NULL,
   `alahan` varchar(255) NOT NULL,
-  `id_pelajar` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL,
+  `id_login` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -156,12 +199,12 @@ CREATE TABLE `profilpelajar` (
 --
 
 CREATE TABLE `profilwarden` (
-  `namawarden` varchar(255) NOT NULL,
   `nokpwarden` char(12) NOT NULL,
   `notelwarden` char(12) NOT NULL,
   `noplatwarden` varchar(225) NOT NULL,
-  `id` int(11) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `id` int(11) NOT NULL,
+  `id_login` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -183,7 +226,29 @@ ALTER TABLE `jadualwarden`
 -- Indexes for table `loginadmin`
 --
 ALTER TABLE `loginadmin`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `namapentadbir` (`namapentadbir`);
+
+--
+-- Indexes for table `loginguru`
+--
+ALTER TABLE `loginguru`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `namaguru` (`namaguru`);
+
+--
+-- Indexes for table `loginpelajar`
+--
+ALTER TABLE `loginpelajar`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `namapelajar` (`namapelajar`);
+
+--
+-- Indexes for table `loginwarden`
+--
+ALTER TABLE `loginwarden`
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `namawarden` (`namawarden`);
 
 --
 -- Indexes for table `mcslip`
@@ -195,20 +260,23 @@ ALTER TABLE `mcslip`
 -- Indexes for table `profilguru`
 --
 ALTER TABLE `profilguru`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `profilguru_loginguru_fk` (`id_login`);
 
 --
 -- Indexes for table `profilpelajar`
 --
 ALTER TABLE `profilpelajar`
-  ADD PRIMARY KEY (`id_pelajar`),
-  ADD UNIQUE KEY `nokppfpelajar` (`nokppfpelajar`);
+  ADD PRIMARY KEY (`id`),
+  ADD UNIQUE KEY `nokppfpelajar` (`nokppfpelajar`),
+  ADD KEY `profilpelajar_loginpelajar_fk` (`id_login`);
 
 --
 -- Indexes for table `profilwarden`
 --
 ALTER TABLE `profilwarden`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `profilwarden_loginwarden_fk` (`id_login`);
 
 --
 -- AUTO_INCREMENT for dumped tables
@@ -230,6 +298,24 @@ ALTER TABLE `jadualwarden`
 -- AUTO_INCREMENT for table `loginadmin`
 --
 ALTER TABLE `loginadmin`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT for table `loginguru`
+--
+ALTER TABLE `loginguru`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `loginpelajar`
+--
+ALTER TABLE `loginpelajar`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+
+--
+-- AUTO_INCREMENT for table `loginwarden`
+--
+ALTER TABLE `loginwarden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
@@ -248,13 +334,35 @@ ALTER TABLE `profilguru`
 -- AUTO_INCREMENT for table `profilpelajar`
 --
 ALTER TABLE `profilpelajar`
-  MODIFY `id_pelajar` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `profilwarden`
 --
 ALTER TABLE `profilwarden`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `profilguru`
+--
+ALTER TABLE `profilguru`
+  ADD CONSTRAINT `profilguru_loginguru_fk` FOREIGN KEY (`id_login`) REFERENCES `loginguru` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `profilpelajar`
+--
+ALTER TABLE `profilpelajar`
+  ADD CONSTRAINT `profilpelajar_loginpelajar_fk` FOREIGN KEY (`id_login`) REFERENCES `loginpelajar` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `profilwarden`
+--
+ALTER TABLE `profilwarden`
+  ADD CONSTRAINT `profilwarden_loginwarden_fk` FOREIGN KEY (`id_login`) REFERENCES `loginwarden` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
