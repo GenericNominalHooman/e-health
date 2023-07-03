@@ -1,6 +1,6 @@
 <?php
 // Import site config
-require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health2/site_config.php");
 // Starting session
 session_start();
 ?>
@@ -48,7 +48,7 @@ session_start();
                 </div>
                 <div class="col-sm p-4">
                     <?php
-                    echo ("<a href='" . SITE_URL . "/index.php" . "'><img src='" . IMG_URL . "/logo2.jpg" . "' alt='e-health logo' height='100em'></a>");
+                    echo ("<a href='" . SITE_URL . "/index.php" . "'><img src='" . IMG_URL . "/logo2.jpg" . "' alt='e-health2 logo' height='100em'></a>");
                     ?>
                 </div>
             </div>
