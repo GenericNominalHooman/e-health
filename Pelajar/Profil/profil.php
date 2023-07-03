@@ -621,10 +621,10 @@ $conn = $databaseObj->getConnection();
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <div class='inputs nav-link' data-abc="true">
-                                    <i class='bx bxs-key' style='color:#0e6ffd'  ></i>
-                                    <a href='url'>Tukar kata laluan</a>
-                                </div>
+                                <a style='color:#172065' href='<?php echo(PELAJAR_URL."/Profil/tukar_kata_laluan.php");?>' class="nav-link">
+                                    <i class='bx bxs-key'></i>
+                                    Tukar kata laluan
+                            </a>
                             </li>
                         </div>
                     </div>

@@ -77,9 +77,6 @@ use SebastianBergmann\Environment\Console;
         if(isset($_POST["submit_tukar_kata_laluan"])){
             $kataLaluanLama = $verificationObj->escapeOutput($_POST["kata_laluan_lama"]);
             $kataLaluanLamaDB = $loginModel->getAllPelajarWhere("id", $_SESSION["Auth"]["id"])[0]["katalaluanpelajar"];
-            d($kataLaluanLamaDB);
-            d($kataLaluanLama);
-            d(password_hash($kataLaluanLama, PASSWORD_BCRYPT));
             $kataLaluanBaharu = $verificationObj->escapeOutput($_POST["kata_laluan_baharu"]);
             
             // Check whether kata laluan lama is correct
@@ -107,7 +104,6 @@ use SebastianBergmann\Environment\Console;
                 $loginModel->updateUser("loginpelajar", "id", $_SESSION["Auth"]["id"], [
                     "katalaluanpelajar" => password_hash($kataLaluanBaharu, PASSWORD_BCRYPT),
                 ]);
-                d("Updating user");
                 $messageHandlerObj->addMessage("help", "Berjaya tukar kata laluan.");
             }
         }
