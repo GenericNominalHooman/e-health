@@ -670,20 +670,20 @@ $conn = $databaseObj->getConnection();
                 // Change id field name to avoid conflicting entry 
                 userLoginArray.id_login = userLoginArray.id;
                 delete userLoginArray.id;
-                // let userLoginProfileArray = null;
-                // if(!verificationObj.isEmpty(userProfileArray[0])){
+                let userLoginProfileArray = null;
+                if(userProfileArray[0] != null){ // User has filled out the profile page
                     userProfileArray[0].id_profil = userProfileArray[0].id;
                     delete userProfileArray[0].id;
                     // Grab old profile data from the database
-                    let userLoginProfileArray = {
+                    userLoginProfileArray = {
                         ...userLoginArray,
                         ...userProfileArray[0]
                     };
-                // }else{
-                //     userLoginProfileArray = {
-                //         ...userLoginArray,
-                //     };                    
-                // }
+                }else{ // User hasnt filled out the profile page
+                    userLoginProfileArray = {
+                        ...userLoginArray,
+                    };                    
+                }
 
                 // AJAX for updating DB
                 console.log(userLoginProfileArray);
