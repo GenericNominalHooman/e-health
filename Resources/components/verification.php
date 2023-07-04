@@ -50,8 +50,8 @@ class Verification {
     }
 
     public function isNameExist($name) {
-        $admins = $this->loginModel->getAllAdminWhere('namapentadbir', $name);
-        $guruBertugas = $this->loginModel->getAllGuruBertugasWhere('namaguru', $name);
+        $admins = $this->loginModel->getAllPentadbirWhere('namapentadbir', $name);
+        $guruBertugas = $this->loginModel->getAllGuruWhere('namaguru', $name);
         $wardens = $this->loginModel->getAllWardenWhere('namawarden', $name);
         $pelajars = $this->loginModel->getAllPelajarWhere('namapelajar', $name);
 
@@ -59,7 +59,7 @@ class Verification {
     }
 
     public function isKPExist($nokp) {
-        $guruBertugas = $this->profilModel->getAllGuruBertugasWhere('nokp', $nokp);
+        $guruBertugas = $this->profilModel->getAllGuruWhere('nokp', $nokp);
         $wardens = $this->profilModel->getAllWardenWhere('nokp', $nokp);
         $pelajars = $this->profilModel->getAllPelajarWhere('nokp', $nokp);
 

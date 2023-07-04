@@ -36,7 +36,7 @@ class ProfileImageManager {
 
         if (move_uploaded_file($image["tmp_name"], $uploadPath)) {
             // Update the user's "gambarprofil" value in the database
-            $data = ['gambarprofilpelajar' => $imageName];
+            $data = ['gambarprofil'.$userType => $imageName];
             return $this->loginModel->updateUser($tableName, $idColumnName, $id, $data);
         } else {
             return false;

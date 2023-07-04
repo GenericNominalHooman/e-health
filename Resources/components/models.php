@@ -58,30 +58,30 @@ class LoginModel extends Models{
       parent::__construct($conn);
     }
 
-    // Admin
-    public function getAllAdmin() {
-        $stmt = $this->conn->prepare("SELECT * FROM loginadmin");
+    // Pentadbir
+    public function getAllPentadbir() {
+        $stmt = $this->conn->prepare("SELECT * FROM loginpentadbir");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAllAdminWhere($columnName, $columnValue) {
-        $stmt = $this->conn->prepare("SELECT * FROM loginadmin WHERE $columnName='$columnValue'");
+    public function getAllPentadbirWhere($columnName, $columnValue) {
+        $stmt = $this->conn->prepare("SELECT * FROM loginpentadbir WHERE $columnName='$columnValue'");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
     // Guru Bertugas
-    public function getAllGuruBertugas() {
+    public function getAllGuru() {
         $stmt = $this->conn->prepare("SELECT * FROM loginguru");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAllGuruBertugasWhere($columnName, $columnValue) {
+    public function getAllGuruWhere($columnName, $columnValue) {
         $stmt = $this->conn->prepare("SELECT * FROM loginguru WHERE $columnName='$columnValue'");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -128,7 +128,7 @@ class RegisterModel extends Models{
     }
 
     public function createPentadbir($id, $nama, $hashed_katalaluan, $gambarprofilpentadbir) {
-        $sql = "INSERT INTO loginadmin (id, namapentadbir, katalaluanpentadbir, gambarprofilpentadbir) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO loginpentadbir (id, namapentadbir, katalaluanpentadbir, gambarprofilpentadbir) VALUES (?, ?, ?, ?)";
         $stmt = $this->conn->prepare($sql);
         $stmt->bind_param("isss", $id, $nama, $hashed_katalaluan, $gambarprofilpentadbir);
         return $stmt->execute();
@@ -156,14 +156,14 @@ class ProfilModel extends Models{
     }
 
     // Guru Bertugas
-    public function getAllGuruBertugas() {
+    public function getAllGuru() {
         $stmt = $this->conn->prepare("SELECT * FROM profilguru");
         $stmt->execute();
         $result = $stmt->get_result();
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    public function getAllGuruBertugasWhere($columnName, $columnValue) {
+    public function getAllGuruWhere($columnName, $columnValue) {
         $stmt = $this->conn->prepare("SELECT * FROM profilguru WHERE $columnName='$columnValue'");
         $stmt->execute();
         $result = $stmt->get_result();
@@ -203,14 +203,14 @@ class ProfilModel extends Models{
 
 class JadualModel extends Models{
         // Guru Bertugas 
-        public function getAllGuruBertugas() {
+        public function getAllGuru() {
             $stmt = $this->conn->prepare("SELECT * FROM jadualguru");
             $stmt->execute();
             $result = $stmt->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
         }
     
-        public function getAllGuruBertugasWhere($columnName, $columnValue) {
+        public function getAllGuruWhere($columnName, $columnValue) {
             $stmt = $this->conn->prepare("SELECT * FROM jadualguru WHERE $columnName='$columnValue'");
             $stmt->execute();
             $result = $stmt->get_result();

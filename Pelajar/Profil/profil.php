@@ -67,7 +67,7 @@ $conn = $databaseObj->getConnection();
         border: none;
         color: #fff;
         border-radius: 4px;
-        background-color: #172065;
+        background-color: #ff5925;
         cursor: pointer;
         text-transform: uppercase
     }
@@ -336,7 +336,7 @@ $conn = $databaseObj->getConnection();
 <!-- User Profile & Navigation Menu -->
 <div class="container-xxl justify-content-center align-items-start">
     <div class="row">
-        <div class="col-12 col-md-6 mt-4">
+        <div class="col-12 col-md-8 mt-4">
             <div class="container-profile-form">
                 <div class="card-profile">
                     <div class="info"> <span>Profil</span> <button id="savebutton">Kemaskini</button> </div>
@@ -504,57 +504,57 @@ $conn = $databaseObj->getConnection();
                                     let no_kp = new ProfileInfoManager({
                                         title: 'No Kad Pengenalan',
                                         post_name: 'no_kad_pengenalan',
-                                        data: '123',
+                                        data: '',
                                     });
                                     let no_matrik = new ProfileInfoManager({
                                         title: 'No Matrik',
                                         post_name: 'no_matrik',
-                                        data: '213',
+                                        data: '',
                                     });
                                     let dorm = new ProfileInfoManager({
                                         title: 'Dorm',
                                         post_name: 'dorm',
-                                        data: '123',
+                                        data: '',
                                     });
                                     let no_telefon_pelajar = new ProfileInfoManager({
                                         title: 'No Telefon',
                                         post_name: 'no_telefon',
-                                        data: '123',
+                                        data: '',
                                     });
                                     let nama_bapa = new ProfileInfoManager({
                                         title: 'Bapa',
                                         post_name: 'bapa',
-                                        data: 'Bapa 1',
+                                        data: '',
                                     });
                                     let no_telefon_bapa = new ProfileInfoManager({
                                         title: 'No Telefon Bapa',
                                         post_name: 'no_telefon_bapa',
-                                        data: '123',
+                                        data: '',
                                     });
                                     let nama_ibu = new ProfileInfoManager({
                                         title: 'Ibu',
                                         post_name: 'ibu',
-                                        data: 'Ibu 1',
+                                        data: '',
                                     });
                                     let no_telefon_ibu = new ProfileInfoManager({
                                         title: 'No Telefon Ibu',
                                         post_name: 'no_telefon_ibu',
-                                        data: '123',
+                                        data: '',
                                     });
                                     let penyakit_pelajar = new ProfileInfoManager({
                                         title: 'Penyakit Kronik',
                                         post_name: 'penyakit',
-                                        data: 'Penyakit 1',
+                                        data: '',
                                     });
                                     let alamat = new ProfileInfoManager({
                                         title: 'Alamat Rumah',
                                         post_name: 'alamat_rumah',
-                                        data: 'Alamat 1',
+                                        data: '',
                                     });
                                     let alahan_pelajar = new ProfileInfoManager({
                                         title: 'Alahan',
                                         post_name: 'alahan',
-                                        data: 'Alahan 1',
+                                        data: '',
                                     });
 
                                     // Add additional elements to render
@@ -581,7 +581,7 @@ $conn = $databaseObj->getConnection();
                 </div>
             </div>
         </div>
-        <div class="col-12 col-md-6 mt-4">
+        <div class="col-12 col-md-4 mt-4">
             <div class="container-fluid d-flex justify-content-center">
 
                 <div class="card w-100">
@@ -697,7 +697,6 @@ $conn = $databaseObj->getConnection();
                     processData: false,
                     success: function(result) {
                         // Reloading the page for reflecting profile iamge changes
-                        window.alert(result);
                         location.reload();
                     },
                     error: function(error) {

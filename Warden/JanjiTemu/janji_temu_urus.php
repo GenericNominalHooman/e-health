@@ -14,7 +14,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $selectedItems = $_POST["item"];
 
         // Establish a database connection
-        $conn = mysqli_connect("localhost", "root", "", "e-health");
+        $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
         if (!$conn) {
             die("Connection failed: " . mysqli_connect_error());
         }
@@ -134,7 +134,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
                 <?php
                 // Establish a database connection
-                $conn = mysqli_connect("localhost", "root", "", "e-health");
+                $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
                 if (!$conn) {
                     die("Connection failed: " . mysqli_connect_error());
                 }
@@ -155,9 +155,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                             echo "<td>{$row['waktujtpelajar']}</td>";
                             echo "<td id='status{$row['nokppelajar']}'>{$row['status']}</td>";
                             echo "<td>
-                                    <button type='button' onclick='rejectApplication(\"{$row['nokppelajar']}\")'>Reject</button>
-                                    <button type='button' onclick='acceptApplication(\"{$row['nokppelajar']}\")'>Accept</button>
-                                    <button type='button' onclick='deleteApplication(\"{$row['nokppelajar']}\")'>Delete</button>
+                            <button type='button' style='background-color: #a7ebc6;border-color: #a7ebc6;' class='m-2 btn btn-primary' onclick='acceptApplication(\"{$row['nokppelajar']}\")'>Accept</button>
+                                    <button type='button' style='background-color: #e4eb14;border-color: #e4eb14;' class='m-2 btn btn-primary' onclick='rejectApplication(\"{$row['nokppelajar']}\")'>Reject</button>
+                                    <button type='button' style='background-color: #ff2f16;border-color: #ff2f16;' class='m-2 btn btn-primary' onclick='deleteApplication(\"{$row['nokppelajar']}\")'>Delete</button>
                                 </td>";
                             echo "</tr>";
 

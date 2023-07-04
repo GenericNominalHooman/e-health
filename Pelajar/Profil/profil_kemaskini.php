@@ -13,10 +13,7 @@ $dbObj = new Database();
 $modelObj = new Models($dbObj->getConnection());
 $loginModelObj = new LoginModel($dbObj->getConnection());
 $profilModelObj = new ProfilModel($dbObj->getConnection());
-
 print_r($_POST);
-print_r($_FILES["gambar_profil_baru"]);
-print_r($profileDataOld);
 
 // Check POST profile data 
 if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has registered and filled in profile page information
@@ -104,11 +101,12 @@ if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has re
     if($_POST["alahan"] != $profileDataOld["alahan"]){
         $profilModelObj->updateUser("profilpelajar", "id", $profileDataOld["id_profil"], ["alahan"=>$_POST["alahan"]]);
     }
-}else if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has registered but not yet filled in profile page information
+}else if(isset($_POST["nama"])){ // User has registered but not yet filled in profile page information
     // Create verification object for checking nokp and nama field
     $messageHandler = new MessageHandler($loginModelObj);
     $verificationObj = new Verification($messageHandler, $loginModelObj, $profilModelObj);   
-    $profileData = []; 
+    $newProfileData = []; 
+    $validInput = true; 
     
     // Ignore update if new profile data is the same as old profile data for nama field
     if($_POST["nama"] != $profileDataOld["nama"]){
@@ -133,66 +131,47 @@ if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has re
         $_SESSION["Auth"]["gambarprofilpelajar"] = $profilImageManager->getProfileImage("pelajar", $profileDataOld["id_login"]);
     }
     
-    // Ignore update if new profile data is the same as old profile data for nokp 
-    if($_POST["no_kad_pengenalan"] != $profileDataOld["nokp"]){
-        // Prevent updating of nokp when there's other record with the same nokp
-        if(!$verificationObj->isKPExist($_POST["no_kad_pengenlan"])){
-            $profileData["nokp"] = $_POST["no_kad_pengenalan"];
-        }
+    // Prevent updating of nokp when there's other record with the same nokp
+    if(!$verificationObj->isKPExist($_POST["no_kad_pengenalan"])){
+        $newProfileData["nokp"] = $_POST["no_kad_pengenalan"];
     }
-
+    
+    $newProfileData["id"] = null;
+    
+    $newProfileData["id_login"] = $profileDataOld["id_login"];
+    
     // Ignore update if new profile data is the same as old profile data for nomatrik field
-    if($_POST["no_matrik"] != $profileDataOld["nomatrikpelajar"]){
-        $profileData["no_matrik"] = $_POST["nomatrikpelajar"];
-    }
+    $newProfileData["nomatrikpelajar"] = $_POST["no_matrik"];
 
     // Ignore update if new profile data is the same as old profile data for dorm 
-    if($_POST["dorm"] != $profileDataOld["dorm"]){
-        $profileData["dorm"] = $_POST["dorm"];
-    }
+    $newProfileData["dorm"] = $_POST["dorm"];
 
     // Ignore update if new profile data is the same as old profile data for notelpelajar 
-    if($_POST["no_telefon"] != $profileDataOld["notelpelajar"]){
-        $profileData["notelpelajar"] = $_POST["no_telefon"];
-    }
+    $newProfileData["notelpelajar"] = $_POST["no_telefon"];
     
     // Ignore update if new profile data is the same as old profile data for namabapapelajar 
-    if($_POST["bapa"] != $profileDataOld["namabapapelajar"]){
-        $profileData["namabapapelajar"] = $_POST["bapa"];
-    }
+    $newProfileData["namabapapelajar"] = $_POST["bapa"];
     
     // Ignore update if new profile data is the same as old profile data for notelbapapelajar 
-    if($_POST["no_telefon_bapa"] != $profileDataOld["notelbapapelajar"]){
-        $profileData["notelbapapelajar"] = $_POST["no_telefon_bapa"];
-    }
+    $newProfileData["notelbapapelajar"] = $_POST["no_telefon_bapa"];
     
     // Ignore update if new profile data is the same as old profile data for namaibupelajar 
-    if($_POST["ibu"] != $profileDataOld["namaibupelajar"]){
-        $profileData["namaibupelajar"] = $_POST["ibu"];
-    }
+    $newProfileData["namaibupelajar"] = $_POST["ibu"];
     
     // Ignore update if new profile data is the same as old profile data for notelibupelajar 
-    if($_POST["no_telefon_ibu"] != $profileDataOld["notelibupelajar"]){
-        $profileData["notelibupelajar"] = $_POST["no_telefon_ibu"];
-    }
+    $newProfileData["notelibupelajar"] = $_POST["no_telefon_ibu"];
     
     // Ignore update if new profile data is the same as old profile data for penyakitpelajar 
-    if($_POST["penyakit"] != $profileDataOld["penyakitpelajar"]){
-        $profileData["penyakitpelajar"] = $_POST["penyakit"];
-    }
+    $newProfileData["penyakitpelajar"] = $_POST["penyakit"];
     
     // Ignore update if new profile data is the same as old profile data for penyakitpelajar 
-    if($_POST["alamat_rumah"] != $profileDataOld["alamatpelajar"]){
-        $profileData["alamatpelajar"] = $_POST["alamat_rumah"];
-    }
+    $newProfileData["alamatpelajar"] = $_POST["alamat_rumah"];
     
     // Ignore update if new profile data is the same as old profile data for alahan 
-    if($_POST["alahan"] != $profileDataOld["alahan"]){
-        $profileData["alahan"] = $_POST["alahan"];
-    }
+    $newProfileData["alahan"] = $_POST["alahan"];
 
-    // Create new profile entry from $profileData
-    $profilModelObj->createUser("profilpelajar", $profileData);
+    // Create new profile entry from $newProfileData
+    $profilModelObj->createUser("profilpelajar", $newProfileData);
 }
 else{ // User access through GET method or illegal profile action
     Redirect::redirectWithMsg("Location: ".PELAJAR_URL, "Sila login dahulu.");

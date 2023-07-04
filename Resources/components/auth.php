@@ -42,7 +42,7 @@ class Auth {
     }
 
     public function authPentadbir($nama, $katalaluan) {
-        $pentadbir = $this->loginModel->getAllAdminWhere("namapentadbir", $nama);
+        $pentadbir = $this->loginModel->getAllPentadbirWhere("namapentadbir", $nama);
 
         if(!empty($pentadbir)){
             if(password_verify($katalaluan, $pentadbir[0]["katalaluanpentadbir"])){
@@ -61,7 +61,7 @@ class Auth {
     }
 
     public function authGuru($nama, $katalaluan) {
-        $guru = $this->loginModel->getAllGuruBertugasWhere("namaguru", $nama);
+        $guru = $this->loginModel->getAllGuruWhere("namaguru", $nama);
         
         if(!empty($guru)){
             if(password_verify($katalaluan, $guru[0]["katalaluanguru"])){
