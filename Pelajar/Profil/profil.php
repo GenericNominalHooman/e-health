@@ -504,57 +504,57 @@ $conn = $databaseObj->getConnection();
                                     let no_kp = new ProfileInfoManager({
                                         title: 'No Kad Pengenalan',
                                         post_name: 'no_kad_pengenalan',
-                                        data: '',
+                                        data: '123',
                                     });
                                     let no_matrik = new ProfileInfoManager({
                                         title: 'No Matrik',
                                         post_name: 'no_matrik',
-                                        data: '',
+                                        data: '213',
                                     });
                                     let dorm = new ProfileInfoManager({
                                         title: 'Dorm',
                                         post_name: 'dorm',
-                                        data: '',
+                                        data: '123',
                                     });
                                     let no_telefon_pelajar = new ProfileInfoManager({
                                         title: 'No Telefon',
                                         post_name: 'no_telefon',
-                                        data: '',
+                                        data: '123',
                                     });
                                     let nama_bapa = new ProfileInfoManager({
                                         title: 'Bapa',
                                         post_name: 'bapa',
-                                        data: '',
+                                        data: 'Bapa 1',
                                     });
                                     let no_telefon_bapa = new ProfileInfoManager({
                                         title: 'No Telefon Bapa',
                                         post_name: 'no_telefon_bapa',
-                                        data: '',
+                                        data: '123',
                                     });
                                     let nama_ibu = new ProfileInfoManager({
                                         title: 'Ibu',
                                         post_name: 'ibu',
-                                        data: '',
+                                        data: 'Ibu 1',
                                     });
                                     let no_telefon_ibu = new ProfileInfoManager({
                                         title: 'No Telefon Ibu',
                                         post_name: 'no_telefon_ibu',
-                                        data: '',
+                                        data: '123',
                                     });
                                     let penyakit_pelajar = new ProfileInfoManager({
                                         title: 'Penyakit Kronik',
                                         post_name: 'penyakit',
-                                        data: '',
+                                        data: 'Penyakit 1',
                                     });
                                     let alamat = new ProfileInfoManager({
                                         title: 'Alamat Rumah',
                                         post_name: 'alamat_rumah',
-                                        data: '',
+                                        data: 'Alamat 1',
                                     });
                                     let alahan_pelajar = new ProfileInfoManager({
                                         title: 'Alahan',
                                         post_name: 'alahan',
-                                        data: '',
+                                        data: 'Alahan 1',
                                     });
 
                                     // Add additional elements to render
@@ -564,7 +564,7 @@ $conn = $databaseObj->getConnection();
 
                                 // Render as HTML
                                 $(document).ready(function() {
-                                    $('.forms').html(profileHTML + gambarLocation.renderForgotPassword('<?php echo (PELAJAR_URL . "/Profil/tukar_kata_laluan.php"); ?>'));
+                                    $('.forms').html(profileHTML);
                                 });
                             }
                         }
@@ -620,6 +620,12 @@ $conn = $databaseObj->getConnection();
                                     Urus Janji Temu
                                 </a>
                             </li>
+                            <li class="nav-item">
+                                <a style='color:#172065' href='<?php echo(PELAJAR_URL."/Profil/tukar_kata_laluan.php");?>' class="nav-link">
+                                    <i class='bx bxs-key'></i>
+                                    Tukar kata laluan
+                            </a>
+                            </li>
                         </div>
                     </div>
                 </div>
@@ -664,15 +670,23 @@ $conn = $databaseObj->getConnection();
                 // Change id field name to avoid conflicting entry 
                 userLoginArray.id_login = userLoginArray.id;
                 delete userLoginArray.id;
-                userProfileArray[0].id_profil = userProfileArray[0].id;
-                delete userProfileArray[0].id;
-                // Grab old profile data from the database
-                let userLoginProfileArray = {
-                    ...userLoginArray,
-                    ...userProfileArray[0]
-                };
+                let userLoginProfileArray = null;
+                if(userProfileArray[0] != null){ // User has filled out the profile page
+                    userProfileArray[0].id_profil = userProfileArray[0].id;
+                    delete userProfileArray[0].id;
+                    // Grab old profile data from the database
+                    userLoginProfileArray = {
+                        ...userLoginArray,
+                        ...userProfileArray[0]
+                    };
+                }else{ // User hasnt filled out the profile page
+                    userLoginProfileArray = {
+                        ...userLoginArray,
+                    };                    
+                }
 
                 // AJAX for updating DB
+                console.log(userLoginProfileArray);
                 let formData = new FormData($("#uploadProfil")[0]);
                 formData.append("profile_data_old", JSON.stringify(userLoginProfileArray));
                 $.ajax({
@@ -683,6 +697,7 @@ $conn = $databaseObj->getConnection();
                     processData: false,
                     success: function(result) {
                         // Reloading the page for reflecting profile iamge changes
+                        window.alert(result);
                         location.reload();
                     },
                     error: function(error) {
