@@ -1,6 +1,6 @@
 <?php
 // Import site config
-require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health2/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 require_once(COMPONENTS_DIR."/message_handler.php");
 require_once(COMPONENTS_DIR."/models.php");
 require_once(COMPONENTS_DIR."/config.php");

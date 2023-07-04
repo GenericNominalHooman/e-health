@@ -25,7 +25,7 @@ if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has re
     if($_POST["nama"] != $profileDataOld["nama"]){
         // Prevent updating of nama when there's other record with the same nama
         if(!$verificationObj->isNameExist($_POST["nama"])){
-            $loginModelObj->updateUser("loginguru", "id", $profileDataOld["id"], ["namaguru"=>$_POST["nama"]]);
+            $loginModelObj->updateUser("loginguru", "id", $profileDataOld["id_login"], ["namaguru"=>$_POST["nama"]]);
 
             // Update Auth array to reflect DB changes for nama
             $_SESSION["Auth"]["nama"] = $_POST["nama"];
@@ -35,10 +35,7 @@ if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has re
 
     // Ignore update if new profile data is the same as old profile data for nama field
     if($_POST["program"] != $profileDataOld["programguru"]){
-        // Prevent updating of nama when there's other record with the same nama
-        if(!$verificationObj->isNameExist($_POST["nama"])){
-            $loginModelObj->updateUser("loginguru", "id", $profileDataOld["id"], ["programguru"=>$_POST["program"]]);
-        }
+        $loginModelObj->updateUser("profilguru", "id", $profileDataOld["id_profil"], ["programguru"=>$_POST["program"]]);
     }
 
     // Ignore update if new profile data is empty for gambar_profil_baru
@@ -54,7 +51,7 @@ if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has re
     // Ignore update if new profile data is the same as old profile data for no_kp 
     if($_POST["no_kad_pengenalan"] != $profileDataOld["nokp"]){
         // Prevent updating of no_kp when there's other record with the same no_kp
-        if(!$verificationObj->isKPExist($_POST["no_kad_pengenlan"])){
+        if(!$verificationObj->isKPExist($_POST["no_kad_pengenalan"])){
             $profilModelObj->updateUser("profilguru", "id", $profileDataOld["id_profil"], ["nokp"=>$_POST["no_kad_pengenalan"]]);
         }
     }
@@ -89,13 +86,7 @@ if(isset($_POST["nama"]) && isset($profileDataOld["id_profil"])){ // User has re
 
     }
 
-    // Ignore update if new profile data is the same as old profile data for nama field
-    if($_POST["program"] != $profileDataOld["programguru"]){
-        // Prevent updating of nama when there's other record with the same nama
-        if(!$verificationObj->isNameExist($_POST["nama"])){
-            $newProfileData["programguru"] = $_POST["program"];
-        }
-    }
+    $newProfileData["programguru"] = $_POST["program"];
 
     // Ignore update if new profile data is empty for gambar_profil_baru
     if(!empty($_FILES["gambar_profil_baru"])){
