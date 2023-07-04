@@ -1,126 +1,167 @@
 <?php
-// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
-// Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/e-health2/site_config.php");
-require_once(COMPONENTS_DIR . "/config.php");
-$databaseObj = new Database();
-$conn = $databaseObj->getConnection();
+// Import site config
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health2/site_config.php");
+
+// Import header
+require_once(COMPONENTS_DIR . "/header.php");
+
+// Import sidebar
+require_once(TEMPLATE_DIR . "/sidebar2_warden.php");
+
+// Check if the form is submitted and the status is to be updated
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    if (isset($_POST["item"]) && is_array($_POST["item"])) {
+        // Get the selected items (checkbox values)
+        $selectedItems = $_POST["item"];
+
+        // Establish a database connection
+        $conn = mysqli_connect("localhost", "root", "", "e-health2");
+        if (!$conn) {
+            die("Connection failed: " . mysqli_connect_error());
+        }
+
+        // Check if "Delete" button is clicked
+        if (isset($_POST["delete"])) {
+            // Delete each selected item from the database
+            foreach ($selectedItems as $item) {
+                $sql = "DELETE FROM profilpelajar WHERE id = ?";
+                $stmt = mysqli_prepare($conn, $sql);
+                mysqli_stmt_bind_param($stmt, "s", $item);
+                mysqli_stmt_execute($stmt);
+                mysqli_stmt_close($stmt);
+            }
+        }
+
+        // Close the database connection
+        mysqli_close($conn);
+    }
+}
 ?>
-<?php 
 
-if(isset($_POST['submit'])){
-
-    $namaguru= mysqli_real_escape_string($conn, $_POST['npenggunaguru']);
-    $katalaluan = mysqli_real_escape_string($conn, $_POST['klaluanguru']);
- 
-    $select = mysqli_query($conn, "SELECT * FROM `loginguru` WHERE npenggunaguru  = '$namaguru' AND klaluanguru = '$katalaluan'") or die('query failed');
-    if(mysqli_num_rows($select) > 0){
-       $row = mysqli_fetch_assoc($select);
-       $_SESSION['npenggunaguru'] = $namaguru;
-             header("Location: dashboard.php"); // Akan Tukar Nama dashboard iaitu site profile
-           }else{
-             $message[] = 'Salah Kata laluan atau Nama Pengguna';
-          }
-         }
- ?>
 <!DOCTYPE html>
-<html lang="en">
+<html>
+<head>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css">
+    <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $("#profilpelajar").DataTable();
+        });
 
-<meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Log Masuk</title>
+        function deleteApplication() {
+            const selectedItems = Array.from(document.querySelectorAll('input[name="item[]"]:checked')).map(checkbox => checkbox.value);
+            if (selectedItems.length === 0) {
+                alert("Please select at least one item to delete.");
+                return;
+            }
 
-   <!-- custom css file link  
-   <link rel="stylesheet" href="css/style.css">-->
-   <link rel="shortcut icon" href="images/logo2remove.png" type="image/x-icon">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-<style>
-  body{
-    background-color:aliceblue;
-  }
-  </style>
+            if (!confirm("Are you sure you want to delete the selected item(s)?")) {
+                return;
+            }
 
+            const tableBody = document.querySelector("#profilpelajar tbody");
+
+            selectedItems.forEach(item => {
+                const row = document.querySelector(`tr[data-id="${item}"]`);
+                if (row) {
+                    tableBody.removeChild(row);
+                }
+            });
+
+            const xhr = new XMLHttpRequest();
+            xhr.open("POST", "<?php echo $_SERVER["PHP_SELF"]; ?>", true);
+            xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    if (response.status === "success") {
+                        console.log("Deleted successfully.");
+                    } else {
+                        console.error("Failed to delete the application.");
+                    }
+                }
+            };
+            const data = "item[]=" + encodeURIComponent(JSON.stringify(selectedItems)) + "&delete=delete";
+            xhr.send(data);
+        }
+    </script>
 </head>
 <body>
+    <div class="mt-3">
+        <h1 class="display-4">Senarai Pelajar</h1>
+        <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+            <table id="profilpelajar" class="table table-striped" width="100%">
+                <thead>
+                    <tr>
+                        <th>Pilih</th>
+                        <th>Bil</th>
+                        <th>Nama Pelajar</th>
+                        <th>Nombor KP</th>
+                        <th>Nombor Matrik Pelajar</th>
+                        <th>Dorm</th>
+                        <th>Nombor Telefon Pelajar</th>
+                        <th>Nama Bapa Pelajar</th>
+                        <th>Nombor Telefon Bapa Pelajar</th>
+                        <th>Nama Ibu Pelajar</th>
+                        <th>Nombor Telefon Ibu Pelajar</th>
+                        <th>Alamat Pelajar</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    // Establish a database connection
+                    $conn = mysqli_connect("localhost", "root", "", "e-health");
+                    if (!$conn) {
+                        die("Connection failed: " . mysqli_connect_error());
+                    }
 
-<section class="vh-100 gradient-custom">
-  <div class="container py-5 h-100">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
-          <div class="card-body p-4 p-md-5">
-          <?php
-echo "<img src='" . IMG_URL . "/guru.png' alt='Admin Icon' class='rounded mx-auto d-block' width='200' height='150'>";
-?>
+                    $query = mysqli_query($conn, "SELECT profilpelajar.*, loginpelajar.namapelajar, loginpelajar.id FROM profilpelajar INNER JOIN loginpelajar ON profilpelajar.id_login = loginpelajar.id");
+                    $numrows = mysqli_num_rows($query);
 
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">LOG MASUK GURU BERTUGAS</h3>
-            
-            <form  autocomplete="off" action="login.php"  method="post">
-                
-                
+                    if ($query) {
+                        if ($numrows != 0) {
+                            $cnt = 1;
+
+                            while ($row = mysqli_fetch_assoc($query)) {
+                                echo "<tr data-id='{$row['id']}'>";
+                                echo "<td><input type='checkbox' name='item[]' value='{$row['id']}'></td>";
+                                echo "<td>{$cnt}</td>";
+                                echo "<td>{$row['namapelajar']}</td>";
+                                echo "<td>{$row['nokp']}</td>";
+                                echo "<td>{$row['nomatrikpelajar']}</td>";
+                                echo "<td>{$row['dorm']}</td>";
+                                echo "<td>{$row['notelpelajar']}</td>";
+                                echo "<td>{$row['namabapapelajar']}</td>";
+                                echo "<td>{$row['notelbapapelajar']}</td>";
+                                echo "<td>{$row['namaibupelajar']}</td>";
+                                echo "<td>{$row['notelibupelajar']}</td>";
+                                echo "<td>{$row['alamatpelajar']}</td>";
+                                echo "</tr>";
+
+                                $cnt++; // Increment $cnt after each iteration
+                            }
+                        }
+                    }
+
+                    // Close the database connection
+                    mysqli_close($conn);
+                    ?>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="12">
+                            <button type="button" onclick="deleteApplication()">Delete Selected</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
             <?php
-        
-        if(isset($message)){
-           foreach($message as $message){
-              echo '<div class="message alert alert-dark" role="alert">'.$message.'</div>';
-           }
-          }
-        
-     ?>
-                               
-                            
-                            <!-- No K/P input -->
-              
-                            <div class="form-outline mb-4">
-                            <div class="form-floating">
-                              <input type="text" autocomplete="off"  name="namapentadbir" class="form-control" placeholder="Nama Pengguna" >
-                              <label  for="floatingPassword">Nama Pengguna</label></div>
-                                </div>
+                    d($_POST);
+                    d($query);
 
-                          <!-- Password input -->
-                             <div class="form-outline mb-4">
-                             <div class="form-floating">
-                                <input type="password" id="password" name="katalaluanpentadbir" class="form-control" placeholder="Kata Laluan" >
-                                <label class="form-label" for="password">Kata Laluan</label>
-                                <label for="floatingPassword">Kata Laluan</label>
-                                <div class="mt-3">
-                                <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan 
-                              </div></div></div>
-                                
-                              
-               
-
-      <!-- Submit button -->
-      <div class="form-outline mb-4">
-      <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">Log Masuk</button>
-      </div>
-      Kembali&nbsp;<a href="../index.php">Halaman Utama</a>
-    </form>
-</div>
-</div>
-</div>
-</div>
-</div>
-</section>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-
-<script src= "https://code.jquery.com/jquery-3.5.1.js"></script>
-<script src= "https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-<script src= "https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
-<script src="./js/app.js"></script>
-<script>
-function myFunction() {
-var x = document.getElementById("password");
-if (x.type === "password") {
-    x.type = "text";
-    } else {
-     x.type = "password";
-    }
-    }
-</script>
-
+            ?>
+        </form>
+    </div>
 </body>
 </html>
-<?php include(COMPONENTS_DIR."/footer.php"); ?>
-<?php mysqli_close($conn); ?>

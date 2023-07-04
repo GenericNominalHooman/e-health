@@ -29,14 +29,26 @@ session_start();
 // Check if the uploaded image path is set in the session
 if (isset($_SESSION["uploaded_image"])) {
     $uploaded_image = $_SESSION["uploaded_image"];
-    echo "<img src='$uploaded_image' alt='Uploaded Image'>";
+    echo "<img id='uploadedImage' src='$uploaded_image' alt='Uploaded Image'>";
+    echo "<button onclick='printImage()'>Print</button>"; // Add the print button
 } else {
     echo "No image uploaded.";
 }
 ?>
 
+<script>
+    function printImage() {
+        var image = document.getElementById("uploadedImage");
+        var printWindow = window.open("", "_blank");
+        printWindow.document.write("<html><head><title>Print</title></head><body><img src='" + image.src + "'></body></html>");
+        printWindow.document.close();
+        printWindow.print();
+    }
+</script>
+
 </body>
 </html>
+
 
 <?php
 require_once(COMPONENTS_DIR . "/footer.php");

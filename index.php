@@ -50,10 +50,30 @@ require_once(COMPONENTS_DIR . "/jadual_carousel.php");
 require_once(COMPONENTS_DIR . "/models.php");
 
 $jadualModel = new JadualModel($dbObj->getConnection());
-$slideshowManager = new SlideshowManager();
-$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuruBertugasWhere("id_gambar", sizeof($jadualModel->getAllGuruBertugas())+1)[0]["gambar"]); // Jadual guru
-$slideshowManager = new SlideshowManager();
-$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWardenWhere("id_gambar", sizeof($jadualModel->getAllWarden()))[0]["gambar"]); // Jadual warden
+$allGuruBertugas = $jadualModel->getAllGuruBertugas();
+$guruBertugasCount = sizeof($allGuruBertugas);
+
+if ($guruBertugasCount > 0) {
+    $guruBertugas = $allGuruBertugas[$guruBertugasCount - 1]; // Accessing the last element
+    $gambar = $guruBertugas['gambar'];
+    $imagePath = UPLOADS_URL . "/jadual" . "/" . $gambar;
+
+    $slideshowManager = new SlideshowManager();
+    $slideshowManager->addImage($imagePath);
+}
+
+$allWarden = $jadualModel->getAllWarden();
+$wardenCount = count($allWarden);
+
+if ($wardenCount > 0) {
+    $warden = $allWarden[$wardenCount - 1]; // Accessing the last element
+    $gambar = $warden['gambar'];
+    $imagePath = UPLOADS_URL . "/jadual" . "/" . $gambar;
+
+    $slideshowManager = new SlideshowManager();
+    $slideshowManager->addImage($imagePath);
+}
+
 // $slideshowManager->addImage(); // Jadual pemandu
 ?>
 </div>

@@ -162,6 +162,8 @@ if (isset($_POST["submit"])) {
         ?>
     </div>
 
+    <button onclick="printImage()">Print</button>
+
     <script>
         // Display image preview
         function previewImage() {
@@ -182,6 +184,20 @@ if (isset($_POST["submit"])) {
 
                 reader.readAsDataURL(file);
             });
+        }
+
+        // Print the image
+        function printImage() {
+            const imageElement = document.querySelector('#preview-image img');
+            if (imageElement) {
+                const imageUrl = imageElement.src;
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`<img src="${imageUrl}">`);
+                printWindow.document.close();
+                printWindow.print();
+            } else {
+                alert("No image found.");
+            }
         }
 
         // Call the previewImage function

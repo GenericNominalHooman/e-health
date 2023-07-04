@@ -103,7 +103,7 @@ class LoginModel extends Models{
         return $result->fetch_all(MYSQLI_ASSOC);
     }
 
-    // Warden 
+    // Pelajar
     public function getAllPelajar() {
         $stmt = $this->conn->prepare("SELECT * FROM loginpelajar");
         $stmt->execute();

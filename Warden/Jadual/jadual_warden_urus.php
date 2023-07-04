@@ -100,7 +100,7 @@ if (isset($_POST["submit"])) {
                 $database = new Database();
                 $conn = $database->getConnection();
 
-                // Prepare the query to insert the image details into the jadualguru table
+                // Prepare the query to insert the image details into the jadualwarden table
                 $uploaded_at = date("Y-m-d H:i:s");
                 $gambar = basename($_FILES["image"]["name"]);
                 $sql = "INSERT INTO jadualwarden (uploaded_at, gambar) VALUES (?, ?)";
@@ -162,6 +162,8 @@ if (isset($_POST["submit"])) {
         ?>
     </div>
 
+    <button onclick="printImage()">Print</button>
+
     <script>
         // Display image preview
         function previewImage() {
@@ -184,6 +186,20 @@ if (isset($_POST["submit"])) {
             });
         }
 
+        // Print the image
+        function printImage() {
+            const imageElement = document.querySelector('#preview-image img');
+            if (imageElement) {
+                const imageUrl = imageElement.src;
+                const printWindow = window.open('', '_blank');
+                printWindow.document.write(`<img src="${imageUrl}">`);
+                printWindow.document.close();
+                printWindow.print();
+            } else {
+                alert("No image found.");
+            }
+        }
+
         // Call the previewImage function
         previewImage();
     </script>
@@ -194,4 +210,3 @@ if (isset($_POST["submit"])) {
 <?php
 require_once(COMPONENTS_DIR . "/footer.php");
 ?>
- 
