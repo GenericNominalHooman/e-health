@@ -1,41 +1,10 @@
 <?php
-// Import site config
-require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health2/site_config.php");
-
-// Import header
-require_once(COMPONENTS_DIR . "/header.php");
-
-// Import sidebar
-require_once(TEMPLATE_DIR . "/sidebar2_warden.php");
-
-// Check if the form is submitted and the status is to be updated
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    if (isset($_POST["item"]) && is_array($_POST["item"])) {
-        // Get the selected items (checkbox values)
-        $selectedItems = $_POST["item"];
-
-        // Establish a database connection
-        $conn = mysqli_connect("localhost", "root", "", "e-health2");
-        if (!$conn) {
-            die("Connection failed: " . mysqli_connect_error());
-        }
-
-        // Check if "Delete" button is clicked
-        if (isset($_POST["delete"])) {
-            // Delete each selected item from the database
-            foreach ($selectedItems as $item) {
-                $sql = "DELETE FROM profilpelajar WHERE id = ?";
-                $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($stmt, "s", $item);
-                mysqli_stmt_execute($stmt);
-                mysqli_stmt_close($stmt);
-            }
-        }
-
-        // Close the database connection
-        mysqli_close($conn);
-    }
-}
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
+require_once(COMPONENTS_DIR . "/config.php");
+$databaseObj = new Database();
+$conn = $databaseObj->getConnection();
 ?>
 
 <!DOCTYPE html>

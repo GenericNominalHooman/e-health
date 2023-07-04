@@ -1,6 +1,6 @@
 <?php
 // Import site config
-require_once($_SERVER["DOCUMENT_ROOT"]."/e-health2/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 require_once(COMPONENTS_DIR."/profile_image_manager.php");
 require_once("auth_register_test.php");
 require_once("auth_test.php");

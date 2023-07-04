@@ -1,13 +1,12 @@
 <?php
-    session_start(); // Start the session
-
     // Import site config
-    require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health2/site_config.php");
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
     require_once(COMPONENTS_DIR . "/header.php");
     require_once(COMPONENTS_DIR . "/config.php");
     require_once(COMPONENTS_DIR . "/auth.php");
+    require_once(COMPONENTS_DIR . "/models.php");
     
     // Display sidebar based on user type
     $dbObj = new Database();
@@ -50,30 +49,10 @@ require_once(COMPONENTS_DIR . "/jadual_carousel.php");
 require_once(COMPONENTS_DIR . "/models.php");
 
 $jadualModel = new JadualModel($dbObj->getConnection());
-$allGuruBertugas = $jadualModel->getAllGuruBertugas();
-$guruBertugasCount = sizeof($allGuruBertugas);
-
-if ($guruBertugasCount > 0) {
-    $guruBertugas = $allGuruBertugas[$guruBertugasCount - 1]; // Accessing the last element
-    $gambar = $guruBertugas['gambar'];
-    $imagePath = UPLOADS_URL . "/jadual" . "/" . $gambar;
-
-    $slideshowManager = new SlideshowManager();
-    $slideshowManager->addImage($imagePath);
-}
-
-$allWarden = $jadualModel->getAllWarden();
-$wardenCount = count($allWarden);
-
-if ($wardenCount > 0) {
-    $warden = $allWarden[$wardenCount - 1]; // Accessing the last element
-    $gambar = $warden['gambar'];
-    $imagePath = UPLOADS_URL . "/jadual" . "/" . $gambar;
-
-    $slideshowManager = new SlideshowManager();
-    $slideshowManager->addImage($imagePath);
-}
-
+$slideshowManager = new SlideshowManager();
+$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuru("id_gambar", sizeof($jadualModel->getAllGuru())+1)[0]["gambar"]); // Jadual guru
+$slideshowManager = new SlideshowManager();
+$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWardenWhere("id_gambar", sizeof($jadualModel->getAllWarden()))[0]["gambar"]); // Jadual warden
 // $slideshowManager->addImage(); // Jadual pemandu
 ?>
 </div>

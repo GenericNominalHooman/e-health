@@ -15,6 +15,8 @@ require_once(COMPONENTS_DIR . "/models.php");
 require_once(COMPONENTS_DIR . "/message_handler.php");
 // Import config
 require_once(COMPONENTS_DIR . "/config.php");
+// Navbar
+require_once(COMPONENTS_DIR . "/navbar.php");
 // Import pelajar sidebar template
 require_once(TEMPLATE_DIR . "/sidebar2_pentadbir.php");
 ?>
@@ -453,7 +455,7 @@ $conn = $databaseObj->getConnection();
         <div class="col-12 col-md-4 mt-4">
             <div class="container-fluid d-flex justify-content-center">
 
-                <div class="card w-100">
+                <div class="card w-100" id="siteNavbar">
                     <div class="card-header bg-transparent header-elements-inline">
                         <span class="card-title mt-3 font-weight-normal">Navigasi Halaman</span>
                     </div>

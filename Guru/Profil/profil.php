@@ -441,6 +441,7 @@ $conn = $databaseObj->getConnection();
                                 let profileHTML = gambarLocation.renderImage() + gambarInput.renderImageInput() + nama.render();
 
                                 // User has completed user profile information
+                                console.log(userProfileArray);
                                 if (!verificationObj.isEmpty(userProfileArray)) {
                                     let program = new ProfileInfoManager({
                                         title: 'Program',
@@ -459,7 +460,7 @@ $conn = $databaseObj->getConnection();
                                         data: userProfileArray[0]['notelguru'],
                                     });
                                     let no_plat = new ProfileInfoManager({
-                                        title: 'No Plat Guru',
+                                        title: 'No Plat Kenderaan',
                                         post_name: 'no_plat',
                                         data: userProfileArray[0]['noplatguru'],
                                     });
@@ -533,7 +534,7 @@ $conn = $databaseObj->getConnection();
 
                             <!-- Profil -->
                             <li class="nav-item">
-                                <a href="<?php echo (PENTADBIR_URL . "/Profil/profil.php"); ?>" class="nav-link nav-item-header" data-abc="true">
+                                <a href="<?php echo (WARDEN_URL . "/Profil/profil.php"); ?>" class="nav-link nav-item-header" data-abc="true">
                                     <i class='bx bx-user-circle'></i>
                                     Profil
                                 </a>
@@ -542,7 +543,7 @@ $conn = $databaseObj->getConnection();
                             <!-- Janji Temu -->
                             <li class="nav-item-header">Janji Temu</li>
                             <li class="nav-item">
-                                <a href="<?php echo (PENTADBIR_URL . "/JanjiTemu/janji_temu_urus.php"); ?>" class="nav-link" data-abc="true">
+                                <a href="<?php echo (WARDEN_URL . "/JanjiTemu/janji_temu_urus.php"); ?>" class="nav-link" data-abc="true">
                                     <i class='bx bx-list-ol'></i>
                                     Urus Janji Temu
                                 </a>
@@ -551,7 +552,7 @@ $conn = $databaseObj->getConnection();
                             <!-- Urus pengguna -->
                             <li class="nav-item-header">Urus Pengguna</li>
                             <li class="nav-item">
-                                <a href="<?php echo (PENTADBIR_URL . "/Pelajar/pelajar_urus.php"); ?>" class="nav-link" data-abc="true">
+                                <a href="<?php echo (WARDEN_URL . "/Pelajar/pelajar_urus.php"); ?>" class="nav-link" data-abc="true">
                                     <i class='bx bx-list-ol'></i>
                                     Urus Pelajar
                                 </a>
@@ -560,9 +561,9 @@ $conn = $databaseObj->getConnection();
                             <!-- Urus jadual -->
                             <li class="nav-item-header">Urus Jadual</li>
                             <li class="nav-item">
-                                <a href="<?php echo (PENTADBIR_URL . "/Warden/jadual_warden_urus.php"); ?>" class="nav-link" data-abc="true">
+                                <a href="<?php echo (WARDEN_URL . "/Warden/jadual_warden_urus.php"); ?>" class="nav-link" data-abc="true">
                                     <i class='bx bx-list-ol'></i>
-                                    Urus Jadual Warden
+                                    Urus Jadual Guru
                                 </a>
                             </li>
 
@@ -644,8 +645,7 @@ $conn = $databaseObj->getConnection();
                     processData: false,
                     success: function(result) {
                         // Reloading the page for reflecting profile iamge changes
-                        window.alert(result);
-                        // location.reload();
+                        location.reload();
                     },
                     error: function(error) {
                         console.log(error);
