@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.11.4-MariaDB, for Linux (x86_64)
 --
--- Host: localhost    Database: e-health
+-- Host: localhost    Database: e-health2
 -- ------------------------------------------------------
 -- Server version	10.11.4-MariaDB
 
