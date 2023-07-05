@@ -1,0 +1,23 @@
+.bg-primary-custom{
+    background-color: #ffffff;
+}
+
+.bg-secondary-custom{
+    background-color: #172065;
+}
+
+.bg-tertiary-custom{
+    background-color: #F8693B;
+}
+
+.primary-custom{
+    color: #ffffff;
+}
+
+.secondary-custom{
+    color: #172065;
+}
+
+.tertiary-custom{
+    color: #F8693B;
+}

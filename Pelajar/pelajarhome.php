@@ -1,8 +1,10 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
+require_once(COMPONENTS_DIR."/header.php");
 require_once(COMPONENTS_DIR."/auth_pelajar.php");
+require_once(TEMPLATES_DIR . "/sidebar_pelajar.php"); // Guest sidebar
 ?>
 <?php
 require_once(COMPONENTS_DIR."/models.php");

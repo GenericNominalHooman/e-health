@@ -1,75 +1,63 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+// require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
 // Importing components
-require_once COMPONENTS_DIR."/models.php";
-require_once COMPONENTS_DIR."/redirect.php";
-require_once COMPONENTS_DIR."/verify.php";
-$modelsFactoryObj = new ModelsFactory();
-$userModelObj = $modelsFactoryObj->createUserModel();
+// require_once COMPONENTS_DIR . "/models.php";
+// require_once COMPONENTS_DIR . "/redirect.php";
+// require_once COMPONENTS_DIR . "/verify_overhaul.php";
 
 include 'config.php';
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
 
-   $nama = mysqli_real_escape_string($conn, $_POST['nama']);
-   $nokp = mysqli_real_escape_string($conn, $_POST['nokp']);
-   $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
-   $image = $_FILES['image']['name'];
-   $image_size = $_FILES['image']['size'];
-   $image_tmp_name = $_FILES['image']['tmp_name'];
-   $image_folder = 'uploaded_img/'.$image;
+  $nama = mysqli_real_escape_string($conn, $_POST['nama']);
+  $nokp = mysqli_real_escape_string($conn, $_POST['nokp']);
+  $pass = mysqli_real_escape_string($conn, md5($_POST['password']));
+  $image = $_FILES['image']['name'];
+  $image_size = $_FILES['image']['size'];
+  $image_tmp_name = $_FILES['image']['tmp_name'];
+  $image_folder = 'uploaded_img/' . $image;
 
-   
-
-    //  Check for each user input fields whether it conforms to the rules provided
-    $verificationRulesNama = VerificationRulesBuilder::createNew()->setIsNotEmpty()->isAString()->setMaxLength(100);
-    $verificationRulesNoKP = VerificationRulesBuilder::createNew()->isANumber()->setMinLength(12)->setMaxLength(13);
-    $verificationRulesPassword = VerificationRulesBuilder::createNew()->setIsNotempty()->setMinLength(6);
-
-    // Redirect user to login page with appropiate error code
-    $redirectObj = new Redirect();
-    if(!$verificationRulesNama->build()->verify($nama)){ 
-      $redirectObj->redirectToWithError(PELAJAR_URL."/login2.php", "Jumlah bilangan huruf nama pengguna mesti melebihi 100 huruf");
-    }else if(!$verificationRulesNoKP->build()->verify($nokp)){
-      $redirectObj->redirectToWithError(PELAJAR_URL."/login2.php", "Jumlah bilangan angka nombor kad pengenalan mestilah 12");
-    }else if(!$verificationRulesPassword->build()->verify($pass)){
-      // var_dump($pass);
-      // exit();
-      $redirectObj->redirectToWithError(PELAJAR_URL."/login2.php", "Kata laluan mestilah berjenis string dan mestilah mengandungi minima 6 huruf");
-    }
+  // Redirect user to login page with appropiate error code
+  $redirectObj = new Redirect();
+  if (!Verify::verifyNama($nama)) {
+    $redirectObj->redirectToWithError(PELAJAR_URL . "/login2.php", "Jumlah bilangan huruf nama pengguna mesti diantara 5 hingga 20 huruf atau nama pengguna telah digunakan");
+  } else if (!Verify::verifyNOKP($nokp)) {
+    $redirectObj->redirectToWithError(PELAJAR_URL . "/login2.php", "Jumlah bilangan angka nombor kad pengenalan mestilah 12 atau sudah terdapat akaun yang menggunakan nokp anda");
+  } else if (!Verify::verifyPassword($pass)) {
+    $redirectObj->redirectToWithError(PELAJAR_URL . "/login2.php", "Kata laluan mestilah berjenis string dan mestilah mengandungi minima 6 huruf");
+  }
 
 
-   $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE nokp = '$nokp' AND password = '$pass'") or die('query failed');
+  $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE nokp = '$nokp' AND password = '$pass'") or die('query failed');
 
-   if(mysqli_num_rows($select) > 0){
-      $message[] = 'user already exist'; 
-      $redirectObj->redirectToWithError("/".SITE_NAME.'/Pelajar/login2.php', 'Nama pengguna sudah berada di dalam pangkalan data, sila gunakkan nama pengguna yang lain.');
-   }else{
-      if($image_size > 2000000){
-         $message[] = 'image size is too large!';
-      }else{
-         $insert = mysqli_query($conn, "INSERT INTO `user_form`(nama, nokp, password, image) VALUES('$nama', '$nokp', '$pass', '$image')") or die('query failed');
-         if($insert){
-            move_uploaded_file($image_tmp_name, $image_folder);
-            $message[] = 'registered successfully!';
-            header('location:login3.php');
-         }else{
-            $message[] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+  if (mysqli_num_rows($select) > 0) {
+    $message[] = 'user already exist';
+    $redirectObj->redirectToWithError("/" . SITE_NAME . '/Pelajar/login2.php', 'Nama pengguna sudah berada di dalam pangkalan data, sila gunakkan nama pengguna yang lain.');
+  } else {
+    if ($image_size > 2000000) {
+      $message[] = 'image size is too large!';
+    } else {
+      $insert = mysqli_query($conn, "INSERT INTO `user_form`(nama, nokp, password, image) VALUES('$nama', '$nokp', '$pass', '$image')") or die('query failed');
+      if ($insert) {
+        move_uploaded_file($image_tmp_name, $image_folder);
+        $message[] = 'registered successfully!';
+        header('location:login3.php');
+      } else {
+        $message[] = '<div class="alert alert-warning alert-dismissible fade show" role="alert">
             <p><strong>Pendaftaran tidak berjaya</strong> Sila cuba sekali lagi. Sila pastikan No Kad Pengenalan anda tidak pernah didaftarkan di sistem ini.</p>
             <hr>
             <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>';
-         }
       }
-   }
-
+    }
+  }
 }
 
 
-    /*$data = "nama=".$nama."&nokp=".$nokp;
+/*$data = "nama=".$nama."&nokp=".$nokp;
 
     if (empty($nokp)) {
     	$em = "sila masukkan No. Kad Pengenalan";
@@ -91,29 +79,30 @@ if(isset($_POST['submit'])){
          header('location:login3.php');
   
     }*/
-  
+
 
 ?>
 <!DOCTYPE html>
 <html lang="en">
 
 <meta charset="UTF-8">
-   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-   <title>Daftar Masuk</title>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Daftar Masuk</title>
 
-   <!-- custom css file link  
+<!-- custom css file link  
    <link rel="stylesheet" href="css/style.css">-->
-   <link rel="shortcut icon" href="images/logo2remove.png" type="image/x-icon">
-	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  
-  <style>
-  body{
-    background-color:aliceblue;
+<link rel="shortcut icon" href="images/logo2remove.png" type="image/x-icon">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+<style>
+  body {
+    background-color: aliceblue;
   }
-  </style>
+</style>
 
 </head>
+
 <body>
 
 <section class="gradient-custom" >
@@ -138,67 +127,72 @@ if(isset($_POST['submit'])){
 </ul>
             <form autocomplete="off" action="login2.php" method="post" enctype="multipart/form-data">
                 <?php
-                if(isset($_GET['error'])) {
-                  echo("<div class='message'>".$_GET['error']."</div>");
+                if (isset($_GET['error'])) {
+                  echo ("<div class='message'>" . $_GET['error'] . "</div>");
                 }
                 ?>
                 <div class="col-md-6 mb-4">
-                            </div>
-                            <div class="form-outline mb-4">
-                            <div class="form-floating">
-                              <input type="text"  name="nama" class="form-control" placeholder="Nama Penuh" />
-                              <label  for="floatingPassword">Nama Penuh</label></div>
-                                </div>
+                </div>
+                <div class="form-outline mb-4">
+                  <div class="form-floating">
+                    <input type="text" name="nama" class="form-control" placeholder="Nama Penuh" />
+                    <label for="floatingPassword">Nama Penuh</label>
+                  </div>
+                </div>
 
-                               <div class="form-outline mb-4">
-                            <div class="form-floating">
-                              <input type="text"  name="nokp" class="form-control" placeholder="No.Kad Pengenalan" />
-                              <label  for="floatingPassword">No. Kad Pengenalan</label></div>
-                                </div>
+                <div class="form-outline mb-4">
+                  <div class="form-floating">
+                    <input type="text" name="nokp" class="form-control" placeholder="No.Kad Pengenalan" />
+                    <label for="floatingPassword">No. Kad Pengenalan</label>
+                  </div>
+                </div>
 
-                          <!-- Password input -->
-                             <div class="form-outline mb-4">
-                             <div class="form-floating">
-                                <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan"/>
-                                <label class="form-label" for="password">Kata Laluan</label>
-                                <label for="floatingPassword">Kata Laluan</label>
-                                <div class="mt-3">
-                                <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan
-                              </div></div></div>
-                             <div class="mb-3">
-                              <input type="file" id="image" name="image" class="box form-control" accept="image/jpg, image/jpeg, image/png" value="">
-    </div>
-                              <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">Daftar </button>
-              <div class="mt-3">
-              <p>Kembali untuk <a href="login3.php">Log In</a></p>
-              </div> 
-          
-            </form>
+                <!-- Password input -->
+                <div class="form-outline mb-4">
+                  <div class="form-floating">
+                    <input type="password" id="password" name="password" class="form-control" placeholder="Kata Laluan" />
+                    <label class="form-label" for="password">Kata Laluan</label>
+                    <label for="floatingPassword">Kata Laluan</label>
+                    <div class="mt-3">
+                      <input type="checkbox" onclick="myFunction()">&nbsp;Tunjuk Kata Laluan
+                    </div>
+                  </div>
+                </div>
+                <div class="mb-3">
+                  <input type="file" id="image" name="image" class="box form-control" accept="image/jpg, image/jpeg, image/png" value="">
+                </div>
+                <button type="submit" name="submit" class="btn btn-primary btn-lg btn-block">Daftar </button>
+                <div class="mt-3">
+                  <p>Kembali untuk <a href="login3.php">Log In</a></p>
+                </div>
+
+              </form>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+  </section>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
 
-<script src= "https://code.jquery.com/jquery-3.5.1.js"></script>
-		<script src= "https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-		<script src= "https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
-		<script src="./js/app.js"></script>
-        <script>
-            function myFunction() {
-            var x = document.getElementById("password");
-            if (x.type === "password") {
-                x.type = "text";
-                } else {
-                 x.type = "password";
-                }
-                }
-        </script>
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+  <script src="./js/app.js"></script>
+  <script>
+    function myFunction() {
+      var x = document.getElementById("password");
+      if (x.type === "password") {
+        x.type = "text";
+      } else {
+        x.type = "password";
+      }
+    }
+  </script>
 
 </body>
+
 </html>
-<?php mysqli_close($conn); 
-include(COMPONENTS_DIR."/footer.php");
+<?php mysqli_close($conn);
+include(COMPONENTS_DIR . "/footer.php");
 ?>

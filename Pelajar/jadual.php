@@ -6,21 +6,21 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 =======
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 =======
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 >>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
 ?>
 <?php
