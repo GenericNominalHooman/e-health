@@ -16,8 +16,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
   $waktujtpelajar = $_POST["time"];
 
   // Create the SQL query to insert into the database
-  $query = "INSERT INTO janjitemupelajar (sebabjt, waktujtpelajar) VALUES ('$sebabjt', '$waktujtpelajar')";
-
+  $query = "INSERT INTO janjitemupelajar (sebabjt, waktujtpelajar, id_pelajar, ".'status'.") VALUES ('$sebabjt', '$waktujtpelajar','".$_SESSION["Auth"]["id"]."','Proses')";
+d($query);
   
 
   // Execute the query
