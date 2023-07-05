@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["reject"])) {
             // Update the status to "Rejected" for each selected item
             foreach ($selectedItems as $item) {
-                $sql = "UPDATE janjitemupelajar SET status = 'Rejected' WHERE id_pelajar = ?";
+                $sql = "UPDATE janjitemupelajar SET status = 'Rejected' WHERE id_pelajar = ? and waktujtpelajar = ?";
                 $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($stmt, "s", $item);
+                mysqli_stmt_bind_param($stmt, "ss", $item);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
             }
