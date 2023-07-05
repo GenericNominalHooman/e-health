@@ -10,6 +10,6 @@ $modelMysqliConn = $modelDatabaseObj->getConnection();
 d($modelMysqliConn);
 $userModelObj = new LoginModel($modelMysqliConn);
 d($userModelObj->getAllAdmin());
-d($userModelObj->getAllGuruBertugas());
+d($userModelObj->getAllGuru());
 d($userModelObj->getAllWarden());
 ?>

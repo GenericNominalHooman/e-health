@@ -1,6 +1,4 @@
 <?php
-    session_start(); // Start the session
-
     // Import site config
     require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
@@ -8,6 +6,7 @@
     require_once(COMPONENTS_DIR . "/header.php");
     require_once(COMPONENTS_DIR . "/config.php");
     require_once(COMPONENTS_DIR . "/auth.php");
+    require_once(COMPONENTS_DIR . "/models.php");
     
     // Display sidebar based on user type
     $dbObj = new Database();
@@ -51,7 +50,7 @@ require_once(COMPONENTS_DIR . "/models.php");
 
 $jadualModel = new JadualModel($dbObj->getConnection());
 $slideshowManager = new SlideshowManager();
-$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuruBertugasWhere("id_gambar", sizeof($jadualModel->getAllGuruBertugas())+1)[0]["gambar"]); // Jadual guru
+$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuru("id_gambar", sizeof($jadualModel->getAllGuru())+1)[0]["gambar"]); // Jadual guru
 $slideshowManager = new SlideshowManager();
 $slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWardenWhere("id_gambar", sizeof($jadualModel->getAllWarden()))[0]["gambar"]); // Jadual warden
 // $slideshowManager->addImage(); // Jadual pemandu

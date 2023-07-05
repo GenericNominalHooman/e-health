@@ -632,8 +632,8 @@ $conn = $databaseObj->getConnection();
                     processData: false,
                     success: function(result) {
                         // Reloading the page for reflecting profile iamge changes
-                        window.alert(result);
-                        // location.reload();
+                        // window.alert(result);
+                        location.reload();
                     },
                     error: function(error) {
                         console.log(error);

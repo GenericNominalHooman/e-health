@@ -48,7 +48,7 @@ session_start();
                 </div>
                 <div class="col-sm p-4">
                     <?php
-                    echo ("<a href='" . SITE_URL . "/index.php" . "'><img src='" . IMG_URL . "/logo2.jpg" . "' alt='e-health logo' height='100em'></a>");
+                    echo ("<a href='" . SITE_URL . "/index.php" . "'><img src='" . IMG_URL . "/e-health_logo.jpeg" . "' alt='e-health logo' height='175em'></a>");
                     ?>
                 </div>
             </div>
