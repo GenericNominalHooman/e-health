@@ -2,6 +2,7 @@
 // Site configuration
 require_once("./site_config.php");
 require_once("./components/login_header.php");
+require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
 ?>
 <section class="vh-100" style="background-color: aliceblue;">
   <div class="container py-5 h-100">
