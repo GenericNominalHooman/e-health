@@ -23,9 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["reject"])) {
             // Update the status to "Rejected" for each selected item
             foreach ($selectedItems as $item) {
-                $sql = "UPDATE janjitemupelajar SET status = 'Rejected' WHERE nokppelajar = ?";
+                $sql = "UPDATE janjitemupelajar SET status = 'Rejected' WHERE id_pelajar = ? and waktujtpelajar = ?";
                 $stmt = mysqli_prepare($conn, $sql);
-                mysqli_stmt_bind_param($stmt, "s", $item);
+                mysqli_stmt_bind_param($stmt, "ss", $item);
                 mysqli_stmt_execute($stmt);
                 mysqli_stmt_close($stmt);
             }
@@ -35,7 +35,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["accept"])) {
             // Update the status to "Accepted" for each selected item
             foreach ($selectedItems as $item) {
-                $sql = "UPDATE janjitemupelajar SET status = 'Accepted' WHERE nokppelajar = ?";
+                $sql = "UPDATE janjitemupelajar SET status = 'Accepted' WHERE id_pelajar = ?";
                 $stmt = mysqli_prepare($conn, $sql);
                 mysqli_stmt_bind_param($stmt, "s", $item);
                 mysqli_stmt_execute($stmt);
@@ -47,7 +47,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (isset($_POST["delete"])) {
             // Delete each selected item from the database
             foreach ($selectedItems as $item) {
-                $sql = "DELETE FROM janjitemupelajar WHERE nokppelajar = ?";
+                $sql = "DELETE FROM janjitemupelajar WHERE id_pelajar = ?";
                 $stmt = mysqli_prepare($conn, $sql);
                 mysqli_stmt_bind_param($stmt, "s", $item);
                 mysqli_stmt_execute($stmt);
@@ -64,7 +64,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <html>
 <head>
     <script>
-        function updateStatus(nokppelajar, status) {
+        function updateStatus(id_pelajar, status) {
             const xhr = new XMLHttpRequest();
             xhr.open("POST", "<?php echo $_SERVER["PHP_SELF"]; ?>", true);
             xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
@@ -72,27 +72,27 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 if (xhr.readyState === 4 && xhr.status === 200) {
                     const response = JSON.parse(xhr.responseText);
                     if (response.status === "success") {
-                        const statusCell = document.getElementById(`status${nokppelajar}`);
+                        const statusCell = document.getElementById(`status${id_pelajar}`);
                         statusCell.textContent = status;
                     } else {
                         console.error("Failed to update status.");
                     }
                 }
             };
-            const data = "nokppelajar=" + encodeURIComponent(nokppelajar) + "&status=" + encodeURIComponent(status);
+            const data = "id_pelajar=" + encodeURIComponent(id_pelajar) + "&status=" + encodeURIComponent(status);
             xhr.send(data);
         }
 
-        function rejectApplication(nokppelajar) {
-            updateStatus(nokppelajar, "Rejected");
+        function rejectApplication(id_pelajar) {
+            updateStatus(id_pelajar, "Rejected");
         }
 
-        function acceptApplication(nokppelajar) {
-            updateStatus(nokppelajar, "Accepted");
+        function acceptApplication(id_pelajar) {
+            updateStatus(id_pelajar, "Accepted");
         }
 
-        function deleteApplication(nokppelajar) {
-            const row = document.getElementById(`row${nokppelajar}`);
+        function deleteApplication(id_pelajar) {
+            const row = document.getElementById(`row${id_pelajar}`);
             row.remove();
 
             const xhr = new XMLHttpRequest();
@@ -108,7 +108,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     }
                 }
             };
-            const data = "nokppelajar=" + encodeURIComponent(nokppelajar) + "&action=delete";
+            const data = "id_pelajar=" + encodeURIComponent(id_pelajar) + "&action=delete";
             xhr.send(data);
         }
     </script>
@@ -147,17 +147,17 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                         $cnt = 1;
 
                         while ($row = mysqli_fetch_assoc($query)) {
-                            echo "<tr id='row{$row['nokppelajar']}'>";
-                            echo "<td><input type='checkbox' name='item[]' value='{$row['nokppelajar']}'></td>";
+                            echo "<tr id='row{$row['id_pelajar']}'>";
+                            echo "<td><input type='checkbox' name='item[]' value='{$row['id_pelajar']}'></td>";
                             echo "<td>{$cnt}</td>";
                             echo "<td>{$row['namapelajar']}</td>";
                             echo "<td>{$row['tarikhjtpelajar']}</td>";
                             echo "<td>{$row['waktujtpelajar']}</td>";
-                            echo "<td id='status{$row['nokppelajar']}'>{$row['status']}</td>";
+                            echo "<td id='status{$row['id_pelajar']}'>{$row['status']}</td>";
                             echo "<td>
-                            <button type='button' style='background-color: #a7ebc6;border-color: #a7ebc6;' class='m-2 btn btn-primary' onclick='acceptApplication(\"{$row['nokppelajar']}\")'>Accept</button>
-                                    <button type='button' style='background-color: #e4eb14;border-color: #e4eb14;' class='m-2 btn btn-primary' onclick='rejectApplication(\"{$row['nokppelajar']}\")'>Reject</button>
-                                    <button type='button' style='background-color: #ff2f16;border-color: #ff2f16;' class='m-2 btn btn-primary' onclick='deleteApplication(\"{$row['nokppelajar']}\")'>Delete</button>
+                            <button type='button' style='background-color: #a7ebc6;border-color: #a7ebc6;' class='m-2 btn btn-primary' onclick='acceptApplication(\"{$row['id_pelajar']}\")'>Accept</button>
+                                    <button type='button' style='background-color: #e4eb14;border-color: #e4eb14;' class='m-2 btn btn-primary' onclick='rejectApplication(\"{$row['id_pelajar']}\")'>Reject</button>
+                                    <button type='button' style='background-color: #ff2f16;border-color: #ff2f16;' class='m-2 btn btn-primary' onclick='deleteApplication(\"{$row['id_pelajar']}\")'>Delete</button>
                                 </td>";
                             echo "</tr>";
 

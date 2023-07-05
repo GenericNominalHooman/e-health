@@ -4,7 +4,7 @@
     // 
     require_once('vendor/autoload.php');
 
-    // e-health2 site configuration
+    // e-health site configuration
     define("HOST", $_SERVER['SERVER_NAME']);
     define("HOST_URL", "http://".HOST);
     define("SITE_NAME", "e-health");
@@ -34,7 +34,7 @@
     // DB configuration
     define("DB_HOST", "localhost");
     define("DB_USER", "root");
-    define("DB_PASS", "Kafin-12");
+    define("DB_PASS", "");
     define("DB_NAME", "e-health");
 
     // User profile pages(directories)
