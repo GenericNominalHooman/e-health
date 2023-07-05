@@ -2,9 +2,23 @@
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
+// Import verification
+require_once(COMPONENTS_DIR . "/verification.php");
+// Import header
+require_once(COMPONENTS_DIR . "/header.php");
+// Import profile image manager
+require_once(COMPONENTS_DIR . "/profile_image_manager.php");
+// Import models
+require_once(COMPONENTS_DIR . "/models.php");
+// Import message handler
+require_once(COMPONENTS_DIR . "/message_handler.php");
+// Import config
 require_once(COMPONENTS_DIR . "/config.php");
+// Import warden sidebar template
+require_once(TEMPLATE_DIR . "/sidebar2_warden.php");
 $databaseObj = new Database();
 $conn = $databaseObj->getConnection();
+
 ?>
 
 <!DOCTYPE html>
@@ -15,8 +29,9 @@ $conn = $databaseObj->getConnection();
     <script src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
     <script>
         $(document).ready(function() {
-            $("#profilpelajar").DataTable();
-        });
+    $('#profilpelajar').DataTable(); // Updated selector to use ID (#profilpelajar)
+});
+
 
         function deleteApplication() {
             const selectedItems = Array.from(document.querySelectorAll('input[name="item[]"]:checked')).map(checkbox => checkbox.value);
@@ -75,6 +90,8 @@ $conn = $databaseObj->getConnection();
                         <th>Nama Ibu Pelajar</th>
                         <th>Nombor Telefon Ibu Pelajar</th>
                         <th>Alamat Pelajar</th>
+                        <th>Butang</th>
+                        <th>Aksi</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -84,7 +101,8 @@ $conn = $databaseObj->getConnection();
                     if (!$conn) {
                         die("Connection failed: " . mysqli_connect_error());
                     }
-
+                    
+                    global $row;
                     $query = mysqli_query($conn, "SELECT profilpelajar.*, loginpelajar.namapelajar, loginpelajar.id FROM profilpelajar INNER JOIN loginpelajar ON profilpelajar.id_login = loginpelajar.id");
                     $numrows = mysqli_num_rows($query);
 
@@ -92,45 +110,44 @@ $conn = $databaseObj->getConnection();
                         if ($numrows != 0) {
                             $cnt = 1;
 
-                            while ($row = mysqli_fetch_assoc($query)) {
-                                echo "<tr data-id='{$row['id']}'>";
-                                echo "<td><input type='checkbox' name='item[]' value='{$row['id']}'></td>";
-                                echo "<td>{$cnt}</td>";
-                                echo "<td>{$row['namapelajar']}</td>";
-                                echo "<td>{$row['nokp']}</td>";
-                                echo "<td>{$row['nomatrikpelajar']}</td>";
-                                echo "<td>{$row['dorm']}</td>";
-                                echo "<td>{$row['notelpelajar']}</td>";
-                                echo "<td>{$row['namabapapelajar']}</td>";
-                                echo "<td>{$row['notelbapapelajar']}</td>";
-                                echo "<td>{$row['namaibupelajar']}</td>";
-                                echo "<td>{$row['notelibupelajar']}</td>";
-                                echo "<td>{$row['alamatpelajar']}</td>";
-                                echo "</tr>";
+while ($row = mysqli_fetch_assoc($query)) {
+    echo "<tr data-id='{$row['id']}'>";
+    echo "<td><input type='checkbox' name='item[]' value='{$row['id']}'></td>";
+    echo "<td>{$cnt}</td>";
+    echo "<td>{$row['namapelajar']}</td>";
+    echo "<td>{$row['nokp']}</td>";
+    echo "<td>{$row['nomatrikpelajar']}</td>";
+    echo "<td>{$row['dorm']}</td>";
+    echo "<td>{$row['notelpelajar']}</td>";
+    echo "<td>{$row['namabapapelajar']}</td>";
+    echo "<td>{$row['notelbapapelajar']}</td>";
+    echo "<td>{$row['namaibupelajar']}</td>";
+    echo "<td>{$row['notelibupelajar']}</td>";
+    echo "<td>{$row['alamatpelajar']}</td>";
+    echo "<td>";
+    echo "<a href=\"pelajar_urus_individu.php?id={$row['id']}\"><button class='btn btn-sm btn-outline-primary' ><i class='fa-solid fa-eye'></i>&nbsp;Lihat</button></a>";
+    echo "</td>";
+    echo "<td>";
+    echo "<a href=\"delete.php?id={$row['id']}\"><button class=' btn btn-sm btn-outline-danger' ><i class='fa-solid fa-trash'></i>&nbsp;Buang</button></a>";
+    echo "</td>";
+    echo "</tr>";
+}
 
                                 $cnt++; // Increment $cnt after each iteration
                             }
                         }
-                    }
+                    
 
                     // Close the database connection
                     mysqli_close($conn);
                     ?>
                 </tbody>
-                <tfoot>
-                    <tr>
-                        <td colspan="12">
-                            <button type="button" onclick="deleteApplication()">Delete Selected</button>
-                        </td>
-                    </tr>
-                </tfoot>
+            
             </table>
             <?php
-                    d($_POST);
-                    d($query);
-
-            ?>
-        </form>
+// Import footer
+require_once(COMPONENTS_DIR . "/footer.php");
+?>        </form>
     </div>
 </body>
 </html>

@@ -21,7 +21,8 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
             </div>
             <div class="col-sm p-4">
                 <?php
-                    echo("<a href=''><img src='".IMG_URL."/logo2.jpg"."' alt='e-health logo' height='100em'></a>");
+                    echo("<a href=''><img src='".IMG_URL."/logo2.jpg"."' alt='e-health
+logo' height='100em'></a>");
                 ?>
             </div>
         </div>

@@ -53,7 +53,7 @@ $slideshowManager = new SlideshowManager();
 $slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuru("id_gambar", sizeof($jadualModel->getAllGuru())+1)[0]["gambar"]); // Jadual guru
 $slideshowManager = new SlideshowManager();
 $slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWardenWhere("id_gambar", sizeof($jadualModel->getAllWarden()))[0]["gambar"]); // Jadual warden
-// $slideshowManager->addImage(); // Jadual pemandu
+// $slideshowManager->addImage(); // Jadual pemand
 ?>
 </div>
         <script>
