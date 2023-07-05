@@ -39,7 +39,7 @@ require_once("./components/login_header.php");
             <div class="col-sm-4">
               <div class="card card text-center mb-3  img-fluid rounded" style=" border-color:skyblue;">
                 <div class="card-body ">
-                  <h5 class="card-title">PENDTADBIR</h5>
+                  <h5 class="card-title">PENTADBIR</h5>
                   <img src="img/admin.png" width="90" height="100">
                   <p class="card-text"></p>
                   <a href="Admin/login3.php" class="btn btn-primary">LOG MASUK</a>
@@ -49,7 +49,7 @@ require_once("./components/login_header.php");
             <div class="col-sm-4">
               <div class="card card text-center mb-3" style="border-color:skyblue;">
                 <div class="card-body">
-                  <h5 class="card-title">GURU BERTUGAS</h5>
+                  <h5 class="card-title">PENSYARAH/WARDEN</h5>
                   <img src="img/gururemove.png" width="95" height="100">
                   <p class="card-text"></p>
                   <a href="GuruBertugas/login3.php" class="btn btn-primary">LOG MASUK</a>
