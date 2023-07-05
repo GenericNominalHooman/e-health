@@ -1,13 +1,13 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+// require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
 // Importing components
-require_once COMPONENTS_DIR . "/models.php";
-require_once COMPONENTS_DIR . "/redirect.php";
-require_once COMPONENTS_DIR . "/verify_overhaul.php";
+// require_once COMPONENTS_DIR . "/models.php";
+// require_once COMPONENTS_DIR . "/redirect.php";
+// require_once COMPONENTS_DIR . "/verify_overhaul.php";
 
 include 'config.php';
 
@@ -112,7 +112,7 @@ if (isset($_POST['submit'])) {
           <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
             <div class="card-body p-4 p-md-5">
               <?php
-              echo ('<img src="' . IMG_URL . '/pelajar2remove.png" class="rounded mx-auto d-block" witdh="200" height="150">');
+              // echo ('<img src="' . IMG_URL . '/pelajar2remove.png" class="rounded mx-auto d-block" witdh="200" height="150">');
               ?>
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">DAFTAR MASUK PELAJAR</h3>
               <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
