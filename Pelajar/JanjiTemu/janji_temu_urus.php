@@ -14,7 +14,7 @@ require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php"); // Pelajar sidebar
 // require_once(TEMPLATE_DIR . "/sidebar2_guru.php"); // Guru sidebar
 
 // Retrieve status from the database (Assuming you have a table named 'appointment' with a 'status' column)
-$conn = mysqli_connect("localhost", "root", "", "e-health");
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 $query = "SELECT status FROM janjitemupelajar WHERE id_pelajar = ".$_SESSION['Auth']['id']; // Replace '1' with the actual appointment ID
 $query = "SELECT * FROM janjitemupelajar WHERE id_pelajar = ".$_SESSION['Auth']['id'];
 $result = mysqli_query($conn, $query);

@@ -4,7 +4,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 require_once(COMPONENTS_DIR . "/header.php");
 // Import pelajar sidebar template
 require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
-$conn = mysqli_connect("localhost", "root", "", "e-health");
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 d($_SESSION["Auth"]);
 // Initialize variables
 $notification = "";

@@ -94,7 +94,16 @@ $slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWarden
                 require_once(COMPONENTS_DIR . "/config.php");
                 $conn = new Database();
                 $janjitemuModel = new JanjitemuModel($conn->getConnection());
-                $janjitemuRows = $janjitemuModel->getAllJanjitemuColumns(["namapelajar", "programjtpelajar", "waktujtpelajar", "tarikhjtpelajar", "sebabjt", "status"]);
+                $profilModel = new ProfilModel($dbObj->getConnection());
+                // $janjitemuDisplay = ;
+                // Grab janjitemu entry
+                $janjitemuRows = $janjitemuModel->getAllJanjitemuColumns(["waktujtpelajar", "sebabjt", "status"]);
+                // Merge both rows into one list
+                // for($i=0; $i<sizeof($janjitemuRows); $i++){
+                //     // Grab janjitemu appropiate profil entry based on id_login
+                //     $profilPelajarRows = $profilModel->getAllPelajar("id_login", $_SESSION["Auth"]["id"]);
+
+                // }
                 // Converts janjitemupelajar entries into JSON so that it can be parsed by JS
                 $janjitemuRowsJSON = json_encode($janjitemuRows);
             ?>

@@ -9,7 +9,7 @@ require_once(COMPONENTS_DIR . "/header.php");
 // Import sidebar(Please uncomment the appropiate user sidebar for your page)
 // require_once(TEMPLATE_DIR . "/sidebar2_pentadbir.php"); // Pentadbir sidebar
 // require_once(TEMPLATE_DIR . "/sidebar2_warden.php"); // Warden sidebar
- require_once(TEMPLATE_DIR . "/sidebar2_guru.php"); // Guru sidebar
+ require_once(TEMPLATE_DIR . "/sidebar2_pentadbir.php"); // Guru sidebar
 ?>
 
 <!-- CONTENT HERE -->
@@ -22,7 +22,9 @@ require_once(COMPONENTS_DIR . "/footer.php");
 ?>
 <?php
 
-include 'config.php';
+require_once(COMPONENTS_DIR.'/config.php');
+$dbObj = new Database();
+$conn = $dbObj->getConnection();
 $id = $_SESSION['Auth']['id'];
 
 if(isset($_POST['update_jadual'])){
@@ -38,8 +40,8 @@ if(isset($_POST['update_jadual'])){
       if($update_image_size > 2000000){
          $message[] = 'image is too large';
       }else{
-         $image_update_query = mysqli_query($conn, "UPDATE `loginadmin` SET image = '$update_image' WHERE id = '$id'") or die('query failed');
-         if($image_update_query){
+            $image_update_query = mysqli_query($conn, "UPDATE `jadualguru` SET gambar = '$update_image' WHERE id = '$id'") or die('query failed');
+            if($image_update_query){
             move_uploaded_file($update_image_tmp_name, $update_image_folder);
          }
          $message[] = 'image updated succssfully!';
@@ -95,7 +97,7 @@ if(isset($_POST['update_jadual'])){
 </div>
 <div class="container">
 <?php
-      $select = mysqli_query($conn, "SELECT * FROM `loginadmin` WHERE id = '$id'") or die('query failed');
+      $select = mysqli_query($conn, "SELECT * FROM `loginpentadbir` WHERE id = '$id'") or die('query failed');
       if(mysqli_num_rows($select) > 0){
          $fetch = mysqli_fetch_assoc($select);
       }
@@ -122,16 +124,18 @@ if(isset($_POST['update_jadual'])){
         <p class="display-6">PAPARAN GAMBAR</p>
         
     <?php
-         $select = mysqli_query($conn, "SELECT * FROM `loginadmin` WHERE id = '$id'") or die('query failed');
+         $select = mysqli_query($conn, "SELECT * FROM `loginpentadbir` WHERE id = '$id'") or die('query failed');
          d($select);
-         if(mysqli_num_rows($select) > 0){
-            $fetch = mysqli_fetch_assoc($select);
-         }
-         if($fetch['image'] == ''){
-            echo '<img class="img-fluid " src="images/default-avatar.png" width="900" height="800">';
-         }else{
-            echo '<img class="img-fluid " width="900" height="800" src="uploaded_img/'.$fetch['image'].'">';
-            
+         if(isset($_POST["submit"])){
+            if(mysqli_num_rows($select) > 0){
+               $fetch = mysqli_fetch_assoc($select);
+            }
+            if($fetch['image'] == ''){
+               echo '<img class="img-fluid " src="images/default-avatar.png" width="900" height="800">';
+            }else{
+               echo '<img class="img-fluid " width="900" height="800" src="uploaded_img/'.$fetch['image'].'">';
+               
+            }
          }
       ?>
 	</div>

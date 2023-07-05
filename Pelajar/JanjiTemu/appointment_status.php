@@ -3,7 +3,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 // Import peljar sidebar template
 require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
-$conn = mysqli_connect("localhost", "root", "", "e-health");
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
 
 // Fetch the appointment status from the database
 $query = "SELECT status FROM janjitemupelajar ORDER BY waktujtpelajar DESC LIMIT 1";

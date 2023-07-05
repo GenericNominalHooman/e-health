@@ -1,6 +1,6 @@
 <?php
 // Establish a database connection
-$conn = mysqli_connect("localhost", "root", "", "e-health");
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
  // Import site config
  require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
  // Import peljar sidebar template
