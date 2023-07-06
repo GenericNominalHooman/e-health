@@ -2,19 +2,16 @@
 // Site configuration
 require_once("./site_config.php");
 require_once("./components/login_header.php");
-$servername = "localhost";
-$username = "root";
-$password = "";
-$dbname = "hospital2";
+require_once("./config.php");
 
-$conn = new mysqli($servername, $username, $password, $dbname);
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
+// Instansiating DB connection
+$dbOb = new Database();
+$conn = $dbObj->getConnection();
 
 // Fetch student appointment data from the database
 $sql = "SELECT nama, nokp, program, tahun, waktu, tarikh, sebab, status FROM janjitemu";
 $result = $conn->query($sql);
+require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
 ?>
 <html>
   <head>
@@ -86,7 +83,7 @@ $result = $conn->query($sql);
                   <h5 class="card-title">GURU BERTUGAS</h5>
                   <img src="img/gururemove.png" width="95" height="100">
                   <p class="card-text"></p>
-                  <a href="GuruBertugas/index2.php" class="btn btn-primary">LOG MASUK</a>
+                  <a href="GuruBertugas/login3.php" class="btn btn-primary">LOG MASUK</a>
                 </div>
               </div>
             </div>

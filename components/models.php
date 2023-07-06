@@ -1,6 +1,6 @@
 <?php
 // Import site config
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
 require_once(COMPONENTS_DIR . "/config.php");
@@ -41,6 +41,21 @@ class UserModel extends Models
 
   public function getGuruBertugasWhere($columnName, $columnValue){
     $query = "SELECT * FROM gurubertugas WHERE $columnName='$columnValue'";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getAllPelajar()
+  {
+    $query = "SELECT * FROM user_form";
+    $stmt = $this->conn->prepare($query);
+    $stmt->execute();
+    return $stmt->fetchAll(PDO::FETCH_ASSOC);
+  }
+
+  public function getPelajarWhere($columnName, $columnValue){
+    $query = "SELECT * FROM user_form WHERE $columnName='$columnValue'";
     $stmt = $this->conn->prepare($query);
     $stmt->execute();
     return $stmt->fetchAll(PDO::FETCH_ASSOC);

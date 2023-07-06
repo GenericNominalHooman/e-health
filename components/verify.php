@@ -1,6 +1,6 @@
 <?php
 // Import site config
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 ?>
 <?php
 class Verify{
@@ -40,7 +40,6 @@ class Verify{
                 $this->isPassVerification = false;
             }
         }
-        d($this->isPassVerification);
 
         return $this;
     }
@@ -58,7 +57,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;
     }
@@ -76,7 +74,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;
     }
@@ -94,7 +91,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;        
     }
@@ -112,7 +108,6 @@ class Verify{
                 }
             }
         }
-        d($this->isPassVerification);
         
         return $this;                
     }
@@ -123,7 +118,6 @@ class Verify{
         // Convert any special characters to HTML entities
         $filtered = htmlspecialchars($filtered, ENT_QUOTES | ENT_HTML5, 'UTF-8');
         // Return the sanitized input
-        d($filtered);
         return $filtered;
     }
 }
@@ -136,21 +130,22 @@ class VerificationRulesBuilder{
     private $aNumber;
 
     // Public constructor
-    public function __construct($notEmpty, $minLength, $maxLength, $aNumber){
+    public function __construct($notEmpty, $minLength, $maxLength, $aNumber, $aString){
         $this->notEmpty = $notEmpty;
         $this->aNumber = $aNumber;
         $this->minLength = $minLength;
         $this->maxLength = $maxLength;
+        $this->aString = $aString;
     }
     
     // Private static constructor for cloning
-    private static function createClone($notEmpty, $minLength, $maxLength, $aNumber){
-        return new self($notEmpty, $minLength, $maxLength, $aNumber);
+    private static function createClone($notEmpty, $minLength, $maxLength, $aNumber, $aString){
+        return new self($notEmpty, $minLength, $maxLength, $aNumber, $aString);
     }
 
     // Public constructor for public instansiation
     public static function createNew(){
-        return new self(null, null, null, null);
+        return new self(null, null, null, null, null);
     }
 
     public function setIsNotEmpty(){
@@ -179,11 +174,11 @@ class VerificationRulesBuilder{
     }
 
     public function build(){
-        return new Verify($this->notEmpty, $this->minLength, $this->maxLength, $this->aString, $this->aNumber);
+        return new Verify($this->notEmpty, $this->minLength, $this->maxLength, $this->aString, $this->aNumber, $this->aString);
     }
 
     public function clone(){
-        return VerificationRulesBuilder::createClone($this->notEmpty, $this->minLength, $this->maxLength, $this->aString);
+        return VerificationRulesBuilder::createClone($this->notEmpty, $this->minLength, $this->maxLength, $this->aString, $this->aNumber, $this->aString);
     }
 }
 ?>
