@@ -8,7 +8,6 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 @include 'config.php';
 include 'auth.php';
 $id_pelajar = $_SESSION['id_pelajar'];
-
 if(!isset($id_pelajar)){
   header('location:login3.php');
 };
@@ -87,6 +86,7 @@ if (isset($_POST['update_profile'])) {
 </head>
 
 <body>
+   
 
    <div class="update-profile">
 
