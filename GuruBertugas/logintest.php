@@ -7,7 +7,7 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 require_once(COMPONENTS_DIR."/redirect.php");
 
 session_start(); 
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 
 if (isset($_POST['uname']) && isset($_POST['password'])) {
 
@@ -28,6 +28,8 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: login.php?error=<div class='alert alert-dark' role='alert'>Sila masukkan password terlebih</div>");
 	    exit();
 	}else{
+		$dbObj = new DatabaseMySqli();
+		$conn = $dbObj->getConnection();
 		$sql = "SELECT * FROM gurubertugas WHERE username='$uname' AND password='$pass'";
 
 		$result = mysqli_query($conn, $sql);
@@ -47,7 +49,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
 			}
 		}else{
 			$redirectObj = new Redirect();
-			$redirectObj->redirectToWithError("login3.php", "Kata laluan atau nama pengguna salah");
+			$redirectObj->redirectWithMsg("login3.php", "Kata laluan atau nama pengguna salah");
 		}
 	}
 	

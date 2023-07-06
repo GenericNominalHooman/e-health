@@ -26,6 +26,7 @@
     define("TEMPLATES_URL", SITE_URL."/"."templates");
 
     // DB configuration
+    define("DB_HOST", "localhost");
     define("DB_USER", "root");
     define("DB_PASS", "Kafin-12");
     define("DB_NAME", "hospital2");

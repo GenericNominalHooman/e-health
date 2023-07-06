@@ -45,7 +45,7 @@ if(isset($_GET['logout'])){
         <style>
         
         .body{
-            background-color: aliceblue;
+            background-color: #ffff;
         }
 
         .container1 {

@@ -1,5 +1,5 @@
 <?php 
-include("config.php");
+require_once(COMPONENTS_DIR."/config.php");
 
 
 if(isset($_POST['submit']))
@@ -71,7 +71,7 @@ if(isset($_POST['submit']))
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">KEMASKINI MAKLUMAT PELAJAR</h3>
             <?php
             if (isset($_GET['id_janjitemu'])) {
-              include("config.php");
+              require_once(COMPONENTS_DIR."/config.php");
               $id_janjitemu = $_GET['id_janjitemu'];
               $sql = "SELECT * FROM janjitemu WHERE id_janjitemu=$id_janjitemu";
               $result = mysqli_query($conn,$sql);

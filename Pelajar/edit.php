@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 if(isset($_POST['submit']))
 {
     $id_janjitemu = mysqli_real_escape_string($conn, $_POST['id_janjitemu']);

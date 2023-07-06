@@ -1,157 +1,152 @@
 <?php
-// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
-// Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
-require_once(COMPONENTS_DIR."/auth_pelajar.php");
-require_once(TEMPLATES_DIR."/sidebar_pelajar.php");
-?>
+// Import site config
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 
+?>
 <?php
-@include 'config.php';
-include 'auth.php';
-$id_pelajar = $_SESSION['id_pelajar'];
+// Import header
+require_once(COMPONENTS_DIR . "/header.php");
+// Import sidebar(Please uncomment the appropiate user sidebar for your page)
+// require_once(TEMPLATE_DIR . "/sidebar2_guest.php"); // Guest sidebar
+require_once(TEMPLATES_DIR . "/sidebar_pelajar.php"); // Pelajar sidebar
+// require_once(TEMPLATE_DIR . "/sidebar2_pentadbir.php"); // Pentadbir sidebar
+// require_once(TEMPLATE_DIR . "/sidebar2_warden.php"); // Warden sidebar
+// require_once(TEMPLATE_DIR . "/sidebar2_guru.php"); // Guru sidebar
+
+// Retrieve status from the database (Assuming you have a table named 'appointment' with a 'status' column)
+d($_SESSION);
+$conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+$query = "SELECT * FROM janjitemu WHERE nokp = '" . $_SESSION['nokp'] . "' ORDER BY tarikh DESC LIMIT 1"; // Replace '1' with the actual appointment ID
+d($query);
+$result = mysqli_query($conn, $query);
+$row = mysqli_fetch_assoc($result);
+d($row);
+$status = isset($row['status']) ? $row['status'] : null;
+$waktu = $row['waktu'];
+$tarikh = $row['tarikh'];
+$id = $row['id_janjitemu'];
+mysqli_close($conn);
+                        
+if(!empty($query)){ // User has made a janjitemu
+    echo
+    <<<EOT
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+            <div id="janjitemuUrusForm" class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:#172065;">
+    EOT;
+                echo('<div  row-id="'.$id.'" class="card-body p-4 p-md-5 d-flex justify-content-center align-items-center">');
+                    echo('<div class="container col-md-4 text-center">
+                            <i class="fa-solid fa-list"></i>    
+                            </div>
+                        <div class="container col-md-8">');
+                    // STATUS FIELD BEGIN
+                    echo("<div class='row'>".
+                            "<h3>".
+                                $status.
+                            "</h3>".
+                        "</div>"
+                    );
+                    echo("<div class='container row'>".
+                            "<div class='col-md-6'>".
+                                $waktu.
+                            "</div>".
+                            "<div class='col-md-6 text-end'>".
+                                $tarikh.
+                            "</div>".
+                        "</div>"
+                    );
+                    echo('<div class="row">
+                            <button id="cancelBtn" class="button col-md-6">Cancel</button>
+                            <button id="uploadBtn" class="button col-md-6">Upload MC Slip</button>
+                    </div>');
+                    // STATUS FIELD END
+                    echo("</div>");
+    echo <<<EOT
+                </div>
+            </div>
+        </div>
+    </div>
+    EOT;
+}
 
 
 ?>
 
-<?php include "config.php"; ?>
+<!-- CONTENT HERE -->
+<?php
 
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>E-HEALTH</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-  <link rel="shortcut icon" href="images/logo2remove.png" type="image/x-icon">
-  <link rel="stylesheet" href="https://kit.fontawesome.com/c7ad192f5f.css" crossorigin="anonymous">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
-  <link rel="stylesheet" href="css/search.css" />
-  <style>
-    html,
-    body {
-      background-color: aliceblue;
-    }
-  </style>
-</head>
-
-<body>
-
-  <body>
-    <div class="container" style="background-color:aliceblue;">
-      <div class="container  py-3 my-3" style="background-color:aliceblue;">
-        <nav class="navbar navbar-expand-lg " style="background-color:aliceblue;">
-          <div class="container-fluid" style="background-color:aliceblue;">
-            <a class="navbar-brand" href="pelajarhome.php">
-              <img src="images/logoremove.png" alt="Logo" width="250" height="85" class="d-inline-block align-text-top">
-              <img src="images/logo2remove.png" alt="Logo" width="260" height="100" class="d-inline-block align-text-top">
-            </a>
-
-
-            <header>
-              <!-- Navbar -->
-              <nav class="navbar navbar-expand-lg navbar-light" style="background-color:aliceblue;">
-
-
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation" style="background-color:aliceblue;">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="background-color:aliceblue;">
-                  <div class="navbar-nav">
-                    <a class="nav-link" aria-current="page" href="pelajarhome.php"><i class="fa-solid fa-house"></i>&nbsp;Utama</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="../Admin/jadual2.php"><i class="fa-regular fa-calendar-days"></i>&nbsp;Jadual Guru Bertugas</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="janjitemu.php">Janji Temu</a>
-                    </li>
-                    <li class="nav-item">
-                      <a class="nav-link" href="kemaskini.php"><i class="fa-solid fa-magnifying-glass"></i>&nbsp;Semak Status</a>
-                    </li>
-                    </ul>
-                  </div>
-                </div>
-                <span class="navbar-text">
-                  <button class="btn btn-outline-info " onclick="window.location.href='logout.php';"><i class="fa-solid fa-arrow-right-from-bracket"></i>&nbsp;Log Keluar</button>
-                </span>
-          </div>
-      </div>
-      </nav>
-      <!-- Navbar -->
-
-
-      <div class="col-md-12">
-        <div class="card p-4 mt-3 mb-4">
-          <h3 class="heading mt-5 text-center">SILA MASUKKAN NO K/P </h3>
-          <div class="d-flex justify-content-center px-5">
-            <div class="search">
-              <form action="kemaskini.php" method="POST">
-                <input type="text" class="search-input" placeholder="NO KAD PENGENALAN" name="search" autocomplete="off">
-                <button type="submit" name="submit" class="search-icon"> <i class="fa fa-search"></i> </a>
-            </div>
-          </div>
-
-          </form>
-          <table class="table table-bordered table-stripted mt-3 " style="width:100%; border-color:darkblue;">
-            <?php
-              if (isset($_POST['submit'])) {
-                $search =  $_POST['search'];
-
-                $sql = "SELECT * FROM `janjitemu` WHERE id_janjitemu='$search' OR nokp='$search'";
-                $result = mysqli_query($conn, $sql);
-
-                if ($result) {
-                  if (mysqli_num_rows($result) > 0) {
-                    echo '<thead>
-                  <tr>
-                  
-                              <th class="text-center">Nama</th>
-                              <th class="text-center">No.K/P</th>
-                              <th class="text-center">Waktu Janji Temu</th>
-                              <th class="text-center">Tarikh Janji Temu</th>
-                              <th class="text-center">Sebab</th>
-                              <th class="text-center">Status</th>
-                              <th class="text-center">Butang</th>
-                            
-                          </tr>
-                      </thead>
-                  ';
-                    while ($row = mysqli_fetch_assoc($result)) {
-                      echo '<tbody>
-                          <tr>
-                          
-                          <td >' . $row['nama'] . '</td>
-                          <td>' . $row['nokp'] . '</td>
-                          <td>' . $row['waktu'] . '</td>
-                          <td>' . $row['tarikh'] . '</td>
-                          <td>' . $row['sebab'] . '</td>
-                          <td>' . $row['status'] . '</td>'; ?>
-                      <td class="d-print-none">
-                        <!-- <a href="lanjut.php?id_janjitemu=<?= $row['id_janjitemu']; ?>"class="btn btn-outline-secondary"><i class="fa-regular fa-pen-to-square"></i>&nbsp;Maklumat Lanjut</a>-->
-                        <!-- <a href="update.php?id_janjitemu=<?= $row['id_janjitemu']; ?>"class="btn btn-sm btn-outline-secondary"><i class="fa-regular fa-pen-to-square"></i>&nbsp;Edit</a>-->
-                        <a href="butiran.php?id_janjitemu=<?= $row['id_janjitemu']; ?>" class="btn btn-sm btn-outline-primary"><i class="fa fa-eye"></i>&nbsp;Butiran</a>
-                        <a href="padam.php?id_janjitemu=<?= $row['id_janjitemu']; ?>" class="btn btn-sm btn-outline-danger"><i class="fa fa-trash"></i>&nbsp;Delete</a>
-                        <a href="../Admin/upload2.php" class="btn btn-sm btn-outline-success "><i class="fa-solid fa-upload"></i>&nbsp;Muat Naik MC/Time Slip</a>
-                      </td>
-                      </tr>
-                      </tbody>
-
-              <?php
-                    }
-                  } else {
-                    echo '<h2> Maklumat Tiada dalam rekod sila buat <a href="janjitemu.php">janjitemu</a> terlebih dahulu</h2>';
-                  }
+?>
+<div class="mt-3 overflow-auto">
+    <h1 class="display-4">Senarai Janji Temu</h1>
+    <form method="POST" action="<?php echo $_SERVER["PHP_SELF"]; ?>">
+        <table id="janjitemupelajar" class="table table-striped" width="100%">
+            <thead>
+                <th>Bil</th>
+                <th>No Kad Pengenalan</th>
+                <th>Nama</th>
+                <th>Program</th>
+                <th>Tahun</th>
+                <th>Waktu</th>
+                <th>No Telefon Pelajar</th>
+                <th>Alamat</th>
+                <th>Jantina</th>
+                <th>Sebab</th>
+                <th>Status Janji Temu</th>
+            </thead>
+            <tbody>
+                <?php
+                // Establish a database connection
+                $conn = mysqli_connect(DB_HOST, DB_USER, DB_PASS, DB_NAME);
+                if (!$conn) {
+                    die("Connection failed: " . mysqli_connect_error());
                 }
-              }
-            ?>
-          </table>
-        </div>
-      </div>
-    </div>
-  </body>
 
-</html>
-<?php include(COMPONENTS_DIR . "/footer.php"); ?>
+                $query = mysqli_query($conn, "SELECT * FROM janjitemu WHERE nokp='".$_SESSION["nokp"]."'");
+                $numrow = mysqli_num_rows($query);
+
+                if ($query) {
+                    if ($numrow != 0) {
+                        $cnt = 1;
+
+                        while ($row = mysqli_fetch_assoc($query)) {
+                            echo "<td>{$cnt}</td>";
+                            echo "<td>{$row['nokp']}</td>";
+                            echo "<td>{$row['nama']}</td>";
+                            echo "<td>{$row['program']}</td>";
+                            echo "<td>{$row['tahun']}</td>";
+                            echo "<td>{$row['waktu']}</td>";
+                            echo "<td>{$row['notelpen']}</td>";
+                            echo "<td>{$row['alamat']}</td>";
+                            echo "<td>{$row['jantina']}</td>";
+                            echo "<td>{$row['sebab']}</td>";
+                            echo "<td>{$row['status']}</td>";
+                            echo "</tr>";
+
+                            $cnt++; // Increment $cnt after each iteration
+                        }
+                    }
+                }
+
+                // Close the database connection
+                mysqli_close($conn);
+                ?>
+                <script>
+                    // Applying Data table to the table
+                    $("#janjitemupelajar").DataTable();
+                </script>
+            </tbody>
+        </table>
+    </form>
+</div>
+<!-- END CONTENT -->
+<script>
+    $(document).ready(function(){
+        $("#janjitemuUrusForm").on("click", function(){
+            
+        })
+    });
+</script>
+<?php
+// Import footer
+require_once(COMPONENTS_DIR . "/footer.php");
+?>

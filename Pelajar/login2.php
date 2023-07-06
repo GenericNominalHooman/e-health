@@ -97,7 +97,7 @@ if (isset($_POST['submit'])) {
 
 <style>
   body {
-    background-color: aliceblue;
+    background-color: #ffff;
   }
 </style>
 
@@ -105,27 +105,25 @@ if (isset($_POST['submit'])) {
 
 <body>
 
-<section class="gradient-custom" >
-  <div class="container py-5 h-100" >
-    <div class="row justify-content-center align-items-center h-100" >
-      <div class="col-12 col-lg-9 col-xl-7" >
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;" >
-          <div class="card-body p-4 p-md-5" >
-            <?php
-              echo('<img src="'.IMG_URL.'/pelajar2remove.png" class="rounded mx-auto d-block" witdh="200" height="150">');
-            ?>
-            <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">PELAJAR</h3>
-            <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
-  <li class="nav-item" role="presentation">
-    <a href ="login2.php" class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab"
-      aria-controls="pills-login" aria-selected="true">Daftar Masuk</a>
-  </li>
-  <li class="nav-item" role="presentation">
-    <a href="login3.php" class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab"
-      aria-controls="pills-register" aria-selected="false">Log Masuk</a>
-  </li>
-</ul>
-            <form autocomplete="off" action="login2.php" method="post" enctype="multipart/form-data">
+  <section class="gradient-custom">
+    <div class="container py-5 h-100">
+      <div class="row justify-content-center align-items-center h-100">
+        <div class="col-12 col-lg-9 col-xl-7">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:#172065;">
+            <div class="card-body p-4 p-md-5">
+              <?php
+              // echo ('<img src="' . IMG_URL . '/pelajar2remove.png" class="rounded mx-auto d-block" witdh="200" height="150">');
+              ?>
+              <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">DAFTAR MASUK PELAJAR</h3>
+              <ul class="nav nav-pills nav-justified mb-3" id="ex1" role="tablist">
+                <li class="nav-item" role="presentation">
+                  <a href="login2.php" class="nav-link active" id="tab-login" data-mdb-toggle="pill" href="#pills-login" role="tab" aria-controls="pills-login" aria-selected="true">Daftar Masuk</a>
+                </li>
+                <li class="nav-item" role="presentation">
+                  <a href="login3.php" class="nav-link" id="tab-register" data-mdb-toggle="pill" href="#pills-register" role="tab" aria-controls="pills-register" aria-selected="false">Log Masuk</a>
+                </li>
+              </ul>
+              <form autocomplete="off" action="login2.php" method="post" enctype="multipart/form-data">
                 <?php
                 if (isset($_GET['error'])) {
                   echo ("<div class='message'>" . $_GET['error'] . "</div>");

@@ -1,5 +1,5 @@
 <?php  
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 
 	
 /*if( isset($nama)) || isset($nokp)) || isset($notel)) || isset($notelpen)) || isset($waktu)) || isset($tarikh)) || isset($alamat)) || isset($program)) || isset($tahun)) || isset($jantina)) {

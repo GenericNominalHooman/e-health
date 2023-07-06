@@ -4,7 +4,7 @@
 if (isset($_FILES['my_image'])) {
 
 	# database connection file
-	include "config.php";
+	require_once(COMPONENTS_DIR."/config.php");
 	
 	# getting image data and store them in var
 	$img_name = $_FILES['my_image']['name'];

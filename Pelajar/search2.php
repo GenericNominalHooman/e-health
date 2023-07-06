@@ -1,4 +1,4 @@
-<?php include "config.php"; ?>
+<?php require_once(COMPONENTS_DIR."/config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -14,8 +14,8 @@
 </head>
 
 
-<div class="container d-flex justify-content-center" style="background-color:aliceblue;">
- <div class="col-md-12" style="background-color:aliceblue;">
+<div class="container d-flex justify-content-center" style="background-color:#ffff;">
+ <div class="col-md-12" style="background-color:#ffff;">
   
    <form action="kemaskini.php" method="POST">
               <!--<input type="text" name="keyword" autofocus autocomplete="off" >
@@ -23,8 +23,8 @@
               <div class="row">
               <div class="col-md-9">
               <div class="input-group mb-3">
-              <input type="text" class="form-control text-center"  name="search" style="border-color:skyblue;" placeholder="Masukkan No. Kad Pengenalan...."  autocomplete="off">
-                        <button type="submit" class="btn btn-outline-bg-dark"  style="background-color:skyblue;" name="submit" id="button-addon2"><i class="fas fa-search"></i></button>
+              <input type="text" class="form-control text-center"  name="search" style="border-color:#172065;" placeholder="Masukkan No. Kad Pengenalan...."  autocomplete="off">
+                        <button type="submit" class="btn btn-outline-bg-dark"  style="background-color:#172065; color: white;" name="submit" id="button-addon2"><i class="fas fa-search"></i></button>
                 </div>
                  <!--<div class="input-group">
                     <div class="input-group-text"><i class="fas fa-search"></i></div><input type="text" class="form-control"  name="search" placeholder="Masukkan No. Kad Pengenalan...." autocomplete="off">

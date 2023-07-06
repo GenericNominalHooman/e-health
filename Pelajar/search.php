@@ -1,5 +1,5 @@
 <?php 
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 require 'function.php';
 if( isset($_GET['cari']) ) {
 $keyword = $_GET['keyword'];

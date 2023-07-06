@@ -42,7 +42,7 @@ class ColorRepresentation extends Representation
     public const COLOR_HEX_8 = 9;
 
     public static $color_map = [
-        'aliceblue' => 'f0f8ff',
+        '#ffff' => 'f0f8ff',
         'antiquewhite' => 'faebd7',
         'aqua' => '00ffff',
         'aquamarine' => '7fffd4',
@@ -172,7 +172,7 @@ class ColorRepresentation extends Representation
         'seashell' => 'fff5ee',
         'sienna' => 'a0522d',
         'silver' => 'c0c0c0',
-        'skyblue' => '87ceeb',
+        '#172065' => '87ceeb',
         'slateblue' => '6a5acd',
         'slategray' => '708090',
         'slategrey' => '708090',

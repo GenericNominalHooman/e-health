@@ -112,7 +112,7 @@ if (isset($_POST['submit'])) {
 	$LAIN_TEMPAT=$_POST['LAIN_TEMPAT'];
 	
 }
-    include("config.php");
+    require_once(COMPONENTS_DIR."/config.php");
     include("insertmc.php");
     ?>
         </form>

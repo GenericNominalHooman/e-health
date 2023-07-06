@@ -14,7 +14,7 @@ require_once(COMPONENTS_DIR . "/sidebar.php");
      $(document).ready(function() {
          // Pelajar(sidebar item)
          const linkDataLoginPelajar = {
-             url: <?php echo ("'" . PELAJAR_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . PELAJAR_URL . "/login3.php'"); ?>,
              name: 'Login Pelajar',
              icon_class: 'bxs-user',
          };
@@ -23,33 +23,24 @@ require_once(COMPONENTS_DIR . "/sidebar.php");
 
          // Pentadbir(sidebar item)
          const linkDataLoginPentadbir = {
-             url: <?php echo ("'" . ADMIN_URL . "/login.php'"); ?>,
+             url: <?php echo ("'" . ADMIN_URL . "/login3.php'"); ?>,
              name: 'Login Pentadbir',
              icon_class: 'bxs-user',
          };
          const linkLoginPentadbir = new NavLink(linkDataLoginPentadbir);
          const linkLoginPentadbirHTML = linkLoginPentadbir.render();
 
-         // Warden(sidebar item)
-         const linkDataLoginWarden = {
-             url: <?php echo ("'" . ADMIN_URL . "/login.php'"); ?>,
-             name: 'Login Warden',
-             icon_class: 'bxs-user',
-         };
-         const linkLoginWarden = new NavLink(linkDataLoginWarden);
-         const linkLoginWardenHTML = linkLoginWarden.render();
-
          // Guru(sidebar item)
          const linkDataLoginGuru = {
-             url: <?php echo ("'" . GURU_URL . "/login.php'"); ?>,
-             name: 'Login Guru',
+             url: <?php echo ("'" . GURU_URL . "/login3.php'"); ?>,
+             name: 'Login Pensyarah/Warden',
              icon_class: 'bxs-user',
          };
          const linkLoginGuru = new NavLink(linkDataLoginGuru);
          const linkLoginGuruHTML = linkLoginGuru.render();
 
          // Render all sidebar items
-         $(".nav_list").html(linkLoginPentadbirHTML + linkLoginWardenHTML + linkLoginGuruHTML + linkLoginPelajarHTML);
+         $(".nav_list").html(linkLoginPentadbirHTML + linkLoginGuruHTML + linkLoginPelajarHTML);
      });
  </script>
  <!-- END SIDEBAR COMPONENT CONFIGURATION -->

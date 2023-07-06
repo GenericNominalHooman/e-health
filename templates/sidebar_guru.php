@@ -7,7 +7,11 @@
 require_once(COMPONENTS_DIR . "/header.php");
 // Import sidebar components
 require_once(COMPONENTS_DIR . "/sidebar.php");
+require_once(COMPONENTS_DIR . "/redirect.php");
 ?>
+<!-- REDIRECT USER TO LOGIN PAGE IF NOT LOGGED IN BEGIN -->
+
+<!-- REDIRECT USER TO LOGIN PAGE IF NOT LOGGED IN ENDS -->
  <!-- SIDEBAR COMPONENT CONFIGURATION -->
  <script>
      // Sidebar icons

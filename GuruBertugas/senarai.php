@@ -3,15 +3,15 @@
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 require_once(COMPONENTS_DIR."/auth_guru.php");
+require_once(COMPONENTS_DIR."/config.php");
 ?>
 <?php
-require_once("config.php");
-
-/*if(!isset($_SESSION["gurubertugas"])){
-  header("Location: gurubertugashome.php");
-}*/
-
+// DECLARING GLOBAL VARIABLE START
+$dbObj = new DatabaseMySqli();
+$conn = $dbObj->getConnection();
+// DECLARING GLOBAL VARIABLE END
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -59,8 +59,8 @@ require_once("config.php");
 
 </head>
 
-<body id="body-pd" style="background-color:aliceblue;">
-    <header class="header" id="header" style="background-color:aliceblue;">
+<body id="body-pd" style="background-color:#ffff;">
+    <header class="header" id="header" style="background-color:#ffff;">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
         
     </header>
@@ -74,7 +74,7 @@ require_once("config.php");
         </nav>
     </div>
     <!--Container Main start-->
-    <div class="height-900" style="background-color:aliceblue;">
+    <div class="height-900" style="background-color:#ffff;">
     <div class="text-center">
           <img src="images/logoremove.png" alt="Logo" width="250" height="85" class="img-fluid">
         <img src="images/logo2remove.png" alt="Logo" width="260" height="100" class="img-fluid">
@@ -116,7 +116,7 @@ require_once("config.php");
                 <tbody>
                         <!-- loading all leave applications from database -->
                         <?php
-                                include "config.php";
+                                require_once(COMPONENTS_DIR."/config.php");
                                 global $row;
                                 $query = mysqli_query($conn,"SELECT * FROM janjitemu");
                                 

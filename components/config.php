@@ -1,5 +1,6 @@
 <?php
-// Importing site configuration
+// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
+// Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 ?>
 <?php
@@ -11,11 +12,12 @@ class Database{
   }
   
   private function createConnection(){
-    try {
-      $conn = new PDO("mysql:host=".HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
+    // Create connection
+    $conn = new mysqli(HOST, DB_USER, DB_PASS, DB_NAME);
+
+    // Check connection
+    if ($conn->connect_error) {
+      die("Connection failed: " . $conn->connect_error);
     }
 
     $this->conn = $conn;

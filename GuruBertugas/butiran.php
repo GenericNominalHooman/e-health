@@ -25,7 +25,7 @@
         </header>
         <div class="book-details p-5 my-4">
             <?php
-            include("config.php");
+            require_once(COMPONENTS_DIR."/config.php");
             $id_janjitemu = $_GET['id_janjitemu'];
             if ($id_janjitemu) {
                 $sql = "SELECT * FROM janjitemu WHERE id_janjitemu = $id_janjitemu";

@@ -1,6 +1,6 @@
 <?php 
 //connect to database
-include("config.php");
+require_once(COMPONENTS_DIR."/config.php");
 
 //delete record from database
 

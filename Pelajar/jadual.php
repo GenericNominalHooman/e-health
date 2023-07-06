@@ -60,7 +60,7 @@ if(isset($_GET['logout'])){
     <?php include "index.html"?>  
     <center>
     <?php
-    include "config.php";
+    require_once(COMPONENTS_DIR."/config.php");
          $select = mysqli_query($conn, "SELECT image FROM `loginadmin` WHERE id = 4 ") or die('query failed');
          if(mysqli_num_rows($select) > 0){
             $fetch = mysqli_fetch_assoc($select);

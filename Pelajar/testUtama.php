@@ -4,7 +4,7 @@
     <style>
         body{
             padding: 0% 10% 0% 10%;
-            background-color:aliceblue;
+            background-color:#ffff;
         }
 
         .container {

@@ -1,7 +1,7 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-// require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 ?>
 <?php 
 include 'config.php';
@@ -38,7 +38,7 @@ if(isset($_POST['submit'])){
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style>
   body{
-    background-color:aliceblue;
+    background-color:#ffff;
   }
   </style>
 
@@ -49,7 +49,7 @@ if(isset($_POST['submit'])){
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:#172065;">
           <div class="card-body p-4 p-md-5">
             <?php
             // Iz,caninacanteen@gmail.com: Fetching pelajar2remove.png to dynamic

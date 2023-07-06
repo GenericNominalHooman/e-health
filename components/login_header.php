@@ -15,7 +15,7 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 
     <style>
       body {
-        background-color:aliceblue;
+        background-color:#ffff;
       }
       ul {
         margin: 50px;

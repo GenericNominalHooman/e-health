@@ -54,7 +54,7 @@ if(isset($_POST['submit'])){
   
   <style>
   body{
-    background-color:aliceblue;
+    background-color:#ffff;
   }
   </style>
 
@@ -65,7 +65,7 @@ if(isset($_POST['submit'])){
   <div class="container py-5 h-100" >
     <div class="row justify-content-center align-items-center h-100" >
       <div class="col-12 col-lg-9 col-xl-7" >
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;" >
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:#172065;" >
           <div class="card-body p-4 p-md-5" >
           <img src="img/admin.png" class="rounded mx-auto d-block" witdh="200" height="150">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">DAFTAR MASUK PELAJAR</h3>

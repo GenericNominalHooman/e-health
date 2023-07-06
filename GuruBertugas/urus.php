@@ -84,7 +84,7 @@ $(document).ready(function() {
 			
 			<tbody>
 		<?php
-	include "config.php";
+	require_once(COMPONENTS_DIR."/config.php");
 	global $row;
 	$query = mysqli_query($conn,"SELECT * FROM janjitemu ");
 	
