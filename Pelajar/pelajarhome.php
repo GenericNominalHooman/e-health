@@ -42,8 +42,6 @@ $nokp = $_SESSION['nokp'];
 <body >
   
 
-   <?php include "index.html";?>
-   
 	<div class="container">
 
    <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
@@ -60,21 +58,7 @@ $nokp = $_SESSION['nokp'];
     <div class="card-header " style="background-color:#172065; color: white; ">
     <i class="fa-regular fa-pen-to-square"></i>&nbsp;KEMASKINI PROFIL
     </div>
-    <div class="card-body" style="background-color:#ffff;">
-      
-      
-    <?php
-         $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE nokp = '$nokp'") or die('query failed');
-         if(mysqli_num_rows($select) > 0){
-            $fetch = mysqli_fetch_assoc($select);
-         }
-         if($fetch['image'] == ''){
-            echo '<img class="img-fluid rounded-circle rounded mx-auto d-block" src="images/default-avatar.png" >';
-         }else{
-            echo '<img class="img-fluid rounded-circle rounded mx-auto d-block"  src="uploaded_img/'.$fetch['image'].'">';
-         }
-      ?>
-      
+    <div class="card-body" style="background-color:#ffff;">      
     <h5 class="card-title  mt-3">SILA MASUKKAN MAKLUMAT DENGAN BETUL</h5>
     <p class="card-text"></p>
     <a href="update_profile.php" class="btn btn-primary">PROFIL</a>

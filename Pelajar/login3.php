@@ -5,6 +5,8 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 ?>
 <?php 
 include 'config.php';
+require_once(COMPONENTS_DIR . "/header.php");
+require_once(TEMPLATES_DIR . "/sidebar_guest.php");
 session_start();
 
 if(isset($_POST['submit'])){
@@ -16,7 +18,6 @@ if(isset($_POST['submit'])){
 
    if(mysqli_num_rows($select) > 0){
       $row = mysqli_fetch_assoc($select);
-      $_SESSION['id_pelajar'] = $row['id_pelajar'];
       $_SESSION['nokp'] = $nokp;
             header("Location: pelajarhome.php");
           }else{
@@ -108,32 +109,6 @@ if(isset($_POST['submit'])){
       </div>
       Kembali&nbsp;<a href="../index.php">Halaman Utama</a>
     </form>
-    
-               <!--<div class="row">
-               <div class="col-6">
-               <div class="form-outline">
-                  <div class="form-floating">
-                    <input type="text" name="nokp" class="form-control form-control-lg" placeholder="No.Kad Pengenalan" />
-                    <label  for="floatingPassword">No. Kad Pengenalan</label></div>
-                  </div>
-                </div>
-
-                <div class="col-6">
-                  <div class="form-outline">
-                  <div class="form-floating">
-                  <input type="password" class="form-control" name="password" placeholder="Password"  id="password" autocomplete="off">
-                  <label for="floatingPassword">Password</label>
-                  <input type="checkbox" onclick="myFunction()">&nbsp;Show Password
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <a href="login2.php" class="btn btn-outline-info">Daftar Masuk</a>
-              <input type="submit" class="btn btn-outline-info" name="submit" value="Log Masuk">-->
-              <div class="mt-3">
-
-              </div> 
-
 </form>
 </div>
 </div>
