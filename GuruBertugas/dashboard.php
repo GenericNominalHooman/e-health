@@ -8,7 +8,7 @@ require_once(COMPONENTS_DIR . "/header.php");
 ?>
 <!-- GLOBAL VARIABLES START -->
 <?php
-$dbObj = new DatabaseMySqli();
+$dbObj = new Database();
 $conn = $dbObj->getConnection();
 ?>
 <!-- GLOBAL VARIABLES END -->

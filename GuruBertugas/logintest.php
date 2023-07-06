@@ -28,7 +28,7 @@ if (isset($_POST['uname']) && isset($_POST['password'])) {
         header("Location: login.php?error=<div class='alert alert-dark' role='alert'>Sila masukkan password terlebih</div>");
 	    exit();
 	}else{
-		$dbObj = new DatabaseMySqli();
+		$dbObj = new Database();
 		$conn = $dbObj->getConnection();
 		$sql = "SELECT * FROM gurubertugas WHERE username='$uname' AND password='$pass'";
 

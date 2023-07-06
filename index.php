@@ -5,7 +5,7 @@ require_once(COMPONENTS_DIR . "/header.php");
 require_once(COMPONENTS_DIR . "/config.php");
 
 // Instansiating DB connection
-$dbObj = new DatabaseMySqli();
+$dbObj = new Database();
 $conn = $dbObj->getConnection();
 
 // Fetch student appointment data from the database

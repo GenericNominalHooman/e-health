@@ -4,7 +4,7 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
 ?>
 <?php
-class DatabaseMySqli{
+class Database{
   private $conn;
 
   public function __construct(){

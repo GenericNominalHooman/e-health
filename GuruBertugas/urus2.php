@@ -7,7 +7,7 @@ require_once(COMPONENTS_DIR."/config.php");
 ?>
 <?php
 // DECLARING GLOBAL VARIABLE START
-$dbObj = new DatabaseMySqli();
+$dbObj = new Database();
 $conn = $dbObj->getConnection();
 // DECLARING GLOBAL VARIABLE END
 ?>
