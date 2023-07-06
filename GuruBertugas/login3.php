@@ -5,7 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 <?php
 require_once(COMPONENTS_DIR . "/header.php");
 require_once(COMPONENTS_DIR . "/config.php");
-require_once(TEMPLATES_DIR . "/sidebar_guru.php");
+require_once(TEMPLATES_DIR . "/sidebar_guest.php");
 ?>
 
 <link rel="shortcut icon" href="images/logo2remove.png" type="image/x-icon">

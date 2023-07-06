@@ -61,7 +61,7 @@ if(isset($_POST['update_jadual'])){
         
     </header>
 
-<div class="l-navbar" id="nav-bar">
+<div style="background-color: #172065;" class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="dashboard.php" class="nav_link"> <i class="fa-solid fa-house"></i><span class="nav_logo-name">E - HEALTH</span> </a>
                 <div class="nav_list"> <a href="dashboard.php" class="nav_link  "> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 

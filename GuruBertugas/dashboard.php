@@ -2,9 +2,9 @@
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+require_once(COMPONENTS_DIR . "/header.php");
 require_once(COMPONENTS_DIR . "/auth_guru.php");
 require_once(COMPONENTS_DIR . "/config.php");
-require_once(COMPONENTS_DIR . "/header.php");
 ?>
 <!-- GLOBAL VARIABLES START -->
 <?php
@@ -67,44 +67,6 @@ $conn = $dbObj->getConnection();
             </div>
           </div>
           <div class="col-sm-3">
-            <div class="card" style="background-color:#ff2f16; color: white;">
-              <div class="card-body">
-                <h5 class="card-title"> <?php
-                                        $dash_category_query = "SELECT * FROM janjitemu WHERE status='Tidak Sah'";
-                                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
-                                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
-                                          echo "$category_total";
-                                        } else {
-                                          echo "Tiada Permohonan";
-                                        }
-
-                                        ?> </h5>
-                <p class="card-text">Permohonan tidak berjaya</p>
-
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
-            <div class="card" style="background-color:#fcf67e; color: white;">
-              <div class="card-body">
-                <h5 class="card-title"> <?php
-                                        $dash_category_query = "SELECT * FROM janjitemu WHERE status='dalam proses'";
-                                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
-
-                                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
-                                          echo "$category_total";
-                                        } else {
-                                          echo "Tiada Permohonan";
-                                        }
-
-
-                                        ?> </h5>
-                <p class="card-text">Permohonan sedang diproses</p>
-
-              </div>
-            </div>
-          </div>
-          <div class="col-sm-3">
             <div class="card" style="background-color:#44c97e; color: white;">
               <div class="card-body">
                 <h5 class="card-title"> <?php
@@ -124,6 +86,45 @@ $conn = $dbObj->getConnection();
               </div>
             </div>
           </div>
+          <div class="col-sm-3">
+            <div class="card" style="background-color:#D6EF07; color: white;">
+              <div class="card-body">
+                <h5 class="card-title"> <?php
+                                        $dash_category_query = "SELECT * FROM janjitemu WHERE status='dalam proses'";
+                                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+
+                                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                          echo "$category_total";
+                                        } else {
+                                          echo "Tiada Permohonan";
+                                        }
+
+
+                                        ?> </h5>
+                <p class="card-text">Permohonan dalam proses</p>
+
+              </div>
+            </div>
+          </div>
+          <div class="col-sm-3">
+            <div class="card" style="background-color:#ff2f16; color: white;">
+              <div class="card-body">
+                <h5 class="card-title"> <?php
+                                        $dash_category_query = "SELECT * FROM janjitemu WHERE status='Tidak Sah'";
+                                        $dash_category_query_run = mysqli_query($conn, $dash_category_query);
+                                        if ($category_total = mysqli_num_rows($dash_category_query_run)) {
+                                          echo "$category_total";
+                                        } else {
+                                          echo "Tiada Permohonan";
+                                        }
+
+                                        ?> </h5>
+                <p class="card-text">Permohonan tidak berjaya</p>
+
+              </div>
+            </div>
+          </div>
+
         </div>
       </div>
       <div class="mt-3">
