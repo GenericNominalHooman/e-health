@@ -9,7 +9,7 @@ $dbObj = new Database();
 $conn = $dbObj->getConnection();
 
 // Fetch student appointment data from the database
-$sql = "SELECT nama, nokp, program, tahun, waktu, tarikh, sebab, status FROM janjitemu";
+$sql = "SELECT nama, nomatrik, program, tahun, waktu, tarikh, sebab, status FROM janjitemu";
 $result = $conn->query($sql);
 require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
 ?>
