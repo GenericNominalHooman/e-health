@@ -31,7 +31,7 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/e-health/site_config.php");
         <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
           <div class="card-body p-4 p-md-5" >
           <img src="images/gururemove.png" class="rounded mx-auto d-block mb-3" witdh="200" height="150">
-		  <h2 class="text-center mb-3">LOG MASUK GURU BERTUGAS</h2>
+		  <h2 class="text-center mb-3"> LOG MASUK PENSYARAH/WARDEN </h2>
      <form autocomplte="off" action="logintest.php"  method="post" >
 
      	<?php 
