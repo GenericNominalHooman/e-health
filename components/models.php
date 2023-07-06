@@ -13,7 +13,7 @@ class Models{
     }
 
     // Create a new user
-    public function createUser($tableName, $data)
+    public function createRow($tableName, $data)
     {
         $columns = implode(',', array_keys($data));
         $values = implode(',', array_map(function ($value) {
@@ -28,7 +28,7 @@ class Models{
     }
 
     // Update an existing user
-    public function updateUser($tableName, $idColumnName, $id, $data)
+    public function updateRow($tableName, $idColumnName, $id, $data)
     {
         $updateColumns = implode(',', array_map(function ($column) {
             return "$column=?";
@@ -42,7 +42,7 @@ class Models{
     }
 
     // Delete a user
-    public function deleteUser($tableName, $idColumnName, $id)
+    public function deleteRow($tableName, $idColumnName, $id)
     {
         $sql = "DELETE FROM $tableName WHERE $idColumnName=?";
         $stmt = $this->conn->prepare($sql);
