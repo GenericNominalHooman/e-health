@@ -1,8 +1,7 @@
 <?php
-    // 
-    // DEVELOPMENT CONFIG(PLEASE REMOVE IF MIGRATING TO PRODUCTION)
-    // 
+    // DEVELOPMENT CONFIG BEGIN(PLEASE REMOVE IF MIGRATING TO PRODUCTION)
     require_once('vendor/autoload.php');
+    // DEVELOPMENT CONFIG ENDS(PLEASE REMOVE IF MIGRATING TO PRODUCTION)
 
     // e-health site configuration
     define("HOST", $_SERVER['SERVER_NAME']);
