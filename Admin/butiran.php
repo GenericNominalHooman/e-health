@@ -1,7 +1,9 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"]."/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
+require_once(E_HEALTH_DIR."/site_config.php");
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

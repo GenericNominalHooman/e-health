@@ -1,0 +1,5 @@
+<?php
+// PROJECTS CONFIG BEGIN
+define("E_HEALTH_DIR", $_SERVER["DOCUMENT_ROOT"]."/e-health");
+// PROJECTS CONFIG END
+?>

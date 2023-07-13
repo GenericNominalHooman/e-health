@@ -1,7 +1,14 @@
 <?php
-// Site configuration
-require_once("./site_config.php");
-require_once("./components/login_header.php");
+// SITE CONFIG BEGIN
+require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
+require_once(E_HEALTH_DIR."/site_config.php");
+// SITE CONFIG ENDS
+?>
+
+<?php
+// IMPORT BEGIN
+require_once(COMPONENTS_DIR."/login_header.php");
+// IMPORT ENDS
 ?>
 <section class="vh-100" style="background-color: aliceblue;">
   <div class="container py-5 h-100">
