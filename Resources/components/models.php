@@ -216,6 +216,13 @@ class JadualModel extends Models{
             $result = $stmt->get_result();
             return $result->fetch_all(MYSQLI_ASSOC);
         }    
+        
+        public function getAllGuruSort($columnName, $sort, $limit) {
+            $stmt = $this->conn->prepare("SELECT * FROM jadualguru ORDER BY $columnName $sort LIMIT $limit");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }    
 
         // Warden 
         public function getAllWarden() {
@@ -232,6 +239,12 @@ class JadualModel extends Models{
             return $result->fetch_all(MYSQLI_ASSOC);
         }    
 
+        public function getAllWardenSort($columnName, $sort, $limit) {
+            $stmt = $this->conn->prepare("SELECT * FROM jadualwarden ORDER BY $columnName $sort LIMIT $limit");
+            $stmt->execute();
+            $result = $stmt->get_result();
+            return $result->fetch_all(MYSQLI_ASSOC);
+        }    
 }
 
 class MCSlipModel extends Models{

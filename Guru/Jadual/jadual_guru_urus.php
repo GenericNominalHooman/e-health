@@ -1,16 +1,17 @@
 <?php
-// Import site config
-require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
-require_once(COMPONENTS_DIR . "/config.php");
+    // Import site config
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+?>
 
-// Auth component is dependent on header and config component
-require_once(COMPONENTS_DIR . "/header.php");
+<?php
+    // IMPORTS BEGIN
+    require_once(COMPONENTS_DIR . "/config.php");
+    require_once(COMPONENTS_DIR . "/header.php");
+    require_once(TEMPLATE_DIR . "/sidebar2_guru.php");
+    // IMPORTS ENDS
+?>
 
-require_once(TEMPLATE_DIR . "/sidebar2_guru.php");
-
-// Start the session
-session_start();
-
+<?php
 // SlideshowManager class
 class SlideshowManager {
     private $imageList = [];
@@ -44,6 +45,7 @@ function displayLatestImage()
     global $slideshowManager;
     $slideshowManager->displayLatestImage();
 }
+d(date("Y-m-d H:i:s"));
 
 if (isset($_POST["submit"])) {
     $target_dir = UPLOADS_DIR . "/jadual" . "/";

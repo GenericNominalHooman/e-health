@@ -6,8 +6,8 @@ require_once(COMPONENTS_DIR . "/config.php");
 require_once(COMPONENTS_DIR . "/redirect.php");
 require_once(COMPONENTS_DIR . "/auth.php");
 require_once(COMPONENTS_DIR . "/message_handler.php");
-require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
 require_once(COMPONENTS_DIR . "/header.php");
+require_once(TEMPLATE_DIR . "/sidebar2.php");
 ?>
 
 <?php

@@ -7,40 +7,19 @@ require_once(COMPONENTS_DIR . "/config.php");
 require_once(COMPONENTS_DIR . "/redirect.php");
 require_once(COMPONENTS_DIR . "/auth.php");
 require_once(COMPONENTS_DIR . "/verification.php");
-require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
+require_once(TEMPLATE_DIR . "/sidebar2.php");
 require_once(COMPONENTS_DIR . "/header.php");
 ?>
 
 <!-- CONTENT BEGIN -->
 <?php
-// Declaring global variables
+// DECLARING GLOBAL VARIABLES BEGIN
 $dbObj = new Database();
 $authObj = new Auth($dbObj->getConnection());
 $conn = ($dbObj->getConnection());
+// DECLARING GLOBAL VARIABLES ENDS
 ?>
 
-<?php
-// Redirect to profile page if user has already logged on
-if($authObj->isAuth()){
-  $userAuth = $_SESSION["Auth"];
-  switch($userAuth["jenispengguna"]){
-    case "pelajar":
-      Redirect::redirectWithMsg(PELAJAR_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
-    break;
-    case "pentadbir":
-      Redirect::redirectWithMsg(PENTADBIR_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
-    break;
-    case "guru":
-      Redirect::redirectWithMsg(GURU_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
-    break;
-    case "warden":
-      Redirect::redirectWithMsg(WARDEN_URL."/Profil/profil.php", "Untuk mengakses halaman daftar masuk, sila log keluar terlebih dahulu.");
-    break;
-  }
-}
-?>
-
-<!-- CONTENT BEGIN -->
 <?php
 // Insansiating verification object to determine whether the passed in name is already in used
 $loginModel = new LoginModel($dbObj->getConnection());

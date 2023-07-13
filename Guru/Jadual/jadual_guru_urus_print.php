@@ -1,14 +1,14 @@
 <?php
-// Import site config
+    // Import site config
+    require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+?>
+
+<?php
+// IMPORT BEGIN
 require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
-
-// Auth component is dependent on header and config component
 require_once(COMPONENTS_DIR . "/header.php");
-
-require_once(TEMPLATE_DIR . "/sidebar2_guru.php");
-
-// Start the session
-session_start();
+require_once(TEMPLATE_DIR . "/sidebar2.php");
+// IMPORT ENDS
 ?>
 
 <!DOCTYPE html>

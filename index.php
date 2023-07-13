@@ -3,44 +3,25 @@
     require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
+    // IMPORTS BEGIN
     require_once(COMPONENTS_DIR . "/header.php");
     require_once(COMPONENTS_DIR . "/config.php");
     require_once(COMPONENTS_DIR . "/auth.php");
     require_once(COMPONENTS_DIR . "/models.php");
-    
+    require_once(TEMPLATE_DIR . "/sidebar2.php");
+    // IMPORTS ENDS
+
+    // GLOBAL VARIABLE DECLARATION BEGIN
     // Display sidebar based on user type
     $dbObj = new Database();
     $authObj = new Auth($dbObj->getConnection());
-    if($authObj->isAuth()){ // User has logged in
-        $userAuth = $_SESSION["Auth"];
-        switch($userAuth["jenispengguna"]){
-            case "pelajar":
-                // Import peljar sidebar template
-                require_once(TEMPLATE_DIR . "/sidebar2_pelajar.php");
-                break;
-            case "pentadbir":
-                // Import pentadbir sidebar template
-                require_once(TEMPLATE_DIR . "/sidebar2_pentadbir.php");
-                break;
-            case "warden":
-                // Import warden sidebar template
-                require_once(TEMPLATE_DIR . "/sidebar2_warden.php");
-                break;
-            case "guru":
-                // Import guru sidebar template
-                require_once(TEMPLATE_DIR . "/sidebar2_guru.php");
-            break;
-        }
-    }else{ // User hasn't logged in
-        // Import guest sidebar template
-        require_once(TEMPLATE_DIR . "/sidebar2_guest.php");
-    }
+    // GLOBAL VARIABLE DECLARATION ENDS
 ?>
     
 <!-- CONTENT -->
 <div class="container-xxl m-4 p-4 rounded shadow-lg bg-primary-custom">
-    <div class="container-fluid p-4">
-        <h2>Jadual Guru & Warden Bertugas</h2>
+    <div class="container-fluid p-4 text-center">
+        <h2>Jadual Guru / Warden / Pemandu Bertugas</h2>
         <hr>
         <!--BEGIN SLICK CAROUSEL SLIDER-->
         <div class="items p-4 m-4">
@@ -50,9 +31,8 @@ require_once(COMPONENTS_DIR . "/models.php");
 
 $jadualModel = new JadualModel($dbObj->getConnection());
 $slideshowManager = new SlideshowManager();
-$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuru("id_gambar", sizeof($jadualModel->getAllGuru())+1)[0]["gambar"]); // Jadual guru
-$slideshowManager = new SlideshowManager();
-$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWardenWhere("id_gambar", sizeof($jadualModel->getAllWarden()))[0]["gambar"]); // Jadual warden
+$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllGuruSort("uploaded_at", "DESC", 1)[0]["gambar"]); // Jadual guru
+$slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWardenSort("uploaded_at", "DESC", 1)[0]["gambar"]); // Jadual warden
 // $slideshowManager->addImage(); // Jadual pemandu
 ?>
 </div>
@@ -72,7 +52,7 @@ $slideshowManager->addImage(UPLOADS_URL."/jadual"."/".$jadualModel->getAllWarden
     </div>
 </div>
 <div class="m-4 p-4 container-xxl justify-content-center align-items-center bg-primary-custom shadow-lg rounded">
-    <div class="row p-4">
+    <div class="row p-4 text-center">
         <h2>Info Semasa</h2>
         <hr>
     </div>
