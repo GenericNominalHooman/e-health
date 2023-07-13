@@ -14,16 +14,16 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/datetime/1.4.0/css/dataTables.dateTime.min.css">
     <style>
       body {
-        background-color:aliceblue;
+        background-color:#ffff;
       }
     </style>
 </head>
 <body>
 
-<div class="container-fluid" style="background-color:aliceblue;">
+<div class="container-fluid" style="background-color:#ffff;">
 <?php include "headergurubertugas.php";?>
 </div>
-<div class="container" style="background-color:aliceblue;">
+<div class="container" style="background-color:#ffff;">
         <img src="images/logoremove.png" alt="Logo" width="250" height="85" class="d-inline-block align-text-top-center ">
         <img src="images/logo2remove.png" alt="Logo" width="260" height="100" class="d-inline-block align-text-top-center">
         
@@ -31,11 +31,11 @@
           <div class="mt-3">
           <div class="row">
   <div class="col-sm-3 mb-3 mb-sm-0" >
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title" > 
           <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM user_form";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						if($category_total = mysqli_num_rows($dash_category_query_run)){
@@ -50,10 +50,10 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title">   <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='Tidak Sah'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						if($category_total = mysqli_num_rows($dash_category_query_run)){
@@ -69,10 +69,10 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title">   <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='pending'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						
@@ -90,10 +90,10 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title"> <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='Sah'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						

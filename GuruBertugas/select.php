@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 $query="SELECT * FROM janjitemu WHERE status='pending'" ;
 $sql=mysqli_query($conn,$query);
 	if($sql){

@@ -16,7 +16,7 @@
 <style>
 
       body {
-        background-color:aliceblue;
+        background-color:#ffff;
       }
    
 ul {
@@ -46,18 +46,18 @@ a:hover{
 <body>
 <br><br>
   <!-- Sidebar -->
-  <body class="p-3 m-0 border-0 bd-example" style="background-color:aliceblue;">
+  <body class="p-3 m-0 border-0 bd-example" style="background-color:#ffff;">
 
 <!-- Example Code -->
 
 <button class="btn btn-outline-dark" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasWithBothOptions" aria-controls="offcanvasWithBothOptions" style="border-color:darkblue;" ><i class="fa-solid fa-bars" ></i></button>
 
 <div class="offcanvas offcanvas-start" data-bs-scroll="true" tabindex="-1" id="offcanvasWithBothOptions" aria-labelledby="offcanvasWithBothOptionsLabel">
-  <div class="offcanvas-header" style="background-color:aliceblue;">
-    <h5 class="offcanvas-title" style="background-color:aliceblue;" id="offcanvasWithBothOptionsLabel"><img src="images/logoremove.png" width="150" height="55"><img src="images/logo2remove.png" width="150" height="55"></h5>
+  <div class="offcanvas-header" style="background-color:#ffff;">
+    <h5 class="offcanvas-title" style="background-color:#ffff;" id="offcanvasWithBothOptionsLabel"><img src="images/logoremove.png" width="150" height="55"><img src="images/logo2remove.png" width="150" height="55"></h5>
     <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
   </div>
-  <div class="offcanvas-body" style="background-color:aliceblue;">
+  <div class="offcanvas-body" style="background-color:#ffff;">
   <nav class="navMenu">
  <ul class="nav nav-pills nav-stacked">
       <a href="adminpanel2.php" class="btn btn-link"><img src="images/dashboard.webp" width="30" height="30">&nbsp;Main Dashboard</a>

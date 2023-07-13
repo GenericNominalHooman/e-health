@@ -1,6 +1,6 @@
 <?php
 
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 
 	
 function query($sql) {
@@ -21,7 +21,7 @@ function query($sql) {
 
 
 
-/*include "config.php";
+/*require_once(COMPONENTS_DIR."/config.php");
 //date untk papar formate tertentu
     //echo date("l, d-m-y");
     //time

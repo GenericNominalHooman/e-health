@@ -4,7 +4,9 @@
 require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
 require_once(E_HEALTH_DIR."/site_config.php");
 
+require_once(COMPONENTS_DIR."/header.php");
 require_once(COMPONENTS_DIR."/auth_pelajar.php");
+require_once(TEMPLATES_DIR . "/sidebar_pelajar.php"); // Guest sidebar
 ?>
 <?php
 require_once(COMPONENTS_DIR."/models.php");
@@ -15,7 +17,7 @@ $userModel = $modelFactory->createUserModel();
 
 @include 'config.php';
 include 'auth.php';
-$id_pelajar = $_SESSION['id_pelajar'];
+$nokp = $_SESSION['nokp'];
 
 ?>
 
@@ -35,15 +37,13 @@ $id_pelajar = $_SESSION['id_pelajar'];
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <style>
       body{
-  background-color:aliceblue;
+  background-color:#ffff;
 }
     </style>
 </head>
 <body >
   
 
-   <?php include "index.html";?>
-   
 	<div class="container">
 
    <div class="alert alert-danger d-flex align-items-center mt-3" role="alert">
@@ -56,35 +56,21 @@ $id_pelajar = $_SESSION['id_pelajar'];
                          Pihak asrama dan warden hanya boleh membawa pelajar ke  
 	                      hospital hanya pada kes kecemasan sahaja.</p>
    </div></div>
-  <div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
-    <div class="card-header " style="background-color:skyblue; ">
+  <div class="card text-center mb-3 mt-3" style ="border-color:#172065;">
+    <div class="card-header " style="background-color:#172065; color: white; ">
     <i class="fa-regular fa-pen-to-square"></i>&nbsp;KEMASKINI PROFIL
     </div>
-    <div class="card-body" style="background-color:aliceblue;">
-      
-      
-    <?php
-         $select = mysqli_query($conn, "SELECT * FROM `user_form` WHERE id_pelajar = '$id_pelajar'") or die('query failed');
-         if(mysqli_num_rows($select) > 0){
-            $fetch = mysqli_fetch_assoc($select);
-         }
-         if($fetch['image'] == ''){
-            echo '<img class="img-fluid rounded-circle rounded mx-auto d-block" src="images/default-avatar.png" >';
-         }else{
-            echo '<img class="img-fluid rounded-circle rounded mx-auto d-block"  src="uploaded_img/'.$fetch['image'].'">';
-         }
-      ?>
-      
+    <div class="card-body" style="background-color:#ffff;">      
     <h5 class="card-title  mt-3">SILA MASUKKAN MAKLUMAT DENGAN BETUL</h5>
     <p class="card-text"></p>
     <a href="update_profile.php" class="btn btn-primary">PROFIL</a>
   </div></div>
         
-   <div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
-    <div class="card-header" style="background-color:skyblue;">
+   <div class="card text-center mb-3 mt-3" style ="border-color:#172065;">
+    <div class="card-header" style="background-color:#172065; color: white;">
     <i class="fa-solid fa-square-check"></i>&nbsp;SEMAK STATUS
     </div>
-    <div class="card-body" style="background-color:aliceblue;">
+    <div class="card-body" style="background-color:#ffff;">
     <img src="images/check.webp" width="150" height="150">
     <h5 class="card-title">PROSES PENGESAHAN MENGAMBIL MASA SEKURANG-KURANGNYA 1 JAM SEBELUM </h5>
     <p class="card-text"> </p>
@@ -94,11 +80,11 @@ $id_pelajar = $_SESSION['id_pelajar'];
    
   </div>
 </div>
-<div class="card text-center mb-3 mt-3" style ="border-color:skyblue;">
-    <div class="card-header " style="background-color:skyblue;">
+<div class="card text-center mb-3 mt-3" style ="border-color:#172065;">
+    <div class="card-header " style="background-color:#172065; color: white;">
     <i class="fa-solid fa-clipboard-list" ></i>&nbsp;JANJI TEMU
     </div>
-    <div class="card-body" style="background-color:aliceblue;">
+    <div class="card-body" style="background-color:#ffff;">
       <img src="images/janjitemu.png">
     <h5 class="card-title">SILA MASUKKAN MAKLUMAT YANG SAH DAN BETUL</h5>
     <p class="card-text"></p>

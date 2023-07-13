@@ -1,7 +1,7 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <?php
 @include 'config.php';
@@ -23,13 +23,13 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css"/>
     <link rel="stylesheet" href="css/sidebar.css"/>
 </head>
-<body id="body-pd" style="background-color:aliceblue;">
-    <header class="header" id="header" style="background-color:aliceblue;">
+<body id="body-pd" style="background-color:#ffff;">
+    <header class="header" id="header" style="background-color:#ffff;">
         <div class="header_toggle" > <i class='bx bx-menu' id="header-toggle"></i> </div>
         
     </header>
 
-<div class="l-navbar" id="nav-bar">
+<div style="background-color: #172065;" class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="dashboard.php" class="nav_link"> <i class="fa-solid fa-house"></i><span class="nav_logo-name">E - HEALTH</span> </a>
                 <div class="nav_list"> <a href="dashboard.php" class="nav_link active "> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Papan Pemuka</span> </a> 
@@ -40,20 +40,20 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
         </nav>
     </div>
     <!--Container Main start-->
-    <div class="height-100" style="background-color:aliceblue;">
+    <div class="height-100" style="background-color:#ffff;">
     <div class="text-center">
           <img src="images/logoremove.png" alt="Logo" width="250" height="85" class="img-fluid">
         <img src="images/logo2remove.png" alt="Logo" width="260" height="100" class="img-fluid">
 </div>
-        <div class="container" style="background-color:aliceblue;">
+        <div class="container" style="background-color:#ffff;">
           <div class="mt-3">
           <div class="row">
   <div class="col-sm-3 mb-3 mb-sm-0">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title"> 
           <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						if($category_total = mysqli_num_rows($dash_category_query_run)){
@@ -68,10 +68,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title">   <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='Tidak Sah'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						if($category_total = mysqli_num_rows($dash_category_query_run)){
@@ -87,10 +87,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title">   <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='dalam proses'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						
@@ -108,10 +108,10 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title"> <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='Sah'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						
@@ -149,7 +149,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
 			
 			<tbody>
 		<?php
-	include "config.php";
+	require_once(COMPONENTS_DIR."/config.php");
 	global $row;
 	$query = mysqli_query($conn,"SELECT * FROM janjitemu ");
 	

@@ -16,16 +16,19 @@
     define("JS_DIR", SITE_DIR."/"."js");
     define("IMG_DIR", SITE_DIR."/"."img");
     define("COMPONENTS_DIR", SITE_DIR."/"."components");
-
+    define("TEMPLATES_DIR", SITE_DIR."/"."templates");
+    
     // Static content resources(URLs)
     define("CSS_URL", SITE_URL."/"."css");
     define("JS_URL", SITE_URL."/"."js");
     define("IMG_URL", SITE_URL."/"."img");
     define("COMPONENTS_URL", SITE_URL."/"."components");
+    define("TEMPLATES_URL", SITE_URL."/"."templates");
 
     // DB configuration
+    define("DB_HOST", "localhost");
     define("DB_USER", "root");
-    define("DB_PASS", "Kafin-12");
+    define("DB_PASS", "");
     define("DB_NAME", "hospital2");
 
     // User profile pages(directories)

@@ -1,6 +1,6 @@
 <?php 
 session_start(); 
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 
 if (isset($_POST['uname']) && isset($_POST['password'])) {
 

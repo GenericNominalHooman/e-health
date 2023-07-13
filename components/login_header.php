@@ -17,7 +17,7 @@ require_once(E_HEALTH_DIR."/site_config.php");
 
     <style>
       body {
-        background-color:aliceblue;
+        background-color:#ffff;
       }
       ul {
         margin: 50px;

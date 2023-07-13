@@ -1,37 +1,8 @@
 <?php
-// THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
-// Import site settings
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
-=======
+// IMPORT SITE CONFIG BEGIN
 require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
 require_once(E_HEALTH_DIR."/site_config.php");
-
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
-require_once(E_HEALTH_DIR."/site_config.php");
-
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
-require_once(E_HEALTH_DIR."/site_config.php");
-
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
-require_once(E_HEALTH_DIR."/site_config.php");
-
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
-require_once(E_HEALTH_DIR."/site_config.php");
-
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
+// IMPORT SITE CONFIG ENDS
 ?>
 <?php
 @include 'config.php';
@@ -68,35 +39,14 @@ if(isset($_GET['logout'])){
 <body>
     <div class="container">
     <?php include "index.html"?>  
-    <center>
     <?php
-    include "config.php";
+    require_once(COMPONENTS_DIR."/config.php");
          $select = mysqli_query($conn, "SELECT image FROM `loginadmin` WHERE id = 4 ") or die('query failed');
          if(mysqli_num_rows($select) > 0){
             $fetch = mysqli_fetch_assoc($select);
          }
          if($fetch['image'] == ''){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
             echo '<img class="img-fluid  rounded mx-auto d-block" src="images/default-avatar.png" >';
-=======
-            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
-=======
-            echo '<img class="img-fluid  rounded mx-auto d-block" src="Admin/images/default-avatar.png" >';
->>>>>>> parent of f70f5fa (Revert "redirect location non login user to login page for pelajar")
          }else{
             echo '<img class="img-fluid  rounded mx-auto d-block"  src="uploaded_img/'.$fetch['image'].'">';
          }

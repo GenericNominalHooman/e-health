@@ -1,6 +1,6 @@
 <?php
 
-require_once("config.php");
+require_once(COMPONENTS_DIR."/config.php");
 session_start();
 
 /*if(!isset($_SESSION["user_name"])){

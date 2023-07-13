@@ -41,7 +41,7 @@ a:hover{
 <body>
 <br><br>
   <!-- Sidebar -->
-  <body class="p-3 m-0 border-0 bd-example" style="background-color:aliceblue;">
+  <body class="p-3 m-0 border-0 bd-example" style="background-color:#ffff;">
 
 <!-- Example Code -->
 

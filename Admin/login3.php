@@ -6,6 +6,8 @@ require_once(E_HEALTH_DIR."/site_config.php");
 
 ?>
 <?php 
+require_once(COMPONENTS_DIR . "/header.php");
+require_once(TEMPLATES_DIR . "/sidebar_guest.php");
 include 'config.php';
 session_start();
 
@@ -39,7 +41,7 @@ if(isset($_POST['submit'])){
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
 <style>
   body{
-    background-color:aliceblue;
+    background-color:#ffff;
   }
   </style>
 
@@ -50,7 +52,7 @@ if(isset($_POST['submit'])){
   <div class="container py-5 h-100">
     <div class="row justify-content-center align-items-center h-100">
       <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue;">
+        <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:#172065;">
           <div class="card-body p-4 p-md-5">
             <img src="img/admin.png" class="rounded mx-auto d-block" witdh="200" height="150">
             <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">LOG MASUK PENTADBIR</h3>

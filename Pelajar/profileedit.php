@@ -8,7 +8,7 @@ if (isset($_SESSION['id_pelajar']) && isset($_SESSION['nama'])) {
 if(isset($_POST['nama']) && 
    isset($_POST['nokp'])){
 
-    include "config.php";
+    require_once(COMPONENTS_DIR."/config.php");
 
     $nama = $_POST['nama'];
     $nokp = $_POST['nokp'];

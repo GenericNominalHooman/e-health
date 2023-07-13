@@ -5,6 +5,7 @@ require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
 require_once(E_HEALTH_DIR."/site_config.php");
 
 require_once(COMPONENTS_DIR."/auth_pelajar.php");
+require_once(TEMPLATES_DIR."/sidebar_pelajar.php");
 ?>
 
 <?php
@@ -52,11 +53,11 @@ $id_pelajar = $_SESSION['id_pelajar'];
       </div>
     </div>
 
-    <section class="vh-100 gradient-custom" style="background-color:aliceblue;">
-      <div class="container py-5 h-100" style="background-color:aliceblue;">
+    <section class="vh-100 gradient-custom" style="background-color:#ffff;">
+      <div class="container py-5 h-100" style="background-color:#ffff;">
         <div class="row justify-content-center align-items-center h-100">
           <!--<div class="col-12 col-lg-9 col-xl-7" >-->
-          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:skyblue; background-color:aliceblue;">
+          <div class="card shadow-2-strong card-registration" style="border-radius: 15px; border-color:#172065; background-color:#ffff;">
             <div class="card-body p-4 p-md-5">
 
               <h3 class="mb-4 pb-2 pb-md-0 mb-md-5">BORANG JANJI TEMU</h3>

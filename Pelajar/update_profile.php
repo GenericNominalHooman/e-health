@@ -1,10 +1,10 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
+require_once(TEMPLATES_DIR."/sidebar_pelajar.php");
 ?>
 <?php
-
 include 'config.php';
 session_start();
 $id_pelajar = $_SESSION['id_pelajar'];
@@ -23,29 +23,12 @@ if (isset($_POST['update_profile'])) {
 
    if (!empty($update_pass) || !empty($new_pass) || !empty($confirm_pass)) {
       if ($update_pass != $update_pass) {
-         $message[] = 'old password not matched!';
+         $message[] = 'Kata Laluan Lama Tidak Sama';
       } elseif ($new_pass != $confirm_pass) {
-         $message[] = 'confirm password not matched!';
+         $message[] = 'Kata Laluan Tidak Sepadan';
       } else {
          mysqli_query($conn, "UPDATE `user_form` SET password = '$confirm_pass' WHERE id_pelajar = '$id_pelajar'") or die('query failed');
-         $message[] = 'password updated successfully!';
-      }
-   }
-
-   $update_image = $_FILES['update_image']['name'];
-   $update_image_size = $_FILES['update_image']['size'];
-   $update_image_tmp_name = $_FILES['update_image']['tmp_name'];
-   $update_image_folder = 'uploaded_img/' . $update_image;
-
-   if (!empty($update_image)) {
-      if ($update_image_size > 2000000) {
-         $message[] = 'image is too large';
-      } else {
-         $image_update_query = mysqli_query($conn, "UPDATE `user_form` SET image = '$update_image' WHERE id_pelajar = '$id_pelajar'") or die('query failed');
-         if ($image_update_query) {
-            move_uploaded_file($update_image_tmp_name, $update_image_folder);
-         }
-         $message[] = 'image updated succssfully!';
+         $message[] = 'Kata Laluan Berjaya Dikemaskini';
       }
    }
 }
@@ -67,12 +50,13 @@ if (isset($_POST['update_profile'])) {
    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
    <style>
       body {
-         background-color: aliceblue;
+         background-color: #ffff;
       }
    </style>
 </head>
 
 <body>
+   
 
    <div class="update-profile">
 
@@ -88,14 +72,7 @@ if (isset($_POST['update_profile'])) {
                <div class="col-12 col-lg-9 col-xl-7">
                   <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
                      <div class="card-body p-4 p-md-5">
-                        <?php
-                        if ($fetch['image'] == '') {
-                           echo '<img class=" rounded-circle rounded mx-auto d-block" width="130px" height="130px" src="images/default-avatar.png">';
-                        } else {
-                           echo '<img class=" rounded-circle rounded mx-auto d-block" width="130px" height="130px" src="uploaded_img/' . $fetch['image'] . '">';
-                        }
-
-                        ?>
+                        
                         <br>
                         <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 text-center">KEMASKINI PROFIL</h3>
                         <?php
@@ -237,9 +214,7 @@ if (isset($_POST['update_profile'])) {
                               </div>
                            </div>
 
-                           <div class="mb-3">
-                              <input type="file" name="update_image" class="box form-control" accept="image/jpg, image/jpeg, image/png">
-                           </div>
+                           
                            <input type="submit" value="Simpan" name="update_profile" class="btn btn-primary btn-lg btn-block">
                            <div class="mt-3">
                               <p>Kembali ke <a href="pelajarhome.php">halaman utama</a></p>

@@ -1,7 +1,7 @@
 <?php
 // THIS CODE SNIPPET IS REQUIRED ON EVERY PAGE FOR HEADER & FOOTER FUNCTIONALITY TO WORK - Iz
 // Import site settings
-require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/e-health/site_config.php");
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,12 +27,12 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
       }
     </style>
   </head>
-  <body id="body-pd" style="background-color:aliceblue;">
-    <header class="header" id="header" style="background-color:aliceblue;">
+  <body id="body-pd" style="background-color:#ffff;">
+    <header class="header" id="header" style="background-color:#ffff;">
         <div class="header_toggle"> <i class='bx bx-menu' id="header-toggle"></i> </div>
         
     </header>
-    <div class="l-navbar" id="nav-bar">
+    <div style="background-color: #172065;"  class="l-navbar" id="nav-bar">
         <nav class="nav">
             <div> <a href="dashboard.php" class="nav_link"> <i class="fa-solid fa-house"></i><span class="nav_logo-name">E - HEALTH</span> </a>
                 <div class="nav_list"> <a href="dashboard.php" class="nav_link  "> <i class='bx bx-grid-alt nav_icon'></i> <span class="nav_name">Dashboard</span> </a> 
@@ -43,7 +43,7 @@ require_once($_SERVER["DOCUMENT_ROOT"] . "/hospital/site_config.php");
         </nav>
     </div>
     <!--Container Main start-->
-    <div class="height-900" style="background-color:aliceblue;">
+    <div class="height-900" style="background-color:#ffff;">
     <div class="text-center">
           <img src="images/logoremove.png" alt="Logo" width="250" height="85" class="img-fluid">
         <img src="images/logo2remove.png" alt="Logo" width="260" height="100" class="img-fluid">

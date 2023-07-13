@@ -1,4 +1,4 @@
-<?php include "config.php"; ?>
+<?php require_once(COMPONENTS_DIR."/config.php"); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>

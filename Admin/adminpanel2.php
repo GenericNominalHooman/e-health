@@ -11,7 +11,7 @@
 
 	<style>
 		body{
-			background-color:aliceblue;
+			background-color:#ffff;
 		}
 	</style>
 </head>
@@ -26,15 +26,15 @@
           <img src="images/logo.png" alt="Logo" width="250" height="85" class="img-fluid">
         <img src="images/logo2remove.png" alt="Logo" width="260" height="100" class="img-fluid">
         </div>
-        <div class="container" style="background-color:aliceblue;">
+        <div class="container" style="background-color:#ffff;">
           <div class="mt-3">
           <div class="row">
   <div class="col-sm-3 mb-3 mb-sm-0">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title"> 
           <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						if($category_total = mysqli_num_rows($dash_category_query_run)){
@@ -49,10 +49,10 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title">   <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='Tidak Sah'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						if($category_total = mysqli_num_rows($dash_category_query_run)){
@@ -68,10 +68,10 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title">   <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='pending'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						
@@ -89,10 +89,10 @@
     </div>
   </div>
   <div class="col-sm-3">
-    <div class="card" style="background-color:skyblue;">
+    <div class="card" style="background-color:#172065; color: white;">
       <div class="card-body">
         <h5 class="card-title"> <?php 
-						include "config.php";
+						require_once(COMPONENTS_DIR."/config.php");
 						$dash_category_query = "SELECT * FROM janjitemu WHERE status='Sah'";
 						$dash_category_query_run = mysqli_query($conn, $dash_category_query);
 						
@@ -133,7 +133,7 @@
 			
 			<tbody>
 		<?php
-	include "config.php";
+	require_once(COMPONENTS_DIR."/config.php");
 	global $row;
 	$query = mysqli_query($conn,"SELECT * FROM janjitemu ");
 	

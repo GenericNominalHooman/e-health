@@ -1,5 +1,5 @@
 <?php
-include "config.php";
+require_once(COMPONENTS_DIR."/config.php");
 session_start();
 /*if (isset($_SESSION["user"])) {
    header("Location: pelajarhome.php");
