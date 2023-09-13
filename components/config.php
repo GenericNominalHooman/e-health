@@ -10,16 +10,15 @@ class Database{
   public function __construct(){
     $this->createConnection();
   }
-  
-  private function createConnection(){
-    try {
-      $conn = new PDO("mysql:host=".HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
-      $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    } catch(PDOException $e) {
-      echo "Connection failed: " . $e->getMessage();
-    }
 
-    $this->conn = $conn;
+  private function createConnection(){
+    // Create a connection
+    $this->conn = new mysqli(HOST, DB_USER, DB_PASS, DB_NAME);
+
+    // Check the connection
+    if ($this->conn->connect_error) {
+      die("Connection failed: " . $this->conn->connect_error);
+    }
   }
 
   public function getConnection(){

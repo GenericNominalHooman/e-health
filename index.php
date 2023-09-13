@@ -1,17 +1,21 @@
 <?php
 // SITE CONFIG BEGIN
-require_once($_SERVER["DOCUMENT_ROOT"]."/projects_config.php");
-require_once(E_HEALTH_DIR."/site_config.php");
-require_once(COMPONENTS_DIR."/login_header.php");
+require_once($_SERVER["DOCUMENT_ROOT"] . "/projects_config.php");
+require_once(E_HEALTH_DIR . "/site_config.php");
+require_once(COMPONENTS_DIR . "/login_header.php");
 // SITE CONFIG ENDS
 ?>
 <?php
+// IMPORT BEGIN
+require_once(COMPONENTS_DIR . "/config.php");
+// IMPORT ENDS
+
 // Instansiating DB connection
 $dbObj = new Database();
 $conn = $dbObj->getConnection();
 
 // Fetch student appointment data from the database
-$sql = "SELECT nama, nomatrik, program, tahun, waktu, tarikh, sebab, status FROM janjitemu";
+$sql = "SELECT nama, nokp, nomatrik, program, tahun, waktu, tarikh, sebab, status FROM janjitemu";
 $result = $conn->query($sql);
 require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
 
@@ -33,64 +37,45 @@ require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
     background-color: #f2f2f2;
   }
 </style>
-<section class="vh-100">
-  <div class="container py-5 h-100">
-    <div class="row d-flex justify content align-items-center h-100">
-      <!--<div class="col col-xl-10">-->
-      <div class="card shadow-lg p-3 mb-5 row">
-        <div class="row g-0 justify-center">
-          <div class="col-md-6 col-lg-12 d-none d-md-block container-fluid">
-            <div class="container py-3 my-3 col-lg-12">
-              <nav class="navbar navbar-expand-lg bg-body-tertiary">
-                <div class="container-fluid d-flex justify-content-center align-items-center">
-                  <h2 class="text-center">Daftar Masuk Pengguna</h2>
-                </div>
-              </nav>
-            </div>
-          </div>
-        </div>
 
-        <div class="container">
-          <div class="row">
-            <div class="col-sm-4">
-              <div class="card card text-center mb-3  img-fluid rounded">
-                <div class="card-body ">
-                  <h5 class="card-title">PENTADBIR</h5>
-                  <img src="img/admin.png" width="90" height="100">
-                  <p class="card-text"></p>
-                  <a href="Admin/login3.php" class="btn btn-primary">LOG MASUK</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="card card text-center mb-3">
-                <div class="card-body">
-                  <h5 class="card-title">PENSYARAH/WARDEN</h5>
-                  <img src="img/gururemove.png" width="95" height="100">
-                  <p class="card-text"></p>
-                  <a href="GuruBertugas/login3.php" class="btn btn-primary">LOG MASUK</a>
-                </div>
-              </div>
-            </div>
-            <div class="col-sm-4">
-              <div class="card card text-center mb-3 ">
-                <div class="card-body">
-                  <h5 class="card-title">PELAJAR</h5>
-                  <img src="img/pelajar2remove.png" width="95" height="100">
-                  <p class="card-text"></p>
+<!-- CONTENT BEGIN -->
+<section class="container-fluid">
 
-                  <a href="Pelajar/login3.php" class="btn btn-primary">LOG MASUK</a>
-
-                </div>
-              </div>
-            </div>
-          </div>
+  <!-- CAROUSEL JADUAL BEGIN -->
+  <div class="row m-md-5 mt-4 p-md-4 shadow-lg card">
+    <div class="col-12 p-4 card-body">
+      <div class="card-title text-center h2 p-4">Jadual Guru / Warden / Pemandu</div>
+      <div class="card-text">
+        <div id="slideshow">
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190720/gallery/preview/02_o_car.jpg"></div>
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190715/gallery/preview/03_r_car.jpg"></div>
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
+          <div><img data-lazy="https://res.cloudinary.com/dxfq3iotg/image/upload/v1565190714/gallery/preview/04_g_car.jpg"></div>
         </div>
       </div>
-      <div class="row p-4 shadow-lg">
-        <div class="mb-4 text-center">
-          <h2>Senarai Janji Temu Pelajar</h2>
-          <table>
+    </div>
+  </div>
+  <!-- CAROUSEL JADUAL ENDS -->
+
+  <div class="row m-md-5 mt-4 p-md-4 shadow-lg card">
+    <div class="col-12 p-4 card-body">
+      <div class="card-title text-center h2 p-4">Title</div>
+      <div class="card-text">
+        Body
+      </div>
+    </div>
+  </div>
+
+  <!-- JT TABLE BEGIN -->
+  <div class="row m-md-5 mt-4 p-md-4 shadow-lg card">
+    <div class="col-12 p-4 card-body">
+      <div class="card-title text-center h2 p-4">Senarai Janji Temu Pelajar Terkini</div>
+      <div class="card-text p-4 overflow-auto">
+        <table id="janjiTemuTable">
+          <thead>
             <tr>
               <th>Nama</th>
               <th>No Kad Pengenalan</th>
@@ -99,8 +84,10 @@ require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
               <th>Waktu</th>
               <th>Tarikh</th>
               <th>Sebab</th>
-
+              <th>Status</th>
             </tr>
+          </thead>
+          <tbody>
             <?php
             if ($result->num_rows > 0) {
               while ($row = $result->fetch_assoc()) {
@@ -112,18 +99,45 @@ require_once(TEMPLATES_DIR . "/sidebar_guest.php"); // Guest sidebar
                 echo "<td>" . $row["waktu"] . "</td>";
                 echo "<td>" . $row["tarikh"] . "</td>";
                 echo "<td>" . $row["sebab"] . "</td>";
+                echo "<td>" . $row["status"] . "</td>";
                 echo "</tr>";
               }
             } else {
               echo "<tr><td colspan='6'>No data available</td></tr>";
             }
             ?>
-          </table>
-        </div>
+          </tbody>
+        </table>
       </div>
     </div>
   </div>
+  <!-- JT TABLE ENDS -->
+
 </section>
+
+<script>
+  // JT TABLE BEGIN
+  $(document).ready(function() {
+    $("#janjiTemuTable").DataTable();
+  })
+  // JT TABLE ENDS
+</script>
+
+<script>
+  // <!-- CAROUSEL JADUAL BEGIN -->
+  $(document).ready(function() {
+    $('#slideshow').slick({
+      infinite: true,
+      lazyLoad: 'ondemand',
+      slidesToShow: 1,
+      slidesToScroll: 1
+    });
+  });
+  // <!-- CAROUSEL JADUAL ENDS -->
+</script>
+
+<!-- CONTENT ENDS -->
+
 <?php
 // Close the database connection
 $conn->close();
