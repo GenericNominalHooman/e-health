@@ -241,8 +241,7 @@
     <div class="padding">
         <div class="row">
             <div class="col-12">
-                <div class="card">
-                    <div class="media media-2x1 gd-primary h1" style="background-color: #172065;"><a class="media-content" style="background-image:url()" data-abc="true"><strong class="text-fade"><i class='bx bx-book-content'></i></strong></a></div>
+                <div class="card shadow">
                     <div class="card-body text-center">
                         <h5 class="card-title h5">Janjitemu Dibenarkan(Hari Ini)</h5>
                         <hr>

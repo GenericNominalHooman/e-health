@@ -38,6 +38,8 @@ session_start();
     <!-- Color pallete -->
     <link rel="stylesheet" href="<?php echo(RESOURCES_URL."/css/color_pallete.css");?>">
     <!-- IMPORT END -->
+
+    <!-- KV & PROJECT LOGO BEGIN -->
     <div class="container-xxl">
         <div class="contianer-fluid text-center">
             <div class="row align-items-center">
@@ -54,6 +56,7 @@ session_start();
             </div>
         </div>
     </div>
+    <!-- KV & PROJECT LOGO ENDS -->
 </head>
 
 <body id="body-pd">
